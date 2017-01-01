@@ -3,11 +3,13 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Page2 } from '../pages/page2/page2';
 import {Game} from "../pages/game/game";
+import {BoxComponent} from "../components/box/box";
 
 @NgModule({
     declarations: [
         MyApp,
         Game,
+        BoxComponent,
         Page2
     ],
     imports: [
