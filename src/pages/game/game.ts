@@ -8,6 +8,7 @@ import { NavController } from 'ionic-angular';
 })
 export class Game {
 
+    // TODO: Create MODEL!
     public goalColor: string = "blue";
 
     constructor(public navCtrl: NavController) {
