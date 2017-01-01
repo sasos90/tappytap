@@ -29,4 +29,20 @@ game {
             }
         }
     }
+
+    #goal-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+
+        .text {
+            font-size: 20px;
+        }
+
+        .target {
+            width: 25px;
+            height: 25px;
+            margin: 0 10px;
+        }
+    }
 }
