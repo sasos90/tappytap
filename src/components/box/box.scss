@@ -2,5 +2,15 @@ box {
     .box {
         display: block;
         padding: 2px;
+
+        &.missed {
+            animation: spin 0.3s linear;
+        }
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform:rotateY(180deg);
     }
 }
