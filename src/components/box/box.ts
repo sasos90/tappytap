@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'box',
-    template: `<div class="box"></div>`
+    template: `<div class="box" [ngStyle]="{'background': color}"></div>`
 })
 export class BoxComponent {
 
+    @Input("color") color: string = "";
     text: string;
 
     constructor() {
@@ -13,4 +14,7 @@ export class BoxComponent {
         this.text = 'Hello World';
     }
 
+    ngOnInit() {
+
+    }
 }
