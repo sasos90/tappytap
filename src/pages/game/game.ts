@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-page1',
+  selector: 'game',
   templateUrl: 'game.html'
 })
 export class Game {

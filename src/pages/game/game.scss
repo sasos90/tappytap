@@ -1,3 +1,32 @@
-page-page1 {
+game {
 
+    #game-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .row {
+            display: flex;
+        }
+
+        &.level-1 {
+            .box {
+                width: 100vw;
+                height: 100vw;
+            }
+        }
+
+        &.level-2 {
+            .box {
+                width: 50vw;
+                height: 50vw;
+            }
+        }
+
+        &.level-3 {
+            .box {
+                width: 33.33333vw;
+                height: 33.33333vw;
+            }
+        }
+    }
 }
