@@ -9,23 +9,26 @@ game {
         }
 
         &.level-1 {
-            .box {
-                width: 100vw;
-                height: 100vw;
+            box {
+                width: 100%;
             }
         }
 
         &.level-2 {
-            .box {
-                width: 50vw;
-                height: 50vw;
+            box {
+                width: 50%;
             }
         }
 
         &.level-3 {
-            .box {
-                width: 33.33333vw;
-                height: 33.33333vw;
+            box {
+                width: 33.33333%;
+
+                &:after {
+                    content: "";
+                    display: block;
+                    padding-bottom: 100%;
+                }
             }
         }
     }
