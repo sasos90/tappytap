@@ -1,8 +1,29 @@
 game {
 
+    .content-wrapper {
+        height: 100%;
+    }
+
+    .scroll-content {
+        overflow: visible;
+    }
+
     #game-wrapper {
         display: flex;
         flex-direction: column;
+        height: 100%;
+        position: relative;
+
+        .game {
+            margin: 0 auto;
+            //margin-top: 50%;
+            width: 100%;
+
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translateY(-50%) translateX(-50%);
+        }
 
         .row {
             display: flex;
