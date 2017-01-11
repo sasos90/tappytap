@@ -6,7 +6,7 @@ box {
         padding: 2px;
         height: 100%;
 
-        &.missed {
+        &.hit {
             animation: spin 0.3s linear;
         }
     }
