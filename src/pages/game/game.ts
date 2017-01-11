@@ -21,15 +21,19 @@ export class Game {
     ngAfterViewInit() {
         this.gameWrapper = window.document.getElementById("game-wrapper");
         this.gameElement = window.document.querySelectorAll(".game").item(0);
-        this.setLayoutPosition();
+        setTimeout(() => {
+            this.setLayoutPosition();
+        }, 50);
         window.onresize = (event) => {
             this.setLayoutPosition();
         };
     }
 
     private setLayoutPosition() {
+
         let width = this.gameWrapper.offsetWidth;
         let height = this.gameWrapper.offsetHeight - 50;
+        console.debug("w=" + width + " h=" + height);
         if (width >= height) {
             this.gameElement.style.width = height + "px";
         } else {
