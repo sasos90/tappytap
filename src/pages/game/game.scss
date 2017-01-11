@@ -40,12 +40,6 @@ game {
         &.level-3 {
             box {
                 width: 33.33333%;
-
-                &:after {
-                    content: "";
-                    display: block;
-                    padding-bottom: 100%;
-                }
             }
         }
     }

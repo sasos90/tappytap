@@ -1,6 +1,12 @@
 box {
     margin: 1%;
 
+    &:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%;
+    }
+
     .box {
         display: block;
         padding: 2px;
