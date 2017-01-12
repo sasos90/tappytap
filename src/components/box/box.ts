@@ -24,7 +24,7 @@ export class BoxComponent {
 
             console.debug("HIT!");
             // HIT SUCCESSED
-            this.hit = true;
+            this.onSuccessHit();
         } else if (hitColor !== this.target) {
 
             if (!this.missed) {
@@ -32,11 +32,16 @@ export class BoxComponent {
                 this.missed = true;
             } else {
                 console.debug("2. HIT!");
+                this.onSuccessHit();
             }
         } else if (this.hit === false) {
 
             console.debug("2. HIT!");
             // for sure the second hit, which is right!
         }
+    }
+
+    private onSuccessHit() {
+        this.hit = true;
     }
 }
