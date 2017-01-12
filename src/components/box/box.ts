@@ -4,8 +4,9 @@ import {Component, Input} from '@angular/core';
     selector: 'box',
     template: `
         <div class="box-wrapper" [ngClass]="{hit: hit}">
-            <figure class="box front" [ngStyle]="{'background': color}" (click)="tap(color)"></figure>
-            <figure class="box back" [ngStyle]="{'background': target}" (click)="tap(target)"></figure>
+            <div class="box front" [ngStyle]="{'background': color}" (click)="tap(color)"></div>
+            <!-- Remove back figure if you don't want the whole flip but just 50% -->
+            <div class="box back" [ngStyle]="{'background': target}" (click)="tap(target)"></div>
         </div>`
 })
 export class BoxComponent {
