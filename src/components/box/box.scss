@@ -2,6 +2,7 @@ box {
     margin: 1%;
     overflow: hidden;
     position: relative;
+    perspective: 800px;
 
     &:after {
         content: "";
@@ -13,15 +14,27 @@ box {
         width: 100%;
         height: 100%;
         position: absolute;
+        transform-style: preserve-3d;
+        transition: transform 1s;
 
         .box {
             padding: 2px;
             width: 100%;
             height: 100%;
+            margin: 0;
 
-            &.hit {
-                animation: spin 0.3s linear;
+            display: block;
+            position: absolute;
+            backface-visibility: hidden;
+
+            &.back {
+                transform: rotateY( 180deg );
             }
+        }
+
+        &.hit {
+            //animation: spin 0.3s linear;
+            transform: rotateY( 180deg );
         }
     }
 }
