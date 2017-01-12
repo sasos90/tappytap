@@ -18,12 +18,16 @@ export class Game {
 
     }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         this.gameWrapper = window.document.getElementById("game-wrapper");
         this.gameElement = window.document.querySelectorAll(".game").item(0);
+
+        // hide the game layout
+        this.gameWrapper.classList.add("invisible");
+
         setTimeout(() => {
             this.setLayoutPosition();
-        }, 50);
+        }, 200);
         window.onresize = (event) => {
             this.setLayoutPosition();
         };
@@ -32,12 +36,15 @@ export class Game {
     private setLayoutPosition() {
 
         let width = this.gameWrapper.offsetWidth;
-        let height = this.gameWrapper.offsetHeight - 50;
+        let height = this.gameWrapper.offsetHeight;
         console.debug("w=" + width + " h=" + height);
         if (width >= height) {
             this.gameElement.style.width = height + "px";
         } else {
             this.gameElement.style.width = "100%";
         }
+
+        // show the game layout
+        this.gameWrapper.classList.remove("invisible");
     }
 }
