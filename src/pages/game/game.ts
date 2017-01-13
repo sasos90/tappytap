@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
+import {BoxModel} from "../../models/BoxModel";
 
 @Component({
     selector: 'game',
@@ -12,7 +13,17 @@ export class Game {
     private gameElement: any;
 
     // TODO: Create MODEL!
-    public goalColor: string = "blue";
+    public targetColor: BoxModel = new BoxModel("blue");
+
+    // some demo boxes
+    public black: BoxModel = new BoxModel("black");
+    public brown: BoxModel = new BoxModel("brown");
+    public wheat: BoxModel = new BoxModel("wheat");
+    public red: BoxModel = new BoxModel("red");
+    public green: BoxModel = new BoxModel("green");
+    public aqua: BoxModel = new BoxModel("aqua");
+    public blue: BoxModel = new BoxModel("blue");
+    public yellow: BoxModel = new BoxModel("yellow");
 
     constructor(public navCtrl: NavController) {
 
