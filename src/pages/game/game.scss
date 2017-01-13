@@ -1,0 +1,58 @@
+game {
+
+    .content-wrapper {
+        height: 100%;
+    }
+
+    #game-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 90%;
+        position: relative;
+
+        .game {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        &.level-1 {
+            box {
+                width: 100%;
+            }
+        }
+
+        &.level-2 {
+            box {
+                width: 50%;
+            }
+        }
+
+        &.level-3 {
+            box {
+                width: 33.33333%;
+            }
+        }
+    }
+
+    #goal-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+
+        .text {
+            font-size: 20px;
+        }
+
+        .target {
+            width: 25px;
+            height: 25px;
+            margin: 0 10px;
+        }
+    }
+}

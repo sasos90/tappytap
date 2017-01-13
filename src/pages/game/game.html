@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Page One</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="content-wrapper">
+        <div id="goal-wrapper">
+            <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': 'blue'}"></div>
+        </div>
+        <!--<div id="game-wrapper" class="level-1">
+            <div class="game">
+                <div class="row"><box [box]="red" [target]="targetColor"></box></div>
+            </div>
+        </div>-->
+        <!--<div id="game-wrapper" class="level-2">
+            <div class="game">
+                <div class="row"><box [box]="red" [target]="targetColor"></box><box [box]="blue" [target]="targetColor"></box></div>
+                <div class="row"><box [box]="green" [target]="targetColor"></box><box [box]="yellow" [target]="targetColor"></box></div>
+            </div>
+        </div>-->
+        <div id="game-wrapper" class="level-3">
+            <div class="game">
+                <div class="row"><box [box]="red" [target]="targetColor"></box><box [box]="blue" [target]="targetColor"></box><box [box]="black" [target]="targetColor"></box></div>
+                <div class="row"><box [box]="green" [target]="targetColor"></box><box [box]="yellow" [target]="targetColor"></box><box [box]="brown" [target]="targetColor"></box></div>
+                <div class="row"><box [box]="blue" [target]="targetColor"></box><box [box]="blue" [target]="targetColor"></box><box [box]="wheat" [target]="targetColor"></box></div>
+            </div>
+        </div>
+    </div>
+</ion-content>
