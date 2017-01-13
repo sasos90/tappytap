@@ -4,7 +4,7 @@ import {BoxModel} from "../../models/BoxModel";
 @Component({
     selector: 'box',
     template: `
-        <div class="box-wrapper" [ngClass]="{hit: hit, missed: missed}">
+        <div class="box-wrapper" [ngClass]="{hit: hit}" *ngIf="!hideBox">
             <div class="box front" [ngStyle]="{'background': box.color}" (click)="tap(box)"></div>
             <!-- Remove back figure if you don't want the whole flip but just 50% -->
             <div class="box back" [ngStyle]="{'background': target.color}" (click)="tap(target)"></div>
@@ -16,6 +16,7 @@ export class BoxComponent {
     @Input() target: BoxModel;
     public hit: boolean = false;
     public missed: boolean = false;
+    public hideBox: boolean = false;
 
     constructor() {}
 
@@ -34,5 +35,8 @@ export class BoxComponent {
 
     private onSuccessHit() {
         this.hit = true;
+        setTimeout(() => {
+            this.hideBox = true;
+        }, 1000);
     }
 }
