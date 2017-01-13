@@ -25,7 +25,9 @@ export class Game {
     /**
      * 5 seconds countdown hardcoded for now.
      */
-    private countdownTimer: number = 5000;
+    private countDownStart: number = 5000;
+    public countDownProgress: number = this.countDownStart;
+    public countDownPercentage: number = 100;
 
     // TODO: Create MODEL!
     public targetColor: BoxModel = new BoxModel("blue");
@@ -103,9 +105,21 @@ export class Game {
      * @param progress Miliseconds for actual progress
      */
     private step(progress: number) {
-        if (progress > this.countdownTimer) {
+        this.countDownProgress = this.getCountDownProgress(progress);
+        this.countDownPercentage = this.getCountDownPercentage();
+        console.log(this.countDownProgress, this.countDownPercentage);
+
+        if (this.countDownProgress <= 0) {
             console.debug("GAME FINISHED!");
             window.cancelAnimationFrame(this.rafId);
         }
+    }
+
+    private getCountDownProgress(progress: number) : number {
+        return (Math.round(progress) - this.countDownStart) * -1;
+    }
+
+    private getCountDownPercentage() : number {
+        return this.countDownProgress * 100 / this.countDownStart;
     }
 }
