@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 import {BoxModel} from "../../models/BoxModel";
+import {BoxList} from "../../models/BoxList";
 
 @Component({
     selector: 'game',
@@ -31,6 +32,7 @@ export class Game {
 
     // TODO: Create MODEL!
     public targetColor: BoxModel = new BoxModel("blue");
+    public boxList: BoxList = new BoxList();
 
     // some demo boxes
     public black: BoxModel = new BoxModel("black");
@@ -81,6 +83,11 @@ export class Game {
         // GAME
         console.debug("GAME STARTED!");
         this.rafId = window.requestAnimationFrame((now) => this.rafCallback(now));
+        // How to add TIME (add to starting countdown)
+        /*setTimeout(() => {
+             this.countDownStart += 1000;
+             console.error(this.countDownStart);
+         }, 3500);*/
     }
 
     /**
