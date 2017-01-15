@@ -17,8 +17,10 @@ game {
             width: 100%;
         }
 
-        .row {
-            display: flex;
+        box {
+           &.on-top  {
+               z-index: 999;
+           }
         }
 
         &.level-1 {

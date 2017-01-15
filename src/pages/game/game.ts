@@ -34,18 +34,17 @@ export class Game {
     public targetColor: BoxModel = new BoxModel("blue");
     public boxList: BoxList = new BoxList();
 
-    // some demo boxes
-    public black: BoxModel = new BoxModel("black");
-    public brown: BoxModel = new BoxModel("brown");
-    public cadetblue: BoxModel = new BoxModel("cadetblue");
-    public red: BoxModel = new BoxModel("red");
-    public green: BoxModel = new BoxModel("green");
-    public aqua: BoxModel = new BoxModel("aqua");
-    public blue: BoxModel = new BoxModel("blue");
-    public yellow: BoxModel = new BoxModel("yellow");
-
     constructor(public navCtrl: NavController) {
 
+        this.boxList.push(new BoxModel("black"));
+        this.boxList.push(new BoxModel("brown"));
+        this.boxList.push(new BoxModel("cadetblue"));
+        this.boxList.push(new BoxModel("blue"));
+        this.boxList.push(new BoxModel("red"));
+        this.boxList.push(new BoxModel("green"));
+        this.boxList.push(new BoxModel("aqua"));
+        this.boxList.push(new BoxModel("blue"));
+        this.boxList.push(new BoxModel("yellow"));
     }
 
     ngOnInit() {

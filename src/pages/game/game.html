@@ -11,23 +11,10 @@
     <div class="content-wrapper">
         <div id="goal-wrapper">
             <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': 'blue'}"></div>
-        </div><!--
-        <div id="game-wrapper" class="level-1">
-            <div class="game">
-                <box [box]="red" [target]="targetColor"></box>
-            </div>
-        </div>--><!--
-        <div id="game-wrapper" class="level-2">
-            <div class="game">
-                <box [box]="red" [target]="targetColor"></box><box [box]="blue" [target]="targetColor"></box>
-                <box [box]="green" [target]="targetColor"></box><box [box]="yellow" [target]="targetColor"></box>
-            </div>
-        </div>-->
+        </div>
         <div id="game-wrapper" class="level-3">
             <div class="game">
-                <box [box]="red" [target]="targetColor" (onHit)="boxWasHit(red)"  [ngStyle]="{'z-index: 9999999': red.isHit}"></box><box [box]="blue" [target]="targetColor"></box><box [box]="black" [target]="targetColor"></box>
-                <box [box]="green" [target]="targetColor"></box><box [box]="yellow" [target]="targetColor"></box><box [box]="brown" [target]="targetColor"></box>
-                <box [box]="blue" [target]="targetColor"></box><box [box]="blue" [target]="targetColor"></box><box [box]="cadetblue" [target]="targetColor"></box>
+                <box *ngFor="let box of boxList" [box]="box" [target]="targetColor" (onHit)="boxWasHit(box)" [ngClass]="{'on-top': box.isHit}"></box>
             </div>
         </div>
     </div>
