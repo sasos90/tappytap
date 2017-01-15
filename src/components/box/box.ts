@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, EventEmitter, Output} from '@angular/core';
 import {BoxModel} from "../../models/BoxModel";
 
 @Component({
@@ -14,6 +14,7 @@ export class BoxComponent {
 
     @Input() box: BoxModel;
     @Input() target: BoxModel;
+    @Output() onHit = new EventEmitter();
     public hit: boolean = false;
     public missed: boolean = false;
     public hideBox: boolean = false;
@@ -34,6 +35,10 @@ export class BoxComponent {
     }
 
     private onSuccessHit() {
+        // call output
+        this.onHit.emit(this.box);
+
+        // handle view
         this.hit = true;
         setTimeout(() => {
             this.hideBox = true;

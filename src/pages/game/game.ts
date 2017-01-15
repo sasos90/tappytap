@@ -37,7 +37,7 @@ export class Game {
     // some demo boxes
     public black: BoxModel = new BoxModel("black");
     public brown: BoxModel = new BoxModel("brown");
-    public wheat: BoxModel = new BoxModel("wheat");
+    public cadetblue: BoxModel = new BoxModel("cadetblue");
     public red: BoxModel = new BoxModel("red");
     public green: BoxModel = new BoxModel("green");
     public aqua: BoxModel = new BoxModel("aqua");
@@ -88,6 +88,11 @@ export class Game {
              this.countDownStart += 1000;
              console.error(this.countDownStart);
          }, 3500);*/
+    }
+
+    public boxWasHit(ev) {
+        console.log("was hit", ev);
+        ev.isHit = true;
     }
 
     /**

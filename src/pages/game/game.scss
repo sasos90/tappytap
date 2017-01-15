@@ -23,19 +23,22 @@ game {
 
         &.level-1 {
             box {
-                width: 100%;
+                // give 2% less then originally because we have 1% of margin there.
+                width: 98%;
             }
         }
 
         &.level-2 {
             box {
-                width: 50%;
+                // give 2% less then originally because we have 1% of margin there.
+                width: 48%;
             }
         }
 
         &.level-3 {
             box {
-                width: 33.33333%;
+                // give 2% less then originally because we have 1% of margin there.
+                width: 31.33333%;
             }
         }
     }

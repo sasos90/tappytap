@@ -5,7 +5,7 @@ export class BoxModel {
 
     constructor(
         private _color: string,
-        private _isHit: boolean = false
+        public isHit: boolean = false
     ) {}
 
     get color(): string {
@@ -14,14 +14,6 @@ export class BoxModel {
 
     set color(value: string) {
         this._color = value;
-    }
-
-    get isHit(): boolean {
-        return this._isHit;
-    }
-
-    set isHit(value: boolean) {
-        this._isHit = value;
     }
 
     public doesMatch(box: BoxModel) : boolean {
