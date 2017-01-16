@@ -116,14 +116,20 @@ export class Game {
      * @param progress Miliseconds for actual progress
      */
     private step(progress: number) {
-        this.countDownProgress = this.getCountDownProgress(progress);
-        this.countDownPercentage = this.getCountDownPercentage();
+        this.setCountDownTimer(progress);
         console.log(this.countDownProgress, this.countDownPercentage);
 
         if (this.countDownProgress <= 0) {
             console.debug("GAME FINISHED!");
+            // reset timer to zero so the progress bar is not visible anymore
+            this.setCountDownTimer(this.countDownStart);
             window.cancelAnimationFrame(this.rafId);
         }
+    }
+
+    private setCountDownTimer(progress: number) {
+        this.countDownProgress = this.getCountDownProgress(progress);
+        this.countDownPercentage = this.getCountDownPercentage();
     }
 
     private getCountDownProgress(progress: number) : number {
