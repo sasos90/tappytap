@@ -58,6 +58,7 @@ game {
             width: 25px;
             height: 25px;
             margin: 0 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
         }
     }
 
@@ -72,7 +73,7 @@ game {
         div {
             height: 100%;
             width: 100%;
-            background: wheat;
+            background: #FFF9C4;
         }
     }
 }

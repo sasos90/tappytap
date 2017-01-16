@@ -31,20 +31,22 @@ export class Game {
     public countDownPercentage: number = 100;
 
     // TODO: Create MODEL!
-    public targetColor: BoxModel = new BoxModel("blue");
+    public targetColor: BoxModel = new BoxModel("#2196F3");
     public boxList: BoxList = new BoxList();
 
     constructor(public navCtrl: NavController) {
 
-        this.boxList.push(new BoxModel("black"));
-        this.boxList.push(new BoxModel("brown"));
-        this.boxList.push(new BoxModel("cadetblue"));
-        this.boxList.push(new BoxModel("blue"));
-        this.boxList.push(new BoxModel("red"));
-        this.boxList.push(new BoxModel("green"));
-        this.boxList.push(new BoxModel("aqua"));
-        this.boxList.push(new BoxModel("blue"));
-        this.boxList.push(new BoxModel("yellow"));
+        this.boxList.push(new BoxModel("#f44336"));
+        this.boxList.push(new BoxModel("#607D8B"));
+        // this.boxList.push(new BoxModel("#9E9E9E"));
+        this.boxList.push(new BoxModel("#2196F3"));
+        this.boxList.push(new BoxModel("#4CAF50"));
+        this.boxList.push(new BoxModel("#2196F3"));
+        // this.boxList.push(new BoxModel("#FFEB3B"));
+        this.boxList.push(new BoxModel("#FF9800"));
+        this.boxList.push(new BoxModel("#795548"));
+        this.boxList.push(new BoxModel("#3F51B5"));
+        this.boxList.push(new BoxModel("#2196F3"));
     }
 
     ngOnInit() {
