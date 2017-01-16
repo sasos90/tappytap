@@ -18,7 +18,8 @@
             </div>
         </div>
     </div>
-    <div style="position: absolute; top: 0px; left: 0px; height: 100%; width: 100%; z-index: -1;">
-        <div [ngStyle]="{width: countDownPercentage + '%'}" style="height: 100%; width: 100%; background: wheat; transition: width 0.2s;"></div>
+
+    <div class="countdown-wrapper">
+        <div [ngStyle]="{width: countDownPercentage + '%'}"></div>
     </div>
 </ion-content>
