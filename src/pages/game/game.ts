@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {BoxModel} from "../../models/BoxModel";
 import {BoxList} from "../../models/BoxList";
+import {GameModel} from "../../models/GameModel";
 
 @Component({
     selector: 'game',
@@ -29,6 +30,11 @@ export class Game {
     private countDownStart: number = 5000;
     public countDownProgress: number = this.countDownStart;
     public countDownPercentage: number = 100;
+    /**
+     * Games list implementations
+     * @type {BoxModel}
+     */
+    private gameList: Array<GameModel> = [];
 
     // TODO: Create MODEL!
     public targetColor: BoxModel = new BoxModel("#2196F3");
@@ -36,17 +42,24 @@ export class Game {
 
     constructor(public navCtrl: NavController) {
 
-        this.boxList.push(new BoxModel("#f44336"));
-        this.boxList.push(new BoxModel("#607D8B"));
+        // this.boxList.push(new BoxModel("#f44336"));
+        // this.boxList.push(new BoxModel("#607D8B"));
         // this.boxList.push(new BoxModel("#9E9E9E"));
-        this.boxList.push(new BoxModel("#2196F3"));
-        this.boxList.push(new BoxModel("#4CAF50"));
-        this.boxList.push(new BoxModel("#2196F3"));
+        // this.boxList.push(new BoxModel("#2196F3"));
+        // this.boxList.push(new BoxModel("#4CAF50"));
+        // this.boxList.push(new BoxModel("#2196F3"));
         // this.boxList.push(new BoxModel("#FFEB3B"));
-        this.boxList.push(new BoxModel("#FF9800"));
-        this.boxList.push(new BoxModel("#795548"));
-        this.boxList.push(new BoxModel("#3F51B5"));
-        this.boxList.push(new BoxModel("#2196F3"));
+        // this.boxList.push(new BoxModel("#FF9800"));
+        // this.boxList.push(new BoxModel("#795548"));
+        // this.boxList.push(new BoxModel("#3F51B5"));
+        // this.boxList.push(new BoxModel("#2196F3"));
+
+        // TODO: how to init this.boxList with game boxes
+        this.gameList.push(new GameModel(1, 1, new BoxModel("#2196F3"), [
+            new BoxModel("#2196F3")
+        ], 5000, (box: BoxModel) => {
+
+        }));
     }
 
     ngOnInit() {

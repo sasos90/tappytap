@@ -12,7 +12,7 @@
         <div id="goal-wrapper">
             <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': targetColor.color}"></div>
         </div>
-        <div id="game-wrapper" class="level-3">
+        <div id="game-wrapper" class="level-{{ gameList[0].level }}">
             <div class="game">
                 <box *ngFor="let box of boxList" [box]="box" [target]="targetColor" (onHit)="boxWasHit(box)" [ngClass]="{'on-top': box.isHit}"></box>
             </div>
