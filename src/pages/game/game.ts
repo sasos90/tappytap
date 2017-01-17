@@ -27,38 +27,33 @@ export class Game {
     /**
      * 5 seconds countdown hardcoded for now.
      */
-    private countDownStart: number = 5000;
+    private countDownStart: number;
     public countDownProgress: number = this.countDownStart;
     public countDownPercentage: number = 100;
     /**
      * Games list implementations
      * @type {BoxModel}
      */
-    private gameList: Array<GameModel> = [];
-
-    // TODO: Create MODEL!
-    public targetColor: BoxModel = new BoxModel("#2196F3");
-    public boxList: BoxList = new BoxList();
+    public gameList: Array<GameModel> = [];
+    /**
+     * Actual level.
+     */
+    public level: number = 2;
 
     constructor(public navCtrl: NavController) {
 
-        // this.boxList.push(new BoxModel("#f44336"));
-        // this.boxList.push(new BoxModel("#607D8B"));
-        // this.boxList.push(new BoxModel("#9E9E9E"));
-        // this.boxList.push(new BoxModel("#2196F3"));
-        // this.boxList.push(new BoxModel("#4CAF50"));
-        // this.boxList.push(new BoxModel("#2196F3"));
-        // this.boxList.push(new BoxModel("#FFEB3B"));
-        // this.boxList.push(new BoxModel("#FF9800"));
-        // this.boxList.push(new BoxModel("#795548"));
-        // this.boxList.push(new BoxModel("#3F51B5"));
-        // this.boxList.push(new BoxModel("#2196F3"));
-
-        // TODO: how to init this.boxList with game boxes
-        this.gameList.push(new GameModel(1, 1, new BoxModel("#2196F3"), [
-            new BoxModel("#2196F3")
-        ], 5000, (box: BoxModel) => {
-
+        // game definitions.
+        this.gameList.push(new GameModel(1, 1, 5000, (game: GameModel) => {
+            this.gameInitialization(game);
+        }, (game: GameModel) => {
+            console.log("Clicked one");
+            console.log(game.boxList.allHit(game.targetBox));
+        }));
+        this.gameList.push(new GameModel(2, 4, 5000, (game: GameModel) => {
+            this.gameInitialization(game);
+        }, (game: GameModel) => {
+            console.log("Clicked one");
+            console.log(game.boxList.allHit(game.targetBox));
         }));
     }
 
@@ -71,7 +66,11 @@ export class Game {
 
         setTimeout(() => {
             this.setLayoutPosition();
-            this.startGame();
+
+            // simulate starting the game
+            setTimeout(() => {
+                this.startGame();
+            }, 3000);
         }, 200);
         window.onresize = (event) => {
             this.setLayoutPosition();
@@ -96,7 +95,12 @@ export class Game {
     public startGame() {
         // GAME
         console.debug("GAME STARTED!");
+        // run the game's init method
+        this.gameList[this.getLevel()].startTheGame();
+
+        // run animation frame with countdown timers
         this.rafId = window.requestAnimationFrame((now) => this.rafCallback(now));
+
         // How to add TIME (add to starting countdown)
         /*setTimeout(() => {
              this.countDownStart += 1000;
@@ -104,9 +108,13 @@ export class Game {
          }, 3500);*/
     }
 
-    public boxWasHit(ev) {
-        console.log("was hit", ev);
-        ev.isHit = true;
+    public boxWasHit(box: BoxModel) {
+        // console.log("was hit", boxModel);
+        this.gameList[this.getLevel()].handleBoxClick(box);
+    }
+
+    public getLevel() : number {
+        return this.level - 1;
     }
 
     /**
@@ -153,5 +161,9 @@ export class Game {
 
     private getCountDownPercentage() : number {
         return this.countDownProgress * 100 / this.countDownStart;
+    }
+
+    private gameInitialization(game: GameModel) {
+        this.countDownStart = game.countDownTime;
     }
 }

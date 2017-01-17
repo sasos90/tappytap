@@ -30,15 +30,18 @@ export class BoxComponent {
             this.onSuccessHit();
         } else {
             console.debug("1. miss");
-            this.box = this.target;
+            this.box.color = this.target.color;
         }
     }
 
     private onSuccessHit() {
+        // handle object data
+        this.box.isHit = true;
+
         // call output
         this.onHit.emit(this.box);
 
-        // handle view
+        // handle component view
         this.hit = true;
         setTimeout(() => {
             this.hideBox = true;

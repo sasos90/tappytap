@@ -4,9 +4,11 @@ import {BoxModel} from "./BoxModel";
  */
 export class BoxList extends Array<BoxModel> {
 
-    this = [];
-
     constructor() {
         super();
+    }
+
+    public allHit(boxTarget: BoxModel) : boolean {
+        return this.findIndex(box => box.doesMatch(boxTarget) && !box.isHit) === -1;
     }
 }
