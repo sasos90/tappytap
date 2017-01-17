@@ -1,5 +1,6 @@
 import {BoxModel} from "./BoxModel";
 import {BoxList} from "./BoxList";
+import {ColorHelper} from "../helpers/ColorHelper";
 /**
  * Created by saso on 1/17/17.
  */
@@ -63,6 +64,7 @@ export class GameModel {
         this.boxList.push(new BoxModel("#607D8B"));
         this.boxList.push(new BoxModel("#9E9E9E"));
         this.boxList.push(new BoxModel("#2196F3"));
+        ColorHelper.getRandomColor();
         // this.boxList.push(new BoxModel("#4CAF50"));
         // this.boxList.push(new BoxModel("#2196F3"));
         // this.boxList.push(new BoxModel("#FFEB3B"));
