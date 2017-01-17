@@ -48,6 +48,10 @@ export class GameModel {
         this.boxClickImplementation(this, boxClicked);
     }
 
+    public allBoxesAreHit() : boolean {
+        return this.boxList.allHit(this.targetBox);
+    }
+
     private generateTarget() {
         this.targetBox = new BoxModel("#2196F3");
     }

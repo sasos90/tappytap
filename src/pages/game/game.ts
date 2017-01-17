@@ -39,6 +39,7 @@ export class Game {
      * Actual level.
      */
     public level: number = 2;
+    public isLevelFinished: boolean = false;
 
     constructor(public navCtrl: NavController) {
 
@@ -46,14 +47,15 @@ export class Game {
         this.gameList.push(new GameModel(1, 1, 5000, (game: GameModel) => {
             this.gameInitialization(game);
         }, (game: GameModel) => {
-            console.log("Clicked one");
             console.log(game.boxList.allHit(game.targetBox));
         }));
         this.gameList.push(new GameModel(2, 4, 5000, (game: GameModel) => {
             this.gameInitialization(game);
-        }, (game: GameModel) => {
-            console.log("Clicked one");
-            console.log(game.boxList.allHit(game.targetBox));
+        }, (game: GameModel, boxClicked: BoxModel) => {
+            if (game.allBoxesAreHit()) {
+                console.warn("LEVEL DONE");
+                this.onLevelFinish();
+            }
         }));
     }
 
@@ -165,5 +167,12 @@ export class Game {
 
     private gameInitialization(game: GameModel) {
         this.countDownStart = game.countDownTime;
+    }
+
+    private onLevelFinish() {
+        this.isLevelFinished = true;
+        setTimeout(() => {
+            this.isLevelFinished = false;
+        }, 2000);
     }
 }

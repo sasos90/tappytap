@@ -22,4 +22,6 @@
     <div class="countdown-wrapper">
         <div [ngStyle]="{width: countDownPercentage + '%'}"></div>
     </div>
+
+    <div class="level-finished" *ngIf="isLevelFinished">Level finished!</div>
 </ion-content>
