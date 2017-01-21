@@ -1,6 +1,7 @@
 import {BoxModel} from "./BoxModel";
 import {BoxList} from "./BoxList";
 import {ColorHelper} from "../helpers/ColorHelper";
+import {ArrayHelper} from "../helpers/ArrayHelper";
 /**
  * Created by saso on 1/17/17.
  */
@@ -70,5 +71,6 @@ export class GameModel {
                 this.boxList.push(new BoxModel(randomColor));
             }
         }
+        ArrayHelper.shuffleArray(this.boxList);
     }
 }
