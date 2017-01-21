@@ -59,18 +59,16 @@ export class GameModel {
 
     private generateBoxes() {
         this.boxList = new BoxList();
-        // TODO Generate proper number of boxes
-        this.boxList.push(new BoxModel("#f44336"));
-        this.boxList.push(new BoxModel("#607D8B"));
-        this.boxList.push(new BoxModel("#9E9E9E"));
-        this.boxList.push(new BoxModel("#2196F3"));
-        ColorHelper.getRandomColor();
-        // this.boxList.push(new BoxModel("#4CAF50"));
-        // this.boxList.push(new BoxModel("#2196F3"));
-        // this.boxList.push(new BoxModel("#FFEB3B"));
-        // this.boxList.push(new BoxModel("#FF9800"));
-        // this.boxList.push(new BoxModel("#795548"));
-        // this.boxList.push(new BoxModel("#3F51B5"));
-        // this.boxList.push(new BoxModel("#2196F3"));
+        // populate number of target colors
+        for (let i = 0; i < this.level; i++) {
+            this.boxList.push(new BoxModel(this.targetBox.color));
+        }
+        // add missing colors
+        while (this.boxList.length < this.numberOfBoxes) {
+            let randomColor = ColorHelper.getRandomColor();
+            if (randomColor !== this.targetBox.color) {
+                this.boxList.push(new BoxModel(randomColor));
+            }
+        }
     }
 }

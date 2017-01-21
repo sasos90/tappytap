@@ -7,9 +7,7 @@ export class ColorHelper {
         "#F44336",
         "#607D8B",
         "#9E9E9E",
-        "#2196F3",
         "#4CAF50",
-        "#2196F3",
         "#FFEB3B",
         "#FF9800",
         "#795548",
@@ -18,7 +16,7 @@ export class ColorHelper {
     ];
 
     public static getRandomColor() {
-        let randomIndex = Math.floor((Math.random() * ColorHelper.MATERIAL_COLORS.length - 1));
-        console.log(ColorHelper.MATERIAL_COLORS[randomIndex]);
+        let randomIndex = Math.floor((Math.random() * ColorHelper.MATERIAL_COLORS.length));
+        return ColorHelper.MATERIAL_COLORS[randomIndex];
     }
 }
