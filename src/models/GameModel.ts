@@ -54,7 +54,7 @@ export class GameModel {
     }
 
     private generateTarget() {
-        this.targetBox = new BoxModel("#2196F3");
+        this.targetBox = new BoxModel(ColorHelper.getRandomColor());
     }
 
     private generateBoxes() {
