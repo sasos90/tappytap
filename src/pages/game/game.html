@@ -10,11 +10,11 @@
 <ion-content padding>
     <div class="content-wrapper">
         <div id="goal-wrapper">
-            <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': gameList[getLevel()].targetBox.color}"></div>
+            <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': gameList[getLevelForArray()].targetBox.color}"></div>
         </div>
         <div id="game-wrapper" class="level-{{ level }}">
             <div class="game">
-                <box *ngFor="let box of gameList[getLevel()].boxList" [box]="box" [target]="gameList[getLevel()].targetBox" (onHit)="boxWasHit(box)" [ngClass]="{'on-top': box.isHit}"></box>
+                <box *ngFor="let box of gameList[getLevelForArray()].boxList" [box]="box" [target]="gameList[getLevelForArray()].targetBox" (onHit)="boxWasHit(box)" [ngClass]="{'on-top': box.isHit}"></box>
             </div>
         </div>
     </div>

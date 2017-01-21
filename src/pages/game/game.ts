@@ -38,23 +38,37 @@ export class Game {
     /**
      * Actual level.
      */
-    public level: number = 2;
+    public level: number = 1;
     public isLevelFinished: boolean = false;
 
     constructor(public navCtrl: NavController) {
 
         // game definitions.
+        /** LEVEL 1 **/
         this.gameList.push(new GameModel(1, 1, 5000, (game: GameModel) => {
             this.gameInitialization(game);
         }, (game: GameModel) => {
-            console.log(game.boxList.allHit(game.targetBox));
+            if (game.allBoxesAreHit()) {
+                console.warn("LEVEL 1 FINISHED");
+                this.onLevelFinish();
+            }
         }));
+        /** LEVEL 2 **/
         this.gameList.push(new GameModel(2, 4, 5000, (game: GameModel) => {
             this.gameInitialization(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
-                console.warn("LEVEL DONE");
+                console.warn("LEVEL 2 DONE");
                 this.onLevelFinish();
+            }
+        }));
+        /** LEVEL 3 **/
+        this.gameList.push(new GameModel(3, 9, 5000, (game: GameModel) => {
+            this.gameInitialization(game);
+        }, (game: GameModel, boxClicked: BoxModel) => {
+            if (game.allBoxesAreHit()) {
+                console.warn("LEVEL 3 DONE");
+                // this.onLevelFinish();
             }
         }));
     }
@@ -97,11 +111,14 @@ export class Game {
     public startGame() {
         // GAME
         console.debug("GAME STARTED!");
+        // reset countdown timer
+        this.lastFrame = null;
+        this.setCountDownTimer(this.countDownStart);
         // run the game's init method
-        this.gameList[this.getLevel()].startTheGame();
+        this.gameList[this.getLevelForArray()].startTheGame();
 
         // run animation frame with countdown timers
-        this.rafId = window.requestAnimationFrame((now) => this.rafCallback(now));
+        this.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
 
         // How to add TIME (add to starting countdown)
         /*setTimeout(() => {
@@ -112,10 +129,14 @@ export class Game {
 
     public boxWasHit(box: BoxModel) {
         // console.log("was hit", boxModel);
-        this.gameList[this.getLevel()].handleBoxClick(box);
+        this.gameList[this.getLevelForArray()].handleBoxClick(box);
     }
 
-    public getLevel() : number {
+    /**
+     * Get true level number for array.
+     * @return number -> Array index.
+     */
+    public getLevelForArray() : number {
         return this.level - 1;
     }
 
@@ -123,14 +144,14 @@ export class Game {
      * Each game frame
      * @param now
      */
-    private rafCallback(now: number) {
+    private animateTimer(now: number) {
 
         if (!this.lastFrame) {
             this.lastFrame = now;
         }
         let progress: number = now - this.lastFrame;
 
-        this.rafId = window.requestAnimationFrame((now) => this.rafCallback(now));
+        this.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
         this.step(progress);
     }
 
@@ -170,9 +191,17 @@ export class Game {
     }
 
     private onLevelFinish() {
+        // this.gameList[this.getLevelForArray()].levelFinishedCallback();
         this.isLevelFinished = true;
         setTimeout(() => {
+            // hide popup
             this.isLevelFinished = false;
+            // new level
+            this.level++;
+            // run new level
+            this.startGame();
+            window.cancelAnimationFrame(this.rafId);
+
         }, 2000);
     }
 }
