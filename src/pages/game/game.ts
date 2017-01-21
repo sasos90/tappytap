@@ -186,9 +186,6 @@ export class Game {
             this.level++;
             // run new level
             this.startGame();
-            // if we cancel the animation frame we can not start it again.. wtf?
-            // window.cancelAnimationFrame(this.rafId);
-
         }, 2000);
     }
 }
