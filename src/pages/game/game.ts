@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import {BoxModel} from "../../models/BoxModel";
 import {BoxList} from "../../models/BoxList";
 import {GameModel} from "../../models/GameModel";
+import {CountdownTimer} from "../../models/CountdownTimer";
 
 @Component({
     selector: 'game',
@@ -25,11 +26,9 @@ export class Game {
      */
     private lastFrame: number = null;
     /**
-     * 5 seconds countdown hardcoded for now.
+     * Countdown timer object
      */
-    private countDownStart: number;
-    public countDownProgress: number = this.countDownStart;
-    public countDownPercentage: number = 100;
+    public timer: CountdownTimer = new CountdownTimer(0);
     /**
      * Games list implementations
      * @type {BoxModel}
@@ -45,7 +44,7 @@ export class Game {
 
         // game definitions.
         /** LEVEL 1 **/
-        this.gameList.push(new GameModel(1, 1, 5000, (game: GameModel) => {
+        this.gameList.push(new GameModel(1, 1, 2000, (game: GameModel) => {
             this.gameInitialization(game);
         }, (game: GameModel) => {
             if (game.allBoxesAreHit()) {
@@ -54,7 +53,7 @@ export class Game {
             }
         }));
         /** LEVEL 2 **/
-        this.gameList.push(new GameModel(2, 4, 5000, (game: GameModel) => {
+        this.gameList.push(new GameModel(2, 4, 3000, (game: GameModel) => {
             this.gameInitialization(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
@@ -113,7 +112,7 @@ export class Game {
         console.debug("GAME STARTED!");
         // reset countdown timer
         this.lastFrame = null;
-        this.setCountDownTimer(this.countDownStart);
+        this.timer.progress = this.gameList[this.getLevelForArray()].countDownTime;
         // run the game's init method
         this.gameList[this.getLevelForArray()].startTheGame();
 
@@ -162,32 +161,19 @@ export class Game {
      * @param progress Miliseconds for actual progress
      */
     private step(progress: number) {
-        this.setCountDownTimer(progress);
-        console.log(this.countDownProgress, this.countDownPercentage);
+        this.timer.progress = progress;
+        console.log(this.timer.progress, this.timer.percentage);
 
-        if (this.countDownProgress <= 0) {
+        if (this.timer.progress <= 0) {
             console.debug("GAME FINISHED!");
-            // reset timer to zero so the progress bar is not visible anymore
-            this.setCountDownTimer(this.countDownStart);
+            // totally hide progress bar was still visible sometimes
+            this.timer.resetToZero();
             window.cancelAnimationFrame(this.rafId);
         }
     }
 
-    private setCountDownTimer(progress: number) {
-        this.countDownProgress = this.getCountDownProgress(progress);
-        this.countDownPercentage = this.getCountDownPercentage();
-    }
-
-    private getCountDownProgress(progress: number) : number {
-        return (Math.round(progress) - this.countDownStart) * -1;
-    }
-
-    private getCountDownPercentage() : number {
-        return this.countDownProgress * 100 / this.countDownStart;
-    }
-
     private gameInitialization(game: GameModel) {
-        this.countDownStart = game.countDownTime;
+        this.timer = new CountdownTimer(game.countDownTime);
     }
 
     private onLevelFinish() {
@@ -200,7 +186,8 @@ export class Game {
             this.level++;
             // run new level
             this.startGame();
-            window.cancelAnimationFrame(this.rafId);
+            // if we cancel the animation frame we can not start it again.. wtf?
+            // window.cancelAnimationFrame(this.rafId);
 
         }, 2000);
     }
