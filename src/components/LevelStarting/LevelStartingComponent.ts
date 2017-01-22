@@ -3,12 +3,18 @@ import {BoxModel} from "../../models/BoxModel";
 
 @Component({
     selector: 'level-starting',
-    template: `<div>Level starting</div>`
+    template: `<div class="countdown-wrapper">Level starting</div>`
 })
 export class LevelStartingComponent {
 
     @Input() targetBox: BoxModel;
-    @Output() countdownFinish = new EventEmitter();
+    @Output() countdownFinished = new EventEmitter();
 
     constructor() {}
+
+    ngOnInit() {
+        setTimeout(() => {
+            this.countdownFinished.emit();
+        }, 2000);
+    }
 }
