@@ -10,18 +10,18 @@
 <ion-content padding>
     <div class="content-wrapper">
         <div id="goal-wrapper">
-            <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': gameList[getLevelForArray()].targetBox.color}"></div>
+            <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': getGame().targetBox.color}"></div>
         </div>
         <div id="game-wrapper" class="level-{{ level }}">
             <div class="game">
-                <box *ngFor="let box of gameList[getLevelForArray()].boxList" [box]="box" [target]="gameList[getLevelForArray()].targetBox" (onHit)="boxWasHit(box)" [ngClass]="{'on-top': box.isHit}"></box>
+                <box *ngFor="let box of getGame().boxList" [box]="box" [target]="getGame().targetBox" (onHit)="boxWasHit(box)" [ngClass]="{'on-top': box.isHit}"></box>
             </div>
         </div>
     </div>
-
     <div class="countdown-wrapper">
         <div [ngStyle]="{width: timer.percentage + '%'}"></div>
     </div>
 
+    <level-starting *ngIf="isLevelStarting" [targetBox]="getGame().targetBox"></level-starting>
     <div class="level-finished" *ngIf="isLevelFinished">Level finished!</div>
 </ion-content>

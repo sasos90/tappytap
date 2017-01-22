@@ -36,6 +36,7 @@ export class Game {
      * Actual level.
      */
     public level: number = 1;
+    public isLevelStarting: boolean = false;
     public isLevelFinished: boolean = false;
 
     constructor(public navCtrl: NavController) {
@@ -135,6 +136,10 @@ export class Game {
      */
     public getLevelForArray() : number {
         return this.level - 1;
+    }
+
+    public getGame() : GameModel {
+        return this.gameList[this.getLevelForArray()];
     }
 
     /**
