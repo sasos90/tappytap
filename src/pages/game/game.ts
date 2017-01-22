@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 import {BoxModel} from "../../models/BoxModel";
-import {BoxList} from "../../models/BoxList";
 import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
 
@@ -16,7 +15,6 @@ export class Game {
     private gameWrapper: HTMLElement;
     private gameElement: any;
 
-    // objects
     /**
      * Reference ID for requestAnimationFrame javascript function, so we can cancel it later
      */
