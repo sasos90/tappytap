@@ -45,4 +45,8 @@ export class CountdownTimer {
     private calculatePercentage() : number {
         return this.progress * 100 / this.start;
     }
+
+    public addTime(miliseconds: number) {
+        this.start += miliseconds;
+    }
 }
