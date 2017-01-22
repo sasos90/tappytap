@@ -43,6 +43,13 @@ game {
                 width: 31.33333%;
             }
         }
+
+        &.level-4 {
+            box {
+                // give 2% less then originally because we have 1% of margin there.
+                width: 23%;
+            }
+        }
     }
 
     #goal-wrapper {
