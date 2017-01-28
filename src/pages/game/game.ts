@@ -33,7 +33,7 @@ export class Game {
      * Actual level.
      */
     public level: number = 1;
-    public levelStartCountdown: boolean = false;
+    public readySetGo: boolean = false;
     public isLevelFinished: boolean = false;
 
     constructor(public navCtrl: NavController) {
@@ -79,7 +79,7 @@ export class Game {
             this.setLayoutPosition();
 
             // simulate starting the game
-            this.levelStartCountdown = true;
+            this.readySetGo = true;
         }, 200);
         window.onresize = (event) => {
             this.setLayoutPosition();
@@ -104,7 +104,7 @@ export class Game {
     public startGame() {
         // GAME
         console.debug("GAME STARTED!");
-        this.levelStartCountdown = false;
+        this.readySetGo = false;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
         this.timer.progress = this.getGame().countDownTime;
@@ -173,7 +173,7 @@ export class Game {
     private onLevelFinish() {
         // this.getGame().levelFinishedCallback();
         this.isLevelFinished = true;
-        this.levelStartCountdown = true;
+        this.readySetGo = true;
         setTimeout(() => {
             // hide popup
             this.isLevelFinished = false;

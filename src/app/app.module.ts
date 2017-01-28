@@ -4,7 +4,7 @@ import { MyApp } from './app.component';
 import { Page2 } from '../pages/page2/page2';
 import {Game} from "../pages/game/game";
 import {BoxComponent} from "../components/box/box";
-import {LevelStartingComponent} from "../components/LevelStarting/LevelStartingComponent";
+import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent";
 
 @NgModule({
     declarations: [
@@ -12,7 +12,7 @@ import {LevelStartingComponent} from "../components/LevelStarting/LevelStartingC
         Game,
         BoxComponent,
         Page2,
-        LevelStartingComponent
+        ReadySetGoComponent
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -22,7 +22,7 @@ import {LevelStartingComponent} from "../components/LevelStarting/LevelStartingC
         MyApp,
         Game,
         Page2,
-        LevelStartingComponent
+        ReadySetGoComponent
     ],
     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

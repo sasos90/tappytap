@@ -22,6 +22,6 @@
         <div [ngStyle]="{width: timer.percentage + '%'}"></div>
     </div>
 
-    <level-starting *ngIf="levelStartCountdown" [targetBox]="getGame().targetBox" (countdownFinished)="startGame()"></level-starting>
+    <ready-set-go *ngIf="readySetGo" [targetBox]="getGame().targetBox" (countdownFinished)="startGame()"></ready-set-go>
     <div class="level-finished" *ngIf="isLevelFinished">Level finished!</div>
 </ion-content>
