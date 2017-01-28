@@ -44,7 +44,7 @@ export class Game {
         // game definitions.
         /** LEVEL 1 **/
         this.gameList.push(new GameModel(1, 1, 2000, (game: GameModel) => {
-            this.gameInitialization(game);
+            this.gameViewInit(game);
         }, (game: GameModel) => {
             if (game.allBoxesAreHit()) {
                 console.warn("LEVEL 1 FINISHED");
@@ -53,7 +53,7 @@ export class Game {
         }));
         /** LEVEL 2 **/
         this.gameList.push(new GameModel(2, 4, 3000, (game: GameModel) => {
-            this.gameInitialization(game);
+            this.gameViewInit(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
                 console.warn("LEVEL 2 DONE");
@@ -62,11 +62,11 @@ export class Game {
         }));
         /** LEVEL 3 **/
         this.gameList.push(new GameModel(3, 9, 5000, (game: GameModel) => {
-            this.gameInitialization(game);
+            this.gameViewInit(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
                 console.warn("LEVEL 3 DONE");
-                // this.onLevelFinish();
+                this.onLevelFinish();
             }
         }));
     }
@@ -110,10 +110,10 @@ export class Game {
         this.levelStartCountdown = false;
         // reset countdown timer
         this.lastFrame = null;
-        this.timer.progress = this.gameList[this.getLevelForArray()].countDownTime;
+        this.timer.progress = this.getGame().countDownTime;
         // run the game's init method
         // TODO change with this.getGame()
-        this.gameList[this.getLevelForArray()].startTheGame();
+        this.getGame().startTheGame();
 
         // run animation frame with countdown timers
         this.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
@@ -121,7 +121,7 @@ export class Game {
 
     public boxWasHit(box: BoxModel) {
         // console.log("was hit", boxModel);
-        this.gameList[this.getLevelForArray()].handleBoxClick(box);
+        this.getGame().handleBoxClick(box);
     }
 
     /**
@@ -169,21 +169,25 @@ export class Game {
         }
     }
 
-    private gameInitialization(game: GameModel) {
+    private gameViewInit(game: GameModel) {
         this.timer = new CountdownTimer(game.countDownTime);
     }
 
     private onLevelFinish() {
-        // this.gameList[this.getLevelForArray()].levelFinishedCallback();
+        // this.getGame().levelFinishedCallback();
         this.isLevelFinished = true;
         this.levelStartCountdown = true;
         setTimeout(() => {
             // hide popup
             this.isLevelFinished = false;
-            // new level
-            this.level++;
+            this.nextLevel();
             // run new level
             this.startGame();
         }, 2000);
+    }
+
+    private nextLevel() {
+        // new level (increase)
+        this.level++;
     }
 }
