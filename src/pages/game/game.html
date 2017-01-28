@@ -23,5 +23,5 @@
     </div>
 
     <ready-set-go *ngIf="readySetGo" [targetBox]="getGame().targetBox" (countdownFinished)="startGame()"></ready-set-go>
-    <div class="level-finished" *ngIf="isLevelFinished">Level finished!</div>
+    <level-complete *ngIf="levelComplete"></level-complete>
 </ion-content>

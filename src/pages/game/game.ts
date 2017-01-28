@@ -34,7 +34,7 @@ export class Game {
      */
     public level: number = 1;
     public readySetGo: boolean = false;
-    public isLevelFinished: boolean = false;
+    public levelComplete: boolean = false;
 
     constructor(public navCtrl: NavController) {
 
@@ -109,7 +109,6 @@ export class Game {
         this.frameAnimation.lastFrame = null;
         this.timer.progress = this.getGame().countDownTime;
         // run the game's init method
-        // TODO change with this.getGame()
         this.getGame().startTheGame();
 
         // run animation frame with countdown timers
@@ -172,11 +171,11 @@ export class Game {
 
     private onLevelFinish() {
         // this.getGame().levelFinishedCallback();
-        this.isLevelFinished = true;
+        this.levelComplete = true;
         this.readySetGo = true;
         setTimeout(() => {
             // hide popup
-            this.isLevelFinished = false;
+            this.levelComplete = false;
             this.nextLevel();
             // run new level
             this.startGame();

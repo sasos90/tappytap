@@ -19,7 +19,7 @@ game {
 
         box {
            &.on-top  {
-               z-index: 999;
+               z-index: 10;
            }
         }
 
@@ -82,14 +82,5 @@ game {
             width: 100%;
             background: #FFF9C4;
         }
-    }
-
-    .level-finished {
-        position: absolute;
-        color: red;
-        top: 50%;
-        left: 50%;
-        font-size: 26px;
-        transform: translateX(-50%) translateY(-50%);
     }
 }

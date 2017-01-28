@@ -5,6 +5,7 @@ import { Page2 } from '../pages/page2/page2';
 import {Game} from "../pages/game/game";
 import {BoxComponent} from "../components/box/box";
 import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent";
+import {LevelCompleteComponent} from "../components/LevelComplete/LevelCompleteComponent";
 
 @NgModule({
     declarations: [
@@ -12,7 +13,8 @@ import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent"
         Game,
         BoxComponent,
         Page2,
-        ReadySetGoComponent
+        ReadySetGoComponent,
+        LevelCompleteComponent
     ],
     imports: [
         IonicModule.forRoot(MyApp)
@@ -22,7 +24,8 @@ import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent"
         MyApp,
         Game,
         Page2,
-        ReadySetGoComponent
+        ReadySetGoComponent,
+        LevelCompleteComponent
     ],
     providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
