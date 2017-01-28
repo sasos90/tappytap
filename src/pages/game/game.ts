@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import {BoxModel} from "../../models/BoxModel";
 import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
+import {CountdownAnimation} from "../../models/CountdownAnimation";
 
 @Component({
     selector: 'game',
@@ -16,13 +17,9 @@ export class Game {
     private gameElement: any;
 
     /**
-     * Reference ID for requestAnimationFrame javascript function, so we can cancel it later
+     * Model for requestAnimationFrame - countdown animation.
      */
-    private rafId: any;
-    /**
-     * Miliseconds when last frame was executed.
-     */
-    private lastFrame: number = null;
+    private frameAnimation = new CountdownAnimation();
     /**
      * Countdown timer object
      */
@@ -109,14 +106,14 @@ export class Game {
         console.debug("GAME STARTED!");
         this.levelStartCountdown = false;
         // reset countdown timer
-        this.lastFrame = null;
+        this.frameAnimation.lastFrame = null;
         this.timer.progress = this.getGame().countDownTime;
         // run the game's init method
         // TODO change with this.getGame()
         this.getGame().startTheGame();
 
         // run animation frame with countdown timers
-        this.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
+        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
     }
 
     public boxWasHit(box: BoxModel) {
@@ -142,12 +139,12 @@ export class Game {
      */
     private animateTimer(now: number) {
 
-        if (!this.lastFrame) {
-            this.lastFrame = now;
+        if (!this.frameAnimation.lastFrame) {
+            this.frameAnimation.lastFrame = now;
         }
-        let progress: number = now - this.lastFrame;
+        let progress: number = now - this.frameAnimation.lastFrame;
 
-        this.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
+        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
         this.step(progress);
     }
 
@@ -165,7 +162,7 @@ export class Game {
             console.debug("GAME FINISHED!");
             // totally hide progress bar was still visible sometimes
             this.timer.resetToZero();
-            window.cancelAnimationFrame(this.rafId);
+            this.frameAnimation.cancelAnimation();
         }
     }
 
