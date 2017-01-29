@@ -41,7 +41,7 @@ export class Game {
         // game definitions.
         /** LEVEL 1 **/
         this.gameList.push(new GameModel(1, 1, 2000, (game: GameModel) => {
-            this.gameViewInit(game);
+            this.gameSpecificInit(game);
         }, (game: GameModel) => {
             if (game.allBoxesAreHit()) {
                 console.warn("LEVEL 1 FINISHED");
@@ -50,7 +50,7 @@ export class Game {
         }));
         /** LEVEL 2 **/
         this.gameList.push(new GameModel(2, 4, 3000, (game: GameModel) => {
-            this.gameViewInit(game);
+            this.gameSpecificInit(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
                 console.warn("LEVEL 2 DONE");
@@ -59,7 +59,7 @@ export class Game {
         }));
         /** LEVEL 3 **/
         this.gameList.push(new GameModel(3, 9, 5000, (game: GameModel) => {
-            this.gameViewInit(game);
+            this.gameSpecificInit(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
                 console.warn("LEVEL 3 DONE");
@@ -102,17 +102,21 @@ export class Game {
     }
 
     public startGame() {
-        // GAME
+        this.beforeGame();
+
+        // run the game's init method
+        this.getGame().startTheGame();
         console.debug("GAME STARTED!");
+
+        // run animation frame with countdown timers
+        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
+    }
+
+    private beforeGame() {
         this.readySetGo = false;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
         this.timer.progress = this.getGame().countDownTime;
-        // run the game's init method
-        this.getGame().startTheGame();
-
-        // run animation frame with countdown timers
-        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
     }
 
     public boxWasHit(box: BoxModel) {
@@ -165,7 +169,7 @@ export class Game {
         }
     }
 
-    private gameViewInit(game: GameModel) {
+    private gameSpecificInit(game: GameModel) {
         this.timer = new CountdownTimer(game.countDownTime);
     }
 
