@@ -1,3 +1,17 @@
 ready-set-go {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
 
+    .ready-set-go-wrapper {
+        position: absolute;
+        color: blue;
+        top: 50%;
+        left: 50%;
+        font-size: 40px;
+        transform: translateX(-50%) translateY(-50%);
+    }
 }

@@ -173,16 +173,17 @@ export class Game {
         this.timer = new CountdownTimer(game.countDownTime);
     }
 
+    /**
+     * Handle stuff after level is finished. Should not start the game here.
+     */
     private onLevelFinish() {
         // this.getGame().levelFinishedCallback();
         this.levelComplete = true;
-        this.readySetGo = true;
         setTimeout(() => {
-            // hide popup
+            // handle view
             this.levelComplete = false;
+            this.readySetGo = true;
             this.nextLevel();
-            // run new level
-            this.startGame();
         }, 2000);
     }
 
