@@ -6,6 +6,7 @@ import {Game} from "../pages/game/game";
 import {BoxComponent} from "../components/box/box";
 import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent";
 import {LevelCompleteComponent} from "../components/LevelComplete/LevelCompleteComponent";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import {LevelCompleteComponent} from "../components/LevelComplete/LevelCompleteC
         LevelCompleteComponent
     ],
     imports: [
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        BrowserModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
