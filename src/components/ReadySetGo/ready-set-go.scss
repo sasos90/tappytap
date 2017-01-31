@@ -13,5 +13,39 @@ ready-set-go {
         left: 50%;
         font-size: 40px;
         transform: translateX(-50%) translateY(-50%);
+
+        .relative-wrapper {
+            position: relative;
+
+            .step {
+                visibility: hidden;
+                transition: all 0.8s linear;
+                transform: translateY(0px);
+                text-align: center;
+
+                &.one {
+
+                }
+                &.two {
+                    transform: translateY(-100%);
+                }
+
+                &.animation {
+                    visibility: visible;
+                    transform: translateY(-200px);
+                    opacity: 0;
+                }
+            }
+
+            .step-go {
+                visibility: hidden;
+                text-align: center;
+                transform: translateY(-200%);
+
+                &.animation {
+                    visibility: visible;
+                }
+            }
+        }
     }
 }
