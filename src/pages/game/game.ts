@@ -34,6 +34,7 @@ export class Game {
      */
     public level: number = 1;
     public readySetGo: boolean = false;
+    public gameInProgress: boolean = false;
     public levelComplete: boolean = false;
 
     constructor(public navCtrl: NavController) {
@@ -114,6 +115,7 @@ export class Game {
 
     private beforeGame() {
         this.readySetGo = false;
+        this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
         this.timer.progress = this.getGame().countDownTime;
@@ -183,6 +185,7 @@ export class Game {
             // handle view
             this.levelComplete = false;
             this.readySetGo = true;
+            this.gameInProgress = false;
             this.nextLevel();
         }, 2000);
     }

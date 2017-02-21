@@ -8,7 +8,6 @@ import {BoxModel} from "../../models/BoxModel";
             <div class="relative-wrapper">
                 <div class="step one" [ngClass]="{animation: readySetGo >= 0}">{{ 'Ready' }}</div>
                 <div class="step two" [ngClass]="{animation: readySetGo >= 1}">{{ 'Set' }}</div>
-                <div class="step-go" [ngClass]="{animation: readySetGo >= 2}">{{ 'GO!' }}</div>
             </div>
         </div>`
 })
@@ -27,13 +26,8 @@ export class ReadySetGoComponent {
             this.readySetGo++;
             setTimeout(() => {
                 this.readySetGo++;
-                // debugger;
                 setTimeout(() => {
-                    this.readySetGo++;
-                    // debugger;
-                    setTimeout(() => {
-                        this.countdownFinished.emit();
-                    }, 300);
+                    this.countdownFinished.emit();
                 }, 1000);
             }, 1000);
         }, 500);
