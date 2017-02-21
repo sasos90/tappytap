@@ -9,7 +9,8 @@ import {BoxModel} from "../../models/BoxModel";
                 <div class="step one" [ngClass]="{animation: readySetGo >= 0}">{{ 'Ready' }}</div>
                 <div class="step two" [ngClass]="{animation: readySetGo >= 1}">{{ 'Set' }}</div>
             </div>
-        </div>`
+        </div>
+        <div class="overlay-background"></div>`
 })
 export class ReadySetGoComponent {
 

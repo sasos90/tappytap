@@ -5,6 +5,7 @@ ready-set-go {
     width: 100%;
     height: 100%;
     z-index: 99;
+    margin-top: 56px;
 
     .ready-set-go-wrapper {
         position: absolute;
@@ -34,16 +35,6 @@ ready-set-go {
                     visibility: visible;
                     transform: translateY(-200px);
                     opacity: 0;
-                }
-            }
-
-            .step-go {
-                visibility: hidden;
-                text-align: center;
-                transform: translateY(-200%);
-
-                &.animation {
-                    visibility: visible;
                 }
             }
         }
