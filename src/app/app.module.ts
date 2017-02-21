@@ -6,7 +6,16 @@ import {Game} from "../pages/game/game";
 import {BoxComponent} from "../components/box/box";
 import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent";
 import {LevelCompleteComponent} from "../components/LevelComplete/LevelCompleteComponent";
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from "@angular/platform-browser";
+
+export class MyHammerConfig extends HammerGestureConfig  {
+    overrides = <any>{
+        "tap": {
+            time: 1000,
+            threshold: 999
+        } // override default settings
+    }
+}
 
 @NgModule({
     declarations: [
@@ -29,6 +38,9 @@ import {BrowserModule} from "@angular/platform-browser";
         ReadySetGoComponent,
         LevelCompleteComponent
     ],
-    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+    providers: [
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
+    ]
 })
 export class AppModule {}
