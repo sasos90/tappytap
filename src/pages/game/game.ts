@@ -197,6 +197,11 @@ export class Game {
      */
     private onLevelFinish() {
         // Show score after level complete
+        // Stop the countdown timer
+        this.frameAnimation.cancelAnimation();
+        // Timer progress is the remaining miliseconds - which is the score to add eventually
+        console.warn("Result: " + this.timer.progress);
+        // Open the component with scores
         this.levelComplete = true;
 
         // -- Temporary simulate next level start.
