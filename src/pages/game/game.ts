@@ -164,8 +164,9 @@ export class Game {
         console.log(this.timer.progress, this.timer.percentage);
 
         if (this.timer.progress <= 0) {
+            // game is finished - countdown timer elapsed
             console.debug("GAME FINISHED!");
-            // totally hide progress bar was still visible sometimes
+            // totally hide progress bar because it was still visible sometimes
             this.timer.resetToZero();
             this.frameAnimation.cancelAnimation();
         }
