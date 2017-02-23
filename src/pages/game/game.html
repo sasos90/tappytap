@@ -18,10 +18,10 @@
             </div>
         </div>
     </div>
-    <div class="countdown-wrapper">
+
+    <div class="countdown-wrapper" *ngIf="gameInProgress">
         <div [ngStyle]="{width: timer.percentage + '%'}"></div>
     </div>
-
     <ready-set-go *ngIf="readySetGo" [targetBox]="getGame().targetBox" (countdownFinished)="startGame()"></ready-set-go>
     <level-complete *ngIf="levelComplete"></level-complete>
 </ion-content>
