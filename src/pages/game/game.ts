@@ -218,6 +218,7 @@ export class Game {
     }
 
     private gameFinished() {
-        // method for showing the final score result of the game
+        // Method for showing the final score result of the game
+        console.error("baaah.. game lost -> just temporary until it's implemented");
     }
 }
