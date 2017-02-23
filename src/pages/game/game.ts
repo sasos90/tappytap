@@ -196,13 +196,18 @@ export class Game {
      * Handle stuff after level is finished. Should not start the game here.
      */
     private onLevelFinish() {
-        // this.getGame().levelFinishedCallback();
+        // Show score after level complete
         this.levelComplete = true;
+
+        // -- Temporary simulate next level start.
         setTimeout(() => {
-            // handle view
+            // Handle view
+            // Hide level complete
             this.levelComplete = false;
-            this.readySetGo = true;
+            // Set game in progress flag to hide progress bar and boxes
             this.gameInProgress = false;
+            // Start counting down READY SET GO for next level
+            this.readySetGo = true;
             this.nextLevel();
         }, 2000);
     }
