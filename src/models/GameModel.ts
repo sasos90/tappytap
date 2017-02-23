@@ -2,6 +2,7 @@ import {BoxModel} from "./BoxModel";
 import {BoxList} from "./BoxList";
 import {ColorHelper} from "../helpers/ColorHelper";
 import {ArrayHelper} from "../helpers/ArrayHelper";
+import {Dimension} from "./Dimension";
 /**
  * Created by saso on 1/17/17.
  */
@@ -12,7 +13,7 @@ export class GameModel {
 
     constructor(
         private level: number,
-        private numberOfBoxes: number,
+        private numberOfBoxes: Dimension,
         private _countDownTime: number,
         private onGameInit: (game: GameModel) => any,
         private boxClickImplementation: (game: GameModel, boxClicked: BoxModel) => any
@@ -58,10 +59,11 @@ export class GameModel {
         this.targetBox = new BoxModel(ColorHelper.getRandomColor());
     }
 
-    private generateBoxes() {
+    public generateBoxes(numberOfTargetColors?: number) {
+        let nrTargetColors: number = numberOfTargetColors || this.level;
         this.boxList = new BoxList();
         // populate number of target colors
-        for (let i = 0; i < this.level; i++) {
+        for (let i = 0; i < nrTargetColors; i++) {
             this.boxList.push(new BoxModel(this.targetBox.color));
         }
         // add missing colors

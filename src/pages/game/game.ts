@@ -5,6 +5,7 @@ import {BoxModel} from "../../models/BoxModel";
 import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
 import {CountdownAnimation} from "../../models/CountdownAnimation";
+import {Dimension} from "../../models/Dimension";
 
 @Component({
     selector: 'game',
@@ -41,7 +42,7 @@ export class Game {
 
         // game definitions.
         /** LEVEL 1 **/
-        this.gameList.push(new GameModel(1, 1, 2000, (game: GameModel) => {
+        this.gameList.push(new GameModel(1, Dimension.DIM_1X1, 2000, (game: GameModel) => {
             this.gameSpecificInit(game);
         }, (game: GameModel) => {
             if (game.allBoxesAreHit()) {
@@ -50,7 +51,7 @@ export class Game {
             }
         }));
         /** LEVEL 2 **/
-        this.gameList.push(new GameModel(2, 4, 3000, (game: GameModel) => {
+        this.gameList.push(new GameModel(2, Dimension.DIM_2X2, 3000, (game: GameModel) => {
             this.gameSpecificInit(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
@@ -59,7 +60,7 @@ export class Game {
             }
         }));
         /** LEVEL 3 **/
-        this.gameList.push(new GameModel(3, 9, 5000, (game: GameModel) => {
+        this.gameList.push(new GameModel(3, Dimension.DIM_3X3, 5000, (game: GameModel) => {
             this.gameSpecificInit(game);
         }, (game: GameModel, boxClicked: BoxModel) => {
             if (game.allBoxesAreHit()) {
