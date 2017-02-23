@@ -169,6 +169,7 @@ export class Game {
             // totally hide progress bar because it was still visible sometimes
             this.timer.resetToZero();
             this.frameAnimation.cancelAnimation();
+            this.gameFinished();
         }
     }
 
@@ -194,5 +195,9 @@ export class Game {
     private nextLevel() {
         // new level (increase)
         this.level++;
+    }
+
+    private gameFinished() {
+        // method for showing the final score result of the game
     }
 }
