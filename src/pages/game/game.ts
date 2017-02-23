@@ -40,34 +40,48 @@ export class Game {
 
     constructor(public navCtrl: NavController) {
 
-        // game definitions.
+        // Game implementations.
+        /*************/
         /** LEVEL 1 **/
-        this.gameList.push(new GameModel(1, Dimension.DIM_1X1, 2000, (game: GameModel) => {
+        /*************/
+        let onGameInitLvl1 = (game: GameModel) => {
             this.gameSpecificInit(game);
-        }, (game: GameModel) => {
+        };
+        let boxClickImplementationLvl1 = (game: GameModel) => {
             if (game.allBoxesAreHit()) {
                 console.warn("LEVEL 1 FINISHED");
                 this.onLevelFinish();
             }
-        }));
+        };
+        this.gameList.push(new GameModel(1, Dimension.DIM_1X1, 2000, onGameInitLvl1, boxClickImplementationLvl1));
+
+        /*************/
         /** LEVEL 2 **/
-        this.gameList.push(new GameModel(2, Dimension.DIM_2X2, 3000, (game: GameModel) => {
+        /*************/
+        let onGameInitLvl2 = (game: GameModel) => {
             this.gameSpecificInit(game);
-        }, (game: GameModel, boxClicked: BoxModel) => {
+        };
+        let boxClickImplementationLvl2 = (game: GameModel) => {
             if (game.allBoxesAreHit()) {
-                console.warn("LEVEL 2 DONE");
+                console.warn("LEVEL 2 FINISHED");
                 this.onLevelFinish();
             }
-        }));
+        };
+        this.gameList.push(new GameModel(2, Dimension.DIM_2X2, 3000, onGameInitLvl2, boxClickImplementationLvl2));
+
+        /*************/
         /** LEVEL 3 **/
-        this.gameList.push(new GameModel(3, Dimension.DIM_3X3, 5000, (game: GameModel) => {
+        /*************/
+        let onGameInitLvl3 = (game: GameModel) => {
             this.gameSpecificInit(game);
-        }, (game: GameModel, boxClicked: BoxModel) => {
+        };
+        let boxClickImplementationLvl3 = (game: GameModel) => {
             if (game.allBoxesAreHit()) {
-                console.warn("LEVEL 3 DONE");
+                console.warn("LEVEL 3 FINISHED");
                 this.onLevelFinish();
             }
-        }));
+        };
+        this.gameList.push(new GameModel(3, Dimension.DIM_3X3, 5000, onGameInitLvl3, boxClickImplementationLvl3));
     }
 
     ngOnInit() {
