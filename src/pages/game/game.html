@@ -10,7 +10,11 @@
 <ion-content padding>
     <div class="content-wrapper">
         <div id="goal-wrapper">
-            <div class="text">Hit:</div><div class="target" [ngStyle]="{'background': getGame().targetBox.color}"></div>
+            <div class="label">
+                <div class="text">{{ 'HIT' }}</div>
+                <div class="animated bounce">&#x27a1;</div>
+            </div>
+            <div class="target" [ngStyle]="{'background': getGame().targetBox.color}"></div>
         </div>
         <div id="game-wrapper" class="level-{{ level }}">
             <div class="game">

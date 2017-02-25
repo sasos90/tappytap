@@ -56,9 +56,35 @@ game {
         display: flex;
         justify-content: center;
         margin-bottom: 15px;
+        position: relative;
 
-        .text {
-            font-size: 20px;
+        .label {
+            display: flex;
+            position: absolute;
+            transform: translateX(-100%);
+
+            .text {
+                font-weight: bold;
+                font-size: 25px;
+            }
+        }
+
+        .bounce {
+            animation-name: bounce;
+        }
+
+        .animated {
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+            animation-duration: 2s;
+            margin: -17px 5px 0px 5px;
+            font-size: 50px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(0);}
+            40% {transform: translateX(30px);}
+            60% {transform: translateX(15px);}
         }
 
         .target {
