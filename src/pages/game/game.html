@@ -10,7 +10,7 @@
 <ion-content padding>
     <div class="content-wrapper">
         <div id="goal-wrapper">
-            <div class="label">
+            <div class="label" *ngIf="!gameInProgress">
                 <div class="text">{{ 'HIT' }}</div>
                 <div class="animated bounce">&#x27a1;</div>
             </div>
