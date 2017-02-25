@@ -6,8 +6,8 @@ import {BoxModel} from "../../models/BoxModel";
     template: `
         <div class="ready-set-go-wrapper">
             <div class="relative-wrapper">
-                <div class="step one" [ngClass]="{animation: readySetGo >= 0}">{{ 'READY' }}</div>
-                <div class="step two" [ngClass]="{animation: readySetGo >= 1}">{{ 'SET' }}</div>
+                <div class="step one" *ngIf="readySetGo == 0">{{ 'READY' }}</div>
+                <div class="step two" *ngIf="readySetGo == 1">{{ 'SET' }}</div>
             </div>
         </div>
         <div class="overlay-background"></div>`
