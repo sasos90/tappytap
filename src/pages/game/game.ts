@@ -203,23 +203,22 @@ export class Game {
         console.warn("Result: " + this.timer.progress);
         // Open the component with scores
         this.levelComplete = true;
-
-        // -- Temporary simulate next level start.
-        setTimeout(() => {
-            // Handle view
-            // Hide level complete
-            this.levelComplete = false;
-            // Set game in progress flag to hide progress bar and boxes
-            this.gameInProgress = false;
-            // Start counting down READY SET GO for next level
-            this.readySetGo = true;
-            this.nextLevel();
-        }, 2000);
     }
 
-    private nextLevel() {
+    /**
+     * Prepare everything to run next level and start counting down (ready set go)
+     */
+    private startNextLevel() {
+
         // new level (increase)
         this.level++;
+        // Handle view
+        // Hide level complete
+        this.levelComplete = false;
+        // Set game in progress flag to hide progress bar and boxes
+        this.gameInProgress = false;
+        // Start counting down READY SET GO for next level
+        this.readySetGo = true;
     }
 
     private gameFinished() {
