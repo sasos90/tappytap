@@ -1,10 +1,13 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, Output, EventEmitter, Input} from '@angular/core';
+import {ScoreModel} from "../../models/ScoreModel";
 
 @Component({
     selector: 'level-complete',
     template: `
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
-            <div class="message">{{ 'LEVEL COMPLETED' }}</div>
+            <div class="result-wrapper">
+                <div class="message">{{ 'LEVEL COMPLETED' }}</div>
+            </div>
             <div class="navigation-wrapper">
                 <button class="btn-next-level" ion-button (click)="nextLevel()">Next level</button>
             </div>
@@ -13,6 +16,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
 })
 export class LevelCompleteComponent {
 
+    @Input() scoreModel: ScoreModel;
     @Output("nextLevel") nextLevelEvent = new EventEmitter();
     public shown: boolean = false;
 

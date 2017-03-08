@@ -6,6 +6,7 @@ import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
 import {CountdownAnimation} from "../../models/CountdownAnimation";
 import {Dimension} from "../../models/Dimension";
+import {ScoreModel} from "../../models/ScoreModel";
 
 @Component({
     selector: 'game',
@@ -37,6 +38,7 @@ export class Game {
     public readySetGo: boolean = false;
     public gameInProgress: boolean = false;
     public levelComplete: boolean = false;
+    public score: ScoreModel = new ScoreModel();
 
     constructor(public navCtrl: NavController) {
 
