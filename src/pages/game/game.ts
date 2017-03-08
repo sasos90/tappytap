@@ -202,7 +202,9 @@ export class Game {
         // Stop the countdown timer
         this.frameAnimation.cancelAnimation();
         // Timer progress is the remaining miliseconds - which is the score to add eventually
-        console.warn("Result: " + this.timer.progress);
+        let lastScore: number = this.timer.progress;
+        console.warn("Result: " + lastScore);
+        this.score.last = lastScore;
         // Open the component with scores
         this.levelComplete = true;
     }

@@ -6,7 +6,8 @@ import {ScoreModel} from "../../models/ScoreModel";
     template: `
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
             <div class="result-wrapper">
-                <div class="message">{{ 'LEVEL COMPLETED' }}</div>
+                <div class="message">{{ 'LEVEL COMPLETED!' }}</div>
+                <div class="last-score">{{ 'Score:' }} {{ scoreModel.last }}</div>
             </div>
             <div class="navigation-wrapper">
                 <button class="btn-next-level" ion-button (click)="nextLevel()">Next level</button>
