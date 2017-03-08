@@ -14,6 +14,7 @@ export class ScoreModel {
 
     set last(value: number) {
         this._last = value;
+        this.total += this.last;
     }
 
     get total(): number {
