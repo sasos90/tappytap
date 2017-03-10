@@ -7,7 +7,7 @@
             </div>
             <div class="target" [ngStyle]="{'background': getGame().targetBox.color}"></div>
         </div>
-        <div id="game-wrapper" class="level-{{ level }}">
+        <div id="game-wrapper" class="level-{{ getLevelClassSuffix() }}">
             <div class="game">
                 <box *ngFor="let box of getGame().boxList" [box]="box" [target]="getGame().targetBox" (onHit)="boxWasHit(box)" [ngClass]="{'invisible': !gameInProgress, 'on-top': box.isHit}"></box>
             </div>
