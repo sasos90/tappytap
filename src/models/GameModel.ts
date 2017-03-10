@@ -75,4 +75,27 @@ export class GameModel {
         }
         ArrayHelper.shuffleArray(this.boxList);
     }
+
+    public static generateDimensionForGame(level: number) {
+        // TODO: Needs logic for that.
+        switch(level) {
+            case 1:
+                return Dimension.DIM_1X1;
+            case 2:
+                return Dimension.DIM_2X2;
+            case 3:
+                return Dimension.DIM_3X3;
+            case 4:
+                return Dimension.DIM_4X4;
+            case 5:
+                return Dimension.DIM_5X5;
+            default:
+                return Dimension.DIM_6X6;
+        }
+    }
+
+    static generateCountDownTimeForGame(level: number) {
+        // TODO: Needs logic for that.
+        return level * 1000;
+    }
 }

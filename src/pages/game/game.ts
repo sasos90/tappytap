@@ -40,13 +40,27 @@ export class Game {
     public levelComplete: boolean = false;
     public score: ScoreModel = new ScoreModel();
 
-    constructor(public navCtrl: NavController) {
+    public gameModel: GameModel;
+    private gameInitImplementations: Array<any> = [
+        (game: GameModel) => {
+            this.gameSpecificInit(game);
+        }
+    ];
+    private boxClickImplementations: Array<any> = [
+        (game: GameModel) => {
+            if (game.allBoxesAreHit()) {
+                console.warn("LEVEL " + this.level + "FINISHED");
+                this.onLevelFinish();
+            }
+        }
+    ];
 
+    constructor(public navCtrl: NavController) {
         // Game implementations.
         /*************/
         /** LEVEL 1 **/
         /*************/
-        let onGameInitLvl1 = (game: GameModel) => {
+        /*let onGameInitLvl1 = (game: GameModel) => {
             this.gameSpecificInit(game);
         };
         let boxClickImplementationLvl1 = (game: GameModel) => {
@@ -55,12 +69,12 @@ export class Game {
                 this.onLevelFinish();
             }
         };
-        this.gameList.push(new GameModel(1, Dimension.DIM_1X1, 2000, onGameInitLvl1, boxClickImplementationLvl1));
+        this.gameList.push(new GameModel(1, Dimension.DIM_1X1, 2000, onGameInitLvl1, boxClickImplementationLvl1));*/
 
         /*************/
         /** LEVEL 2 **/
         /*************/
-        let onGameInitLvl2 = (game: GameModel) => {
+        /*let onGameInitLvl2 = (game: GameModel) => {
             this.gameSpecificInit(game);
         };
         let boxClickImplementationLvl2 = (game: GameModel) => {
@@ -69,12 +83,12 @@ export class Game {
                 this.onLevelFinish();
             }
         };
-        this.gameList.push(new GameModel(2, Dimension.DIM_2X2, 3000, onGameInitLvl2, boxClickImplementationLvl2));
+        this.gameList.push(new GameModel(2, Dimension.DIM_2X2, 3000, onGameInitLvl2, boxClickImplementationLvl2));*/
 
         /*************/
         /** LEVEL 3 **/
         /*************/
-        let onGameInitLvl3 = (game: GameModel) => {
+        /*let onGameInitLvl3 = (game: GameModel) => {
             this.gameSpecificInit(game);
         };
         let boxClickImplementationLvl3 = (game: GameModel) => {
@@ -83,10 +97,11 @@ export class Game {
                 this.onLevelFinish();
             }
         };
-        this.gameList.push(new GameModel(3, Dimension.DIM_3X3, 5000, onGameInitLvl3, boxClickImplementationLvl3));
+        this.gameList.push(new GameModel(3, Dimension.DIM_3X3, 5000, onGameInitLvl3, boxClickImplementationLvl3));*/
     }
 
     ngOnInit() {
+        this.generateGameModel();
         this.gameWrapper = window.document.getElementById("game-wrapper");
         this.gameElement = window.document.querySelectorAll(".game").item(0);
 
@@ -152,7 +167,7 @@ export class Game {
     }
 
     public getGame() : GameModel {
-        return this.gameList[this.getLevelForArray()];
+        return this.gameModel;
     }
 
     /**
@@ -223,10 +238,40 @@ export class Game {
         this.gameInProgress = false;
         // Start counting down READY SET GO for next level
         this.readySetGo = true;
+        // generate new level game
+        this.generateGameModel();
     }
 
     private gameFinished() {
         // Method for showing the final score result of the game
         console.error("baaah.. game lost -> just temporary until it's implemented");
+    }
+
+    private getGameInitImplementation(level: number) : () => void {
+        // TODO: Needs logic for that.
+        return this.gameInitImplementations[0];
+    }
+
+    private getBoxClickImplementation(level: number) : () => void {
+        // TODO: Needs logic for that.
+        return this.boxClickImplementations[0];
+    }
+
+    private generateGameModel() {
+        this.gameModel = new GameModel(
+            this.level,
+            GameModel.generateDimensionForGame(this.level),
+            GameModel.generateCountDownTimeForGame(this.level),
+            this.getGameInitImplementation(this.level),
+            this.getBoxClickImplementation(this.level)
+        );
+        // return this.gameList[this.getLevelForArray()];
+    }
+
+    public getLevelClassSuffix() : number|string {
+        if (this.level < 6) {
+            return this.level;
+        }
+        return "max";
     }
 }
