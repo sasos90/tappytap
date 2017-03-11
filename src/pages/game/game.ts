@@ -49,8 +49,14 @@ export class Game {
     private boxClickImplementations: Array<any> = [
         (game: GameModel) => {
             if (game.allBoxesAreHit()) {
-                console.warn("LEVEL " + this.level + "FINISHED");
-                this.onLevelFinish();
+                // set another target
+                let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
+                if (untouchedBox) {
+                    game.targetBox = untouchedBox;
+                } else {
+                    // everything was hit
+                    this.onLevelFinish();
+                }
             }
         }
     ];

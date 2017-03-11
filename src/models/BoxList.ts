@@ -11,4 +11,8 @@ export class BoxList extends Array<BoxModel> {
     public allHit(boxTarget: BoxModel) : boolean {
         return this.findIndex(box => box.doesMatch(boxTarget) && !box.isHit) === -1;
     }
+
+    public findUntouchedBox() : BoxModel {
+        return this.find(box => !box.isHit);
+    }
 }
