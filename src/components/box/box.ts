@@ -7,7 +7,7 @@ import {BoxModel} from "../../models/BoxModel";
         <div class="box-wrapper" [ngClass]="{hit: hit}" *ngIf="!hideBox">
             <div class="box front" [ngStyle]="{'background': box.color}" (tap)="tap(box)"></div>
             <!-- Remove back figure if you don't want the whole flip but just 50% -->
-            <div class="box back" [ngStyle]="{'background': target.color}" (tap)="tap(target)"></div>
+            <div class="box back" [ngStyle]="{'background': box.color}" (tap)="tap(target)"></div>
         </div>`
 })
 export class BoxComponent {
