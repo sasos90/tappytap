@@ -37,7 +37,7 @@ export class Game {
     public level: number = 1;
     public readySetGo: boolean = false;
     public gameInProgress: boolean = false;
-    public levelComplete: boolean = false;
+    public finalResult: boolean = false;
     public score: ScoreModel = new ScoreModel();
 
     public gameModel: GameModel;
@@ -221,7 +221,7 @@ export class Game {
         console.warn("Result: " + lastScore);
         this.score.last = lastScore;
         // Open the component with scores
-        this.levelComplete = true;
+        this.finalResult = true;
     }
 
     /**
@@ -233,13 +233,17 @@ export class Game {
         this.level++;
         // Handle view
         // Hide level complete
-        this.levelComplete = false;
+        this.finalResult = false;
         // Set game in progress flag to hide progress bar and boxes
         this.gameInProgress = false;
         // Start counting down READY SET GO for next level
         this.readySetGo = true;
         // generate new level game
         this.generateGameModel();
+    }
+
+    public replayGame() {
+        console.warn("Replay the game - implementation missing");
     }
 
     private gameFinished() {

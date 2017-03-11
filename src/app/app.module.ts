@@ -5,7 +5,7 @@ import { Page2 } from '../pages/page2/page2';
 import {Game} from "../pages/game/game";
 import {BoxComponent} from "../components/box/box";
 import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent";
-import {LevelCompleteComponent} from "../components/LevelComplete/LevelCompleteComponent";
+import {FinalResultComponent} from "../components/FinalResult/FinalResultComponent";
 import {BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from "@angular/platform-browser";
 
 export class MyHammerConfig extends HammerGestureConfig  {
@@ -24,7 +24,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
         BoxComponent,
         Page2,
         ReadySetGoComponent,
-        LevelCompleteComponent
+        FinalResultComponent
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -36,7 +36,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
         Game,
         Page2,
         ReadySetGoComponent,
-        LevelCompleteComponent
+        FinalResultComponent
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
