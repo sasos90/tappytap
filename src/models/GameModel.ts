@@ -42,13 +42,6 @@ export class GameModel {
         return this._countDownTime;
     }
 
-    /**
-     * @deprecated NOT NEEDED ANYMORE
-     */
-    public startTheGame() {
-        // this.onGameInit(this);
-    }
-
     public handleBoxClick(boxClicked: BoxModel) {
         this.boxClickImplementation(this, boxClicked);
     }
@@ -97,7 +90,7 @@ export class GameModel {
     }
 
     static generateCountDownTimeForGame(level: number) {
-        // TODO: Needs logic for that.
+        // TODO: Needs logic for that. why??? we don't need that.
         return level * 1000;
     }
 

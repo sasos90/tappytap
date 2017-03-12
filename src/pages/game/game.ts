@@ -107,14 +107,6 @@ export class Game {
         this.getGame().handleBoxClick(box);
     }
 
-    /**
-     * Get true level number for array.
-     * @return number -> Array index.
-     */
-    public getLevelForArray() : number {
-        return this.level - 1;
-    }
-
     public getGame() : GameModel {
         return this.gameModel;
     }
@@ -176,7 +168,7 @@ export class Game {
      * Prepare everything to run next level and start counting down (ready set go)
      */
     private startNextLevel() {
-
+        // TODO: next thing. replay possible.
         // new level (increase)
         this.level++;
         // Handle view
