@@ -15,7 +15,6 @@ export class GameModel {
         private level: number,
         private numberOfBoxes: Dimension,
         private _countDownTime: number,
-        private onGameInit: (game: GameModel) => any,
         private boxClickImplementation: (game: GameModel, boxClicked: BoxModel) => any
     ) {
         // setup game
@@ -43,8 +42,11 @@ export class GameModel {
         return this._countDownTime;
     }
 
+    /**
+     * @deprecated NOT NEEDED ANYMORE
+     */
     public startTheGame() {
-        this.onGameInit(this);
+        // this.onGameInit(this);
     }
 
     public handleBoxClick(boxClicked: BoxModel) {
@@ -99,15 +101,13 @@ export class GameModel {
         return level * 1000;
     }
 
-    public static generateNewGame(level: number, gameInitImplementations: Array<(game: GameModel) => any>, boxClickImplementations: Array<(game: GameModel) => any>) : GameModel {
-        // TODO: needs logic for these two.
-        let gameInitImplementation: (game: GameModel) => any = gameInitImplementations[0];
+    public static generateNewGame(level: number, boxClickImplementations: Array<(game: GameModel) => any>) : GameModel {
+        // TODO: needs logic and implementations for box click
         let boxClickImplementation: (game: GameModel) => any = boxClickImplementations[0];
         return new GameModel(
             level,
             GameModel.generateDimensionForGame(level),
             GameModel.generateCountDownTimeForGame(level),
-            gameInitImplementation,
             boxClickImplementation
         );
     }

@@ -35,11 +35,6 @@ export class Game {
     public score: ScoreModel = new ScoreModel();
 
     public gameModel: GameModel;
-    private gameInitImplementations: Array<(game: GameModel) => void> = [
-        (game: GameModel) => {
-            this.gameSpecificInit(game);
-        }
-    ];
     private boxClickImplementations: Array<(game: GameModel) => void> = [
         (game: GameModel) => {
             if (game.allBoxesAreHit()) {
@@ -107,6 +102,7 @@ export class Game {
         this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
+        this.timer = new CountdownTimer(5000);
         this.timer.progress = this.getGame().countDownTime;
     }
 
@@ -162,10 +158,6 @@ export class Game {
         }
     }
 
-    private gameSpecificInit(game: GameModel) {
-        this.timer = new CountdownTimer(game.countDownTime);
-    }
-
     /**
      * Handle stuff after level is finished. Should not start the game here.
      */
@@ -209,7 +201,7 @@ export class Game {
     }
 
     private generateGameModel() {
-        this.gameModel = GameModel.generateNewGame(this.level, this.gameInitImplementations, this.boxClickImplementations);
+        this.gameModel = GameModel.generateNewGame(this.level, this.boxClickImplementations);
     }
 
     public getLevelClassSuffix() : number|string {
