@@ -85,7 +85,7 @@ export class GameModel {
     }
 
     public static generateNewGame(level: number, boxClickImplementations: Array<(game: GameModel) => any>) : GameModel {
-        // TODO: needs logic and implementations for box click
+        // TODO: needs logic which implementation to choose. Level wise.
         let boxClickImplementation: (game: GameModel) => any = boxClickImplementations[0];
         return new GameModel(
             level,

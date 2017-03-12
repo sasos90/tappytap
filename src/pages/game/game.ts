@@ -35,6 +35,7 @@ export class Game {
     public score: ScoreModel = new ScoreModel();
 
     public gameModel: GameModel;
+    // TODO: needs more implementations for higher levels.
     private boxClickImplementations: Array<(game: GameModel) => void> = [
         (game: GameModel) => {
             if (game.allBoxesAreHit()) {
