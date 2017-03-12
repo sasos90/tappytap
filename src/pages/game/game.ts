@@ -88,11 +88,7 @@ export class Game {
 
     public startGame() {
         this.beforeGame();
-
-        // run the game's init method
-        this.getGame().startTheGame();
         console.debug("GAME STARTED!");
-
         // run animation frame with countdown timers
         this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
     }
