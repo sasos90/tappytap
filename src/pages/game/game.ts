@@ -158,15 +158,18 @@ export class Game {
      * Handle stuff after level is finished. Should not start the game here.
      */
     private onLevelFinish() {
-        // Show score after level complete
+        // go to next level
+        this.level++;
+        // generate new level game
+        this.generateGameModel();
         // Stop the countdown timer
-        this.frameAnimation.cancelAnimation();
+        // this.frameAnimation.cancelAnimation();
         // Timer progress is the remaining miliseconds - which is the score to add eventually
         let lastScore: number = this.timer.progress;
         console.warn("Result: " + lastScore);
         this.score.last = lastScore;
         // Open the component with scores
-        this.finalResult = true;
+        // this.finalResult = true;
     }
 
     /**
@@ -183,8 +186,6 @@ export class Game {
         this.gameInProgress = false;
         // Start counting down READY SET GO for next level
         this.readySetGo = true;
-        // generate new level game
-        this.generateGameModel();
     }
 
     public replayGame() {
