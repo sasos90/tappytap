@@ -167,10 +167,11 @@ export class Game {
     /**
      * Prepare everything to run next level and start counting down (ready set go)
      */
-    private startNextLevel() {
+    private replayTheGame() {
         // TODO: next thing. replay possible.
         // new level (increase)
-        this.level++;
+        this.level = 1;
+        this.generateGameModel();
         // Handle view
         // Hide level complete
         this.finalResult = false;
@@ -180,13 +181,9 @@ export class Game {
         this.readySetGo = true;
     }
 
-    public replayGame() {
-        console.warn("Replay the game - implementation missing");
-    }
-
     private gameFinished() {
         // Method for showing the final score result of the game
-        console.error("baaah.. game lost -> just temporary until it's implemented");
+        this.finalResult = true;
     }
 
     private generateGameModel() {
