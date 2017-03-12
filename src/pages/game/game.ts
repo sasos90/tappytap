@@ -5,7 +5,6 @@ import {BoxModel} from "../../models/BoxModel";
 import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
 import {CountdownAnimation} from "../../models/CountdownAnimation";
-import {Dimension} from "../../models/Dimension";
 import {ScoreModel} from "../../models/ScoreModel";
 
 @Component({
@@ -26,11 +25,6 @@ export class Game {
      * Countdown timer object
      */
     public timer: CountdownTimer = new CountdownTimer(0);
-    /**
-     * Games list implementations
-     * @type {BoxModel}
-     */
-    public gameList: Array<GameModel> = [];
     /**
      * Actual level.
      */
@@ -61,50 +55,7 @@ export class Game {
         }
     ];
 
-    constructor(public navCtrl: NavController) {
-        // Game implementations.
-        /*************/
-        /** LEVEL 1 **/
-        /*************/
-        /*let onGameInitLvl1 = (game: GameModel) => {
-            this.gameSpecificInit(game);
-        };
-        let boxClickImplementationLvl1 = (game: GameModel) => {
-            if (game.allBoxesAreHit()) {
-                console.warn("LEVEL 1 FINISHED");
-                this.onLevelFinish();
-            }
-        };
-        this.gameList.push(new GameModel(1, Dimension.DIM_1X1, 2000, onGameInitLvl1, boxClickImplementationLvl1));*/
-
-        /*************/
-        /** LEVEL 2 **/
-        /*************/
-        /*let onGameInitLvl2 = (game: GameModel) => {
-            this.gameSpecificInit(game);
-        };
-        let boxClickImplementationLvl2 = (game: GameModel) => {
-            if (game.allBoxesAreHit()) {
-                console.warn("LEVEL 2 FINISHED");
-                this.onLevelFinish();
-            }
-        };
-        this.gameList.push(new GameModel(2, Dimension.DIM_2X2, 3000, onGameInitLvl2, boxClickImplementationLvl2));*/
-
-        /*************/
-        /** LEVEL 3 **/
-        /*************/
-        /*let onGameInitLvl3 = (game: GameModel) => {
-            this.gameSpecificInit(game);
-        };
-        let boxClickImplementationLvl3 = (game: GameModel) => {
-            if (game.allBoxesAreHit()) {
-                console.warn("LEVEL 3 FINISHED");
-                this.onLevelFinish();
-            }
-        };
-        this.gameList.push(new GameModel(3, Dimension.DIM_3X3, 5000, onGameInitLvl3, boxClickImplementationLvl3));*/
-    }
+    constructor(public navCtrl: NavController) {}
 
     ngOnInit() {
         this.generateGameModel();
@@ -275,7 +226,6 @@ export class Game {
             this.getGameInitImplementation(this.level),
             this.getBoxClickImplementation(this.level)
         );
-        // return this.gameList[this.getLevelForArray()];
     }
 
     public getLevelClassSuffix() : number|string {
