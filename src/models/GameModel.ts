@@ -98,4 +98,17 @@ export class GameModel {
         // TODO: Needs logic for that.
         return level * 1000;
     }
+
+    public static generateNewGame(level: number, gameInitImplementations: Array<(game: GameModel) => any>, boxClickImplementations: Array<(game: GameModel) => any>) : GameModel {
+        // TODO: needs logic for these two.
+        let gameInitImplementation: (game: GameModel) => any = gameInitImplementations[0];
+        let boxClickImplementation: (game: GameModel) => any = boxClickImplementations[0];
+        return new GameModel(
+            level,
+            GameModel.generateDimensionForGame(level),
+            GameModel.generateCountDownTimeForGame(level),
+            gameInitImplementation,
+            boxClickImplementation
+        );
+    }
 }

@@ -35,12 +35,12 @@ export class Game {
     public score: ScoreModel = new ScoreModel();
 
     public gameModel: GameModel;
-    private gameInitImplementations: Array<any> = [
+    private gameInitImplementations: Array<(game: GameModel) => void> = [
         (game: GameModel) => {
             this.gameSpecificInit(game);
         }
     ];
-    private boxClickImplementations: Array<any> = [
+    private boxClickImplementations: Array<(game: GameModel) => void> = [
         (game: GameModel) => {
             if (game.allBoxesAreHit()) {
                 // set another target
@@ -208,24 +208,8 @@ export class Game {
         console.error("baaah.. game lost -> just temporary until it's implemented");
     }
 
-    private getGameInitImplementation(level: number) : () => void {
-        // TODO: Needs logic for that.
-        return this.gameInitImplementations[0];
-    }
-
-    private getBoxClickImplementation(level: number) : () => void {
-        // TODO: Needs logic for that.
-        return this.boxClickImplementations[0];
-    }
-
     private generateGameModel() {
-        this.gameModel = new GameModel(
-            this.level,
-            GameModel.generateDimensionForGame(this.level),
-            GameModel.generateCountDownTimeForGame(this.level),
-            this.getGameInitImplementation(this.level),
-            this.getBoxClickImplementation(this.level)
-        );
+        this.gameModel = GameModel.generateNewGame(this.level, this.gameInitImplementations, this.boxClickImplementations);
     }
 
     public getLevelClassSuffix() : number|string {
