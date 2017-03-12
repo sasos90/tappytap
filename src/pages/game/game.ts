@@ -99,7 +99,6 @@ export class Game {
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
         this.timer = new CountdownTimer(5000);
-        this.timer.progress = this.getGame().countDownTime;
     }
 
     public boxWasHit(box: BoxModel) {

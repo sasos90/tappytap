@@ -3,8 +3,8 @@
  */
 export class CountdownTimer {
 
-    public percentage: number;
-    private _progress: number;
+    public percentage: number = 0;
+    private _progress: number = 0;
 
     constructor(
         private _start: number

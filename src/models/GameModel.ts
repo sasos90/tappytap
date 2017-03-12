@@ -14,7 +14,6 @@ export class GameModel {
     constructor(
         private level: number,
         private numberOfBoxes: Dimension,
-        private _countDownTime: number,
         private boxClickImplementation: (game: GameModel, boxClicked: BoxModel) => any
     ) {
         // setup game
@@ -36,10 +35,6 @@ export class GameModel {
 
     set boxList(value: BoxList) {
         this._boxList = value;
-    }
-
-    get countDownTime(): number {
-        return this._countDownTime;
     }
 
     public handleBoxClick(boxClicked: BoxModel) {
@@ -89,18 +84,12 @@ export class GameModel {
         }
     }
 
-    static generateCountDownTimeForGame(level: number) {
-        // TODO: Needs logic for that. why??? we don't need that.
-        return level * 1000;
-    }
-
     public static generateNewGame(level: number, boxClickImplementations: Array<(game: GameModel) => any>) : GameModel {
         // TODO: needs logic and implementations for box click
         let boxClickImplementation: (game: GameModel) => any = boxClickImplementations[0];
         return new GameModel(
             level,
             GameModel.generateDimensionForGame(level),
-            GameModel.generateCountDownTimeForGame(level),
             boxClickImplementation
         );
     }
