@@ -5,6 +5,7 @@ import {ArrayHelper} from "../helpers/ArrayHelper";
 import {Dimension} from "./Dimension";
 import {Game} from "../pages/game/game";
 import {ScoreModel} from "./ScoreModel";
+import {CountdownTimer} from "./CountdownTimer";
 /**
  * Created by saso on 1/17/17.
  */
@@ -12,11 +13,15 @@ export class GameModel {
 
     private _targetBox: BoxModel;
     private _boxList: BoxList;
-    // TODO: needs more implementations for higher levels.
-    public boxClickImplementations: Array<(game: GameModel, boxHit: BoxModel) => void> = [
+    /**
+     * Game data
+     */
+    private score: ScoreModel;
+    private timer: CountdownTimer;
+    private boxClickImplementations: Array<(game: GameModel, boxHit: BoxModel) => void> = [
         (game: GameModel, box: BoxModel) => {
             if (box.isHit) {
-                // this.handleBoxHit(box);
+                this.handleBoxHit(box);
                 if (game.allBoxesAreHit()) {
                     // set another target
                     let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
@@ -28,7 +33,7 @@ export class GameModel {
                     }
                 }
             } else {
-                // this.
+                this.handleBoxMiss(box);
                 console.error("MISSED");
             }
         }
@@ -39,6 +44,7 @@ export class GameModel {
         private numberOfBoxes: Dimension,
         private gameInstance: Game
     ) {
+        this.initGameProperties();
         // setup game
         this.generateTarget();
         this.generateBoxes();
@@ -113,5 +119,26 @@ export class GameModel {
             GameModel.generateDimensionForGame(level),
             gameInstance
         );
+    }
+
+    private initGameProperties() {
+        this.score = this.gameInstance.score;
+        this.timer = this.gameInstance.timer;
+    }
+
+    /**
+     * Action when the box is hit.
+     */
+    private handleBoxHit(box: BoxModel) {
+        this.score.streak++;
+    }
+
+    /**
+     * Penalty when the box is missed.
+     */
+    private handleBoxMiss(box: BoxModel) {
+        this.score.streak = 0;
+        this.score.total -= 1000;
+        this.timer.addTime(-2000);
     }
 }
