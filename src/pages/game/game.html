@@ -15,7 +15,7 @@
     </div>
 
     <div class="countdown-wrapper" *ngIf="gameInProgress">
-        <div [ngStyle]="{width: timer.percentage + '%'}"></div>
+        <div [ngStyle]="{width: timer.percentage + '%'}">{{ timer.percentage }}</div>
     </div>
     <ready-set-go *ngIf="readySetGo" [targetBox]="getGame().targetBox" (countdownFinished)="startGame()"></ready-set-go>
     <final-result *ngIf="finalResult" [scoreModel]="score" (replayClick)="replayTheGame()"></final-result>

@@ -87,7 +87,7 @@ export class Game {
         this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
-        this.timer = new CountdownTimer(20000);
+        this.timer = new CountdownTimer(5000);
     }
 
     public boxWasTapped(box: BoxModel) {
