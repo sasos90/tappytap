@@ -24,4 +24,9 @@ export class ScoreModel {
     set total(value: number) {
         this._total = value;
     }
+
+    public scoreReset() {
+        this.last = 0;
+        this.total = 0;
+    }
 }

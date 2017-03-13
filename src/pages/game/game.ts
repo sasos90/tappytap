@@ -159,6 +159,7 @@ export class Game {
         // Handle view
         // Hide final result wrapper
         this.hideFinalResult();
+        this.score.scoreReset();
         // Set game in progress flag to hide progress bar and boxes
         this.gameInProgress = false;
         // Start counting down READY SET GO for next level
