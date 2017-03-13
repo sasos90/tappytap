@@ -12,8 +12,8 @@ export class GameModel {
     private _targetBox: BoxModel;
     private _boxList: BoxList;
     // TODO: needs more implementations for higher levels.
-    public boxClickImplementations: Array<(game: GameModel) => void> = [
-        (game: GameModel) => {
+    public boxClickImplementations: Array<(game: GameModel, boxHit: BoxModel) => void> = [
+        (game: GameModel, boxHit: BoxModel) => {
             if (game.allBoxesAreHit()) {
                 // set another target
                 let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
@@ -53,9 +53,8 @@ export class GameModel {
         this._boxList = value;
     }
 
-    public handleBoxClick(boxClicked: BoxModel) {
-        console.log("qwe");
-        this.boxClickImplementations[0](this);//this, boxClicked);
+    public handleBoxClick(boxHit: BoxModel) {
+        this.boxClickImplementations[0](this, boxHit);//this, boxClicked);
     }
 
     public allBoxesAreHit() : boolean {
@@ -102,8 +101,6 @@ export class GameModel {
     }
 
     public static generateNewGame(level: number, gameInstance: Game) : GameModel {
-        // TODO: needs logic which implementation to choose. Level wise.
-        // let boxClickImplementation: (game: GameModel) => any = gameInstance.boxClickImplementations[0];
         return new GameModel(
             level,
             GameModel.generateDimensionForGame(level),
