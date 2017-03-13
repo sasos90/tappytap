@@ -2,7 +2,6 @@ game {
 
     .content-wrapper {
         height: 100%;
-        padding-top: 15px;
     }
 
     #game-wrapper {
@@ -100,9 +99,9 @@ game {
         }
 
         .target {
-            width: 25px;
-            height: 25px;
-            margin: 0 10px;
+            width: 100%;
+            height: 50px;
+            margin: 0px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
         }
     }
