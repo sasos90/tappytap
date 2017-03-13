@@ -34,6 +34,9 @@ export class Game {
     public finalResult: boolean = false;
     public score: ScoreModel = new ScoreModel();
 
+    /**
+     * Game data
+     */
     public gameModel: GameModel;
 
     constructor(public navCtrl: NavController) {}
@@ -87,8 +90,7 @@ export class Game {
         this.timer = new CountdownTimer(20000);
     }
 
-    public boxWasHit(box: BoxModel) {
-        // console.log("was hit", boxModel);
+    public boxWasTapped(box: BoxModel) {
         this.getGame().handleBoxClick(box);
     }
 
@@ -119,7 +121,8 @@ export class Game {
      */
     private step(progress: number) {
         this.timer.progress = progress;
-        console.log(this.timer.progress, this.timer.percentage);
+        // console.log(this.timer.progress, this.timer.percentage);
+        console.log(this.score.total);
 
         if (this.timer.progress <= 0) {
             // game is finished - countdown timer elapsed

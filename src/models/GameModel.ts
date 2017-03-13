@@ -4,6 +4,7 @@ import {ColorHelper} from "../helpers/ColorHelper";
 import {ArrayHelper} from "../helpers/ArrayHelper";
 import {Dimension} from "./Dimension";
 import {Game} from "../pages/game/game";
+import {ScoreModel} from "./ScoreModel";
 /**
  * Created by saso on 1/17/17.
  */
@@ -13,16 +14,22 @@ export class GameModel {
     private _boxList: BoxList;
     // TODO: needs more implementations for higher levels.
     public boxClickImplementations: Array<(game: GameModel, boxHit: BoxModel) => void> = [
-        (game: GameModel, boxHit: BoxModel) => {
-            if (game.allBoxesAreHit()) {
-                // set another target
-                let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
-                if (untouchedBox) {
-                    game.targetBox = untouchedBox;
-                } else {
-                    // everything was hit
-                    this.gameInstance.onLevelFinish();
+        (game: GameModel, box: BoxModel) => {
+            if (box.isHit) {
+                // this.handleBoxHit(box);
+                if (game.allBoxesAreHit()) {
+                    // set another target
+                    let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
+                    if (untouchedBox) {
+                        game.targetBox = untouchedBox;
+                    } else {
+                        // everything was hit
+                        this.gameInstance.onLevelFinish();
+                    }
                 }
+            } else {
+                // this.
+                console.error("MISSED");
             }
         }
     ];
