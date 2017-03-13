@@ -35,21 +35,6 @@ export class Game {
     public score: ScoreModel = new ScoreModel();
 
     public gameModel: GameModel;
-    // TODO: needs more implementations for higher levels.
-    private boxClickImplementations: Array<(game: GameModel) => void> = [
-        (game: GameModel) => {
-            if (game.allBoxesAreHit()) {
-                // set another target
-                let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
-                if (untouchedBox) {
-                    game.targetBox = untouchedBox;
-                } else {
-                    // everything was hit
-                    this.onLevelFinish();
-                }
-            }
-        }
-    ];
 
     constructor(public navCtrl: NavController) {}
 
@@ -65,7 +50,7 @@ export class Game {
             this.setLayoutPosition();
 
             // simulate starting the game
-            this.readySetGo = true;
+            this.showReadySetGo();
         }, 200);
         window.onresize = (event) => {
             this.setLayoutPosition();
@@ -95,7 +80,7 @@ export class Game {
     }
 
     private beforeGame() {
-        this.readySetGo = false;
+        this.hideReadySetGo();
         this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
@@ -149,7 +134,7 @@ export class Game {
     /**
      * Handle stuff after level is finished. Should not start the game here.
      */
-    private onLevelFinish() {
+    public onLevelFinish() {
         // go to next level
         this.level++;
         // generate new level game
@@ -168,26 +153,41 @@ export class Game {
      * Prepare everything to run next level and start counting down (ready set go)
      */
     private replayTheGame() {
-        // TODO: next thing. replay possible.
         // new level (increase)
         this.level = 1;
         this.generateGameModel();
         // Handle view
-        // Hide level complete
-        this.finalResult = false;
+        // Hide final result wrapper
+        this.hideFinalResult();
         // Set game in progress flag to hide progress bar and boxes
         this.gameInProgress = false;
         // Start counting down READY SET GO for next level
-        this.readySetGo = true;
+        this.showReadySetGo();
     }
 
     private gameFinished() {
         // Method for showing the final score result of the game
-        this.finalResult = true;
+        this.showFinalResult();
     }
 
     private generateGameModel() {
-        this.gameModel = GameModel.generateNewGame(this.level, this.boxClickImplementations);
+        this.gameModel = GameModel.generateNewGame(this.level, this);
+    }
+
+    private showFinalResult() {
+        this.finalResult = true;
+    }
+
+    private hideFinalResult() {
+        this.finalResult = false;
+    }
+
+    private showReadySetGo() {
+        this.readySetGo = true;
+    }
+
+    private hideReadySetGo() {
+        this.readySetGo = false;
     }
 
     public getLevelClassSuffix() : number|string {

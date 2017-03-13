@@ -3,6 +3,7 @@ import {BoxList} from "./BoxList";
 import {ColorHelper} from "../helpers/ColorHelper";
 import {ArrayHelper} from "../helpers/ArrayHelper";
 import {Dimension} from "./Dimension";
+import {Game} from "../pages/game/game";
 /**
  * Created by saso on 1/17/17.
  */
@@ -10,11 +11,26 @@ export class GameModel {
 
     private _targetBox: BoxModel;
     private _boxList: BoxList;
+    // TODO: needs more implementations for higher levels.
+    public boxClickImplementations: Array<(game: GameModel) => void> = [
+        (game: GameModel) => {
+            if (game.allBoxesAreHit()) {
+                // set another target
+                let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
+                if (untouchedBox) {
+                    game.targetBox = untouchedBox;
+                } else {
+                    // everything was hit
+                    this.gameInstance.onLevelFinish();
+                }
+            }
+        }
+    ];
 
     constructor(
         private level: number,
         private numberOfBoxes: Dimension,
-        private boxClickImplementation: (game: GameModel, boxClicked: BoxModel) => any
+        private gameInstance: Game
     ) {
         // setup game
         this.generateTarget();
@@ -38,7 +54,8 @@ export class GameModel {
     }
 
     public handleBoxClick(boxClicked: BoxModel) {
-        this.boxClickImplementation(this, boxClicked);
+        console.log("qwe");
+        this.boxClickImplementations[0](this);//this, boxClicked);
     }
 
     public allBoxesAreHit() : boolean {
@@ -84,13 +101,13 @@ export class GameModel {
         }
     }
 
-    public static generateNewGame(level: number, boxClickImplementations: Array<(game: GameModel) => any>) : GameModel {
+    public static generateNewGame(level: number, gameInstance: Game) : GameModel {
         // TODO: needs logic which implementation to choose. Level wise.
-        let boxClickImplementation: (game: GameModel) => any = boxClickImplementations[0];
+        // let boxClickImplementation: (game: GameModel) => any = gameInstance.boxClickImplementations[0];
         return new GameModel(
             level,
             GameModel.generateDimensionForGame(level),
-            boxClickImplementation
+            gameInstance
         );
     }
 }
