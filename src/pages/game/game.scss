@@ -87,6 +87,23 @@ game {
             .text-left {
                 font-weight: bold;
                 font-size: 25px;
+                margin-bottom: 0px;
+                transition: all 1s;
+
+                &.slide-up {
+                    //animation: bounce;
+                    margin-bottom: 80px;
+                }
+
+                // TODO.. check keyframes
+                /*@keyframes bounce {
+                    20%, 60%, 100% {
+                        visibility: visible;
+                    }
+                    40%, 80% {
+                        visibility: hidden;
+                    }
+                }*/
             }
 
             .text-right {
