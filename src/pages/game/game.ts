@@ -6,6 +6,7 @@ import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
 import {CountdownAnimation} from "../../models/CountdownAnimation";
 import {ScoreModel} from "../../models/ScoreModel";
+import {HeaderStatusAnimation} from "../../models/HeaderStatusAnimation";
 
 @Component({
     selector: 'game',
@@ -41,6 +42,7 @@ export class Game {
     private exposedTimeout: number;
     public exposed: boolean = false;
     public headerStatus: string = "HIT";
+    public headerStatusAnimation: string = "";
 
     constructor(public navCtrl: NavController) {}
 
