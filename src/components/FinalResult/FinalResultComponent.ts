@@ -7,7 +7,6 @@ import {ScoreModel} from "../../models/ScoreModel";
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
             <div class="headline">{{ 'GAME COMPLETED!' }}</div>
             <div class="result-wrapper">
-                <div class="last-score">{{ 'Score:' }} {{ scoreModel.last }}</div>
                 <div class="total-score">{{ 'Total score:' }} {{ scoreModel.total }}</div>
             </div>
             <div class="navigation-wrapper">
