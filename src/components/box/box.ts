@@ -16,16 +16,12 @@ export class BoxComponent {
     @Input() target: BoxModel;
     @Output() onBoxTap = new EventEmitter();
     public hit: boolean = false;
-    public exposed: boolean = true;
+    @Input() exposed: boolean = false;
     public hideBox: boolean = false;
 
     constructor() {}
 
-    ngOnInit() {
-        setTimeout(() => {
-            this.exposed = false;
-        }, 500);
-    }
+    ngOnInit() {}
 
     public tap(tappedBox: BoxModel) {
         if (this.target.doesMatch(tappedBox)) {

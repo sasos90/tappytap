@@ -38,6 +38,8 @@ export class Game {
      * Game data
      */
     public gameModel: GameModel;
+    private exposedTimeout: number;
+    public exposed: boolean = false;
 
     constructor(public navCtrl: NavController) {}
 
@@ -87,7 +89,17 @@ export class Game {
         this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
-        this.timer = new CountdownTimer(5000);
+        this.timer = new CountdownTimer(20000);
+        // expose the boxes
+        this.exposeBoxes();
+    }
+
+    public exposeBoxes() {
+        clearTimeout(this.exposedTimeout);
+        this.exposed = true;
+        this.exposedTimeout = setTimeout(() => {
+            this.exposed = false;
+        }, 500);
     }
 
     public boxWasTapped(box: BoxModel) {
@@ -142,6 +154,8 @@ export class Game {
         this.level++;
         // generate new level game
         this.generateGameModel();
+        // expose the boxes
+        this.exposeBoxes();
         // Stop the countdown timer
         // this.frameAnimation.cancelAnimation();
         // Timer progress is the remaining miliseconds - which is the score to add eventually

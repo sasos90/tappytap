@@ -27,6 +27,7 @@ export class GameModel {
                     let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
                     if (untouchedBox) {
                         game.targetBox = untouchedBox;
+                        this.gameInstance.exposeBoxes();
                     } else {
                         // everything was hit
                         this.gameInstance.onLevelFinish();
