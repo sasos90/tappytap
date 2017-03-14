@@ -32,9 +32,9 @@ export class ReadySetGoComponent {
                     this.readySetGo++;
                     setTimeout(() => {
                         this.countdownFinished.emit();
-                    }, 1000);
-                }, 1000);
-            }, 1000);
+                    }, 700);
+                }, 700);
+            }, 700);
         }, 500);
     }
 }
