@@ -92,7 +92,7 @@ game {
 
                 &.blinking {
                     visibility: hidden;
-                    animation: blinking 1s linear 3;
+                    animation: blinking .3333s linear 3;
                 }
 
                 &.slide-up {
@@ -100,8 +100,8 @@ game {
                 }
 
                 @keyframes blinking {
-                    30%, 80% { visibility: hidden; }
-                    50%, 100% { visibility: visible; }
+                    50% { visibility: hidden; }
+                    100% { visibility: visible; }
                 }
 
             }
