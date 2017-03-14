@@ -94,8 +94,9 @@ game {
             }
         }
 
-        .animated-arrow {
+        .animated-tap {
             position: absolute;
+            left: 50%;
             width: 34px;
 
             svg {
