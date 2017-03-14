@@ -21,7 +21,7 @@ export class GameModel {
     private boxClickImplementations: Array<(game: GameModel, boxHit: BoxModel) => void> = [
         (game: GameModel, box: BoxModel) => {
             if (box.isHit) {
-                this.handleBoxHit(box);
+                this.handleBoxHit(game, box);
                 if (game.allBoxesAreHit()) {
                     // set another target
                     let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
@@ -130,9 +130,11 @@ export class GameModel {
     /**
      * Action when the box is hit.
      */
-    private handleBoxHit(box: BoxModel) {
+    private handleBoxHit(game: GameModel, box: BoxModel) {
         this.score.streak++;
         console.log("Streak: ", this.score.streak);
+
+        this.levelSpecificBoxHit(game, box);
     }
 
     /**
@@ -142,5 +144,13 @@ export class GameModel {
         this.score.streak = 0;
         this.score.total -= 1000;
         this.timer.addTime(-2000);
+    }
+
+    private levelSpecificBoxHit(game: GameModel, box: BoxModel) {
+        if (this.level > 1) {
+            if (game.allBoxesAreHit()) {
+                this.timer.addTime(1000);
+            }
+        }
     }
 }
