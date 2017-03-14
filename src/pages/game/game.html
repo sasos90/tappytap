@@ -1,8 +1,8 @@
 <ion-content>
     <div class="content-wrapper">
         <div id="goal-wrapper">
-            <div class="label">
-                <div class="text-left" *ngIf="!gameInProgress">{{ 'HIT' }}</div>
+            <div class="status-header">
+                <div class="text-left" *ngIf="gameInProgress">{{ 'HIT' }}</div>
                 <div class="text-right" *ngIf="gameInProgress">{{ 'Score: ' }} {{ score.total }}</div>
             </div>
             <div class="animated-arrow" *ngIf="!gameInProgress">
