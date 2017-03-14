@@ -6,6 +6,7 @@ import {Dimension} from "./Dimension";
 import {Game} from "../pages/game/game";
 import {ScoreModel} from "./ScoreModel";
 import {CountdownTimer} from "./CountdownTimer";
+import {NativeAudio} from "ionic-native";
 /**
  * Created by saso on 1/17/17.
  */
@@ -23,6 +24,7 @@ export class GameModel {
             if (box.isHit) {
                 this.handleBoxHit(game, box);
                 if (game.allBoxesAreHit()) {
+                    NativeAudio.play("hit");
                     // set another target
                     let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
                     if (untouchedBox) {

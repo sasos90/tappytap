@@ -8,6 +8,7 @@ import {CountdownAnimation} from "../../models/CountdownAnimation";
 import {ScoreModel} from "../../models/ScoreModel";
 import {HeaderStatusAnimation} from "../../models/HeaderStatusAnimation";
 import {HeaderStatus} from "../../models/HeaderStatus";
+import {NativeAudio} from "ionic-native";
 
 @Component({
     selector: 'game',
@@ -44,7 +45,9 @@ export class Game {
     public exposed: boolean = false;
     public headerStatus: HeaderStatus = new HeaderStatus("HIT");
 
-    constructor(public navCtrl: NavController) {}
+    constructor(public navCtrl: NavController) {
+        this.preloadSounds();
+    }
 
     ngOnInit() {
         this.generateGameModel();
@@ -219,5 +222,11 @@ export class Game {
             return this.level;
         }
         return "max";
+    }
+
+    private preloadSounds() {
+        // preload sounds
+        NativeAudio.preloadSimple("hit", "assets/sounds/hit.mp3");
+        NativeAudio.preloadSimple("miss", "assets/sounds/miss.wav");
     }
 }
