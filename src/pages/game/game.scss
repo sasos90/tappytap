@@ -90,20 +90,20 @@ game {
                 margin-bottom: 0px;
                 transition: all 1s;
 
-                &.slide-up {
-                    //animation: bounce;
-                    margin-bottom: 80px;
+                &.blinking {
+                    visibility: hidden;
+                    animation: blinking 1s linear 3;
                 }
 
-                // TODO.. check keyframes
-                /*@keyframes bounce {
-                    20%, 60%, 100% {
-                        visibility: visible;
-                    }
-                    40%, 80% {
-                        visibility: hidden;
-                    }
-                }*/
+                &.slide-up {
+                    margin-top: -80px;
+                }
+
+                @keyframes blinking {
+                    30%, 80% { visibility: hidden; }
+                    50%, 100% { visibility: visible; }
+                }
+
             }
 
             .text-right {
