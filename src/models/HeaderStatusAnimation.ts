@@ -5,4 +5,5 @@ export class HeaderStatusAnimation {
 
     public static BLINKING = "blinking";
     public static SLIDE_UP = "slide-up";
+    public static FONT_EMBOSED = "font-embosed";
 }
