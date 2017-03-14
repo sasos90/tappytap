@@ -7,6 +7,7 @@ import {CountdownTimer} from "../../models/CountdownTimer";
 import {CountdownAnimation} from "../../models/CountdownAnimation";
 import {ScoreModel} from "../../models/ScoreModel";
 import {HeaderStatusAnimation} from "../../models/HeaderStatusAnimation";
+import {HeaderStatus} from "../../models/HeaderStatus";
 
 @Component({
     selector: 'game',
@@ -41,8 +42,7 @@ export class Game {
     public gameModel: GameModel;
     private exposedTimeout: number;
     public exposed: boolean = false;
-    public headerStatus: string = "HIT";
-    public headerStatusAnimation: string = "";
+    public headerStatus: HeaderStatus = new HeaderStatus("HIT");
 
     constructor(public navCtrl: NavController) {}
 
@@ -89,7 +89,7 @@ export class Game {
 
     private beforeGame() {
         this.hideReadySetGo();
-        this.resetHeaderStatus();
+        this.headerStatus.clear();
         this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
@@ -175,7 +175,7 @@ export class Game {
      */
     private replayTheGame() {
         // 1. show instructions
-        this.headerStatus = "HIT";
+        this.headerStatus.text = "HIT";
         // new level (increase)
         this.level = 1;
         this.generateGameModel();
@@ -219,9 +219,5 @@ export class Game {
             return this.level;
         }
         return "max";
-    }
-
-    private resetHeaderStatus() {
-        this.headerStatus = "";
     }
 }
