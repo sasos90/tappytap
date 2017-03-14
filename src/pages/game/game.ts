@@ -161,7 +161,7 @@ export class Game {
         // Timer progress is the remaining miliseconds - which is the score to add eventually
         let lastScore: number = this.timer.progress;
         console.warn("Result: " + lastScore);
-        this.score.last = lastScore;
+        this.score.last = Math.round(lastScore / 100);
         // Open the component with scores
         // this.finalResult = true;
     }
