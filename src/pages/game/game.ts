@@ -40,6 +40,7 @@ export class Game {
     public gameModel: GameModel;
     private exposedTimeout: number;
     public exposed: boolean = false;
+    public headerStatus: string = "HIT";
 
     constructor(public navCtrl: NavController) {}
 
@@ -86,6 +87,7 @@ export class Game {
 
     private beforeGame() {
         this.hideReadySetGo();
+        this.resetHeaderStatus();
         this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
@@ -170,6 +172,8 @@ export class Game {
      * Prepare everything to run next level and start counting down (ready set go)
      */
     private replayTheGame() {
+        // 1. show instructions
+        this.headerStatus = "HIT";
         // new level (increase)
         this.level = 1;
         this.generateGameModel();
@@ -213,5 +217,9 @@ export class Game {
             return this.level;
         }
         return "max";
+    }
+
+    private resetHeaderStatus() {
+        this.headerStatus = "";
     }
 }
