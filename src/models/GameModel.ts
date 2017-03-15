@@ -102,7 +102,7 @@ export class GameModel {
         // TODO: Needs logic for that.
         switch(level) {
             case 1:
-                return Dimension.DIM_1X1;
+                return Dimension.DIM_2X2;
             case 2:
                 return Dimension.DIM_2X2;
             case 3:
