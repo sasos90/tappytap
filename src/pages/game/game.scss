@@ -119,31 +119,43 @@ game {
             }
         }
 
-        .animated-tap {
-            position: absolute;
-            left: 50%;
-            width: 34px;
-
-            svg {
-                animation-name: bounce;
-                animation-fill-mode: both;
-                animation-duration: 2s;
-                margin-top: 50%;
-            }
-        }
-
-        @keyframes bounce {
-            0%, 40%, 80% {width: 24px; transform: translateX(0px);}
-            20% {width: 34px; transform: translateX(-6px);}
-            60% {width: 34px; transform: translateX(-6px);}
-            100% {width: 34px; transform: translateX(-6px);}
-        }
-
-        .target {
-            width: 100%;
+        .target-wrapper {
+            position: relative;
             height: 50px;
-            margin: 0px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
+            width: 100%;
+            padding-top: 5px;
+
+            .animated-tap {
+                position: absolute;
+                left: 50%;
+                width: 20px;
+                z-index: 99;
+                transform: translateX(-50%);
+
+                svg {
+                    animation-name: bounce;
+                    animation-fill-mode: both;
+                    animation-duration: 2s;
+                    margin-top: 13px;
+                }
+            }
+
+            @keyframes bounce {
+                0%, 40%, 80% {width: 24px; transform: translateX(0px);}
+                20% {width: 34px; transform: translateX(-6px);}
+                60% {width: 34px; transform: translateX(-6px);}
+                100% {width: 34px; transform: translateX(-6px);}
+            }
+
+            .target {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 45px;
+                height: 45px;
+                margin: 0px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
+            }
         }
     }
 
