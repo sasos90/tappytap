@@ -39,6 +39,7 @@ export class GameModel {
                         this.gameInstance.exposeBoxes();
                     } else {
                         // everything was hit
+                        // TODO: Sum the score up here.
                         this.gameInstance.onLevelFinish();
                     }
                 }
