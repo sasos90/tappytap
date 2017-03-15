@@ -7,6 +7,8 @@ import {Game} from "../pages/game/game";
 import {ScoreModel} from "./ScoreModel";
 import {CountdownTimer} from "./CountdownTimer";
 import {NativeAudio} from "ionic-native";
+import {HeaderStatus} from "./HeaderStatus";
+import {HeaderStatusAnimation} from "./HeaderStatusAnimation";
 /**
  * Created by saso on 1/17/17.
  */
@@ -15,10 +17,15 @@ export class GameModel {
     private _targetBox: BoxModel;
     private _boxList: BoxList;
     /**
+     * Definition of awarded streaks.
+     */
+    private static STREAK_AWARD = [5, 10, 20, 30, 50, 80, 100, 150, 200, 250, 300];
+    /**
      * Game data
      */
     private score: ScoreModel;
     private timer: CountdownTimer;
+    private headerStatus: HeaderStatus;
     private boxClickImplementations: Array<(game: GameModel, boxHit: BoxModel) => void> = [
         (game: GameModel, box: BoxModel) => {
             if (box.isHit) {
@@ -37,7 +44,6 @@ export class GameModel {
                 }
             } else {
                 this.handleBoxMiss(box);
-                console.error("MISSED");
             }
         }
     ];
@@ -127,6 +133,7 @@ export class GameModel {
     private initGameProperties() {
         this.score = this.gameInstance.score;
         this.timer = this.gameInstance.timer;
+        this.headerStatus = this.gameInstance.headerStatus;
     }
 
     /**
@@ -149,10 +156,21 @@ export class GameModel {
     }
 
     private levelSpecificBoxHit(game: GameModel, box: BoxModel) {
+        this.generalBoxHit(game, box);
         if (this.level > 1) {
             if (game.allBoxesAreHit()) {
                 this.timer.addTime(1000);
             }
+        }
+    }
+
+    private generalBoxHit(game: GameModel, box: BoxModel) {
+        if (GameModel.STREAK_AWARD.indexOf(this.score.streak) !== -1) {
+            this.headerStatus.text = "STREAK: " + this.score.streak;
+            this.headerStatus.animation = HeaderStatusAnimation.FONT_EMBOSED;
+            setTimeout(() => {
+                this.headerStatus.clear();
+            }, 1000);
         }
     }
 }
