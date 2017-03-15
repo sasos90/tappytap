@@ -26,12 +26,10 @@ export class BoxComponent {
 
     public tap(tappedBox: BoxModel) {
         if (this.target.doesMatch(tappedBox)) {
-            console.debug("HIT!");
             // HIT SUCCESSED
             this.onSuccessHit();
         } else {
             NativeAudio.play("miss");
-            console.debug("1. miss");
             this.onBoxTap.emit(this.box);
             this.box.color = this.target.color;
         }

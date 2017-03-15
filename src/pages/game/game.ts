@@ -140,8 +140,6 @@ export class Game {
      */
     private step(progress: number) {
         this.timer.progress = progress;
-        // console.log(this.timer.progress, this.timer.percentage);
-        console.log(this.score.total);
 
         if (this.timer.progress <= 0) {
             // game is finished - countdown timer elapsed
