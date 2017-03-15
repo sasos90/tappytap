@@ -151,7 +151,6 @@ export class GameModel {
      */
     private handleBoxMiss(box: BoxModel) {
         this.score.streak = 0;
-        this.score.total -= 1000;
         this.timer.addTime(-2000);
     }
 
