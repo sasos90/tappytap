@@ -96,7 +96,7 @@ export class Game {
         this.gameInProgress = true;
         // reset countdown timer
         this.frameAnimation.lastFrame = null;
-        this.timer = new CountdownTimer(10000);
+        this.timer = new CountdownTimer(5000);
         // expose the boxes
         this.exposeBoxes();
     }
