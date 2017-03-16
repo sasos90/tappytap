@@ -155,6 +155,7 @@ export class Game {
      * Handle stuff after level is finished. Should not start the game here.
      */
     public onLevelFinish() {
+        this.sumPointsForLevel();
         // go to next level
         this.level++;
         // generate new level game
@@ -163,11 +164,13 @@ export class Game {
         this.exposeBoxes();
         // Stop the countdown timer
         // this.frameAnimation.cancelAnimation();
-        // TODO: Sum the score up in the game model instead.
+    }
+
+    private sumPointsForLevel() {
         // Timer progress is the remaining miliseconds - which is the score to add eventually
-        let lastScore: number = this.timer.progress;
-        console.warn("Result: " + lastScore);
-        this.score.last = Math.round(lastScore / 100);
+        let points: number = Math.round(this.timer.progress / 100);
+        console.debug(points + " points for LEVEL " + this.level);
+        this.score.add(points);
     }
 
     /**
@@ -182,7 +185,7 @@ export class Game {
         // Handle view
         // Hide final result wrapper
         this.hideFinalResult();
-        this.score.scoreReset();
+        this.score.reset();
         // Set game in progress flag to hide progress bar and boxes
         this.gameInProgress = false;
         // Start counting down READY SET GO for next level

@@ -3,20 +3,10 @@
  */
 export class ScoreModel {
 
-    private _last: number = 0;
     private _total: number = 0;
     private _streak: number = 0;
 
     constructor() {}
-
-    get last(): number {
-        return this._last;
-    }
-
-    set last(value: number) {
-        this._last = value;
-        this.total += this.last;
-    }
 
     get total(): number {
         return this._total;
@@ -34,8 +24,11 @@ export class ScoreModel {
         this._streak = value;
     }
 
-    public scoreReset() {
-        this.last = 0;
+    public add(points: number) {
+        this.total += points;
+    }
+
+    public reset() {
         this.total = 0;
         this.streak = 0;
     }
