@@ -85,9 +85,13 @@ export class Game {
 
     public startGame() {
         this.beforeGame();
+        this.startUpdateFrame();
         console.debug("GAME STARTED!");
+    }
+
+    private startUpdateFrame() {
         // run animation frame with countdown timers
-        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
+        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.updateFrame(now));
     }
 
     private beforeGame() {
@@ -95,7 +99,7 @@ export class Game {
         this.headerStatus.clear();
         this.gameInProgress = true;
         // reset countdown timer
-        this.frameAnimation.lastFrame = null;
+        this.frameAnimation.resetTime();
         this.timer = new CountdownTimer(5000);
         // expose the boxes
         this.exposeBoxes();
@@ -121,14 +125,14 @@ export class Game {
      * Each game frame
      * @param now
      */
-    private animateTimer(now: number) {
+    private updateFrame(now: number) {
 
         if (!this.frameAnimation.lastFrame) {
             this.frameAnimation.lastFrame = now;
         }
         let progress: number = now - this.frameAnimation.lastFrame;
 
-        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.animateTimer(now));
+        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.updateFrame(now));
         this.step(progress);
     }
 
@@ -160,6 +164,7 @@ export class Game {
         this.level++;
         // generate new level game
         this.generateGameModel();
+        this.frameAnimation.resetTime();
         // expose the boxes
         this.exposeBoxes();
         // Stop the countdown timer

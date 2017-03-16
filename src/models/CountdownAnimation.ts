@@ -27,6 +27,10 @@ export class CountdownAnimation {
         this._lastFrameTimestamp = value;
     }
 
+    public resetTime() {
+        this.lastFrame = null;
+    }
+
     public cancelAnimation() {
         window.cancelAnimationFrame(this.rafId);
     }
