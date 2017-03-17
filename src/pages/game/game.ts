@@ -133,7 +133,7 @@ export class Game {
         let progress: number = now - this.frameAnimation.lastFrame;
 
         this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.updateFrame(now));
-        this.step(progress);
+        this.frame(progress);
     }
 
     /**
@@ -142,7 +142,7 @@ export class Game {
      *
      * @param progress Miliseconds for actual progress
      */
-    private step(progress: number) {
+    private frame(progress: number) {
         this.timer.progress = progress;
 
         if (this.timer.progress <= 0) {
