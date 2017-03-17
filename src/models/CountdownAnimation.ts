@@ -11,13 +11,10 @@ export class CountdownAnimation {
 
     private _percentage: number = 0;
     private _progress: number = 0;
-    private startingPoint: number = 0;
 
     constructor(
         private _start: number
-    ) {
-        this.startingPoint = this._start;
-    }
+    ) {}
 
     get rafId(): any {
         return this._requestAnimationFrameId;
@@ -57,7 +54,6 @@ export class CountdownAnimation {
         this.lastFrame = null;
         this.percentage = 100;
         this.progress = this.start;
-        this.start = this.startingPoint;
     }
 
     public resetToZero() {

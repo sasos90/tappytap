@@ -139,7 +139,6 @@ export class Game {
      */
     private frame(progress: number) {
         this.timer.progress = progress;
-        console.log(Math.round(this.timer.progress / 1000));
 
         if (this.timer.progress <= 0) {
             // game is finished - countdown timer elapsed
