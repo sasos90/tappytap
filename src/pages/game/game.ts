@@ -23,11 +23,7 @@ export class Game {
     /**
      * Model for requestAnimationFrame - countdown animation.
      */
-    public frameAnimation = new CountdownAnimation();
-    /**
-     * Countdown timer object
-     */
-    public timer: CountdownTimer = new CountdownTimer(0);
+    public timer = new CountdownAnimation(5000);
     /**
      * Actual level.
      */
@@ -91,7 +87,7 @@ export class Game {
 
     private startUpdateFrame() {
         // run animation frame with countdown timers
-        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.updateFrame(now));
+        this.timer.rafId = window.requestAnimationFrame((now) => this.updateFrame(now));
     }
 
     private beforeGame() {
@@ -99,8 +95,7 @@ export class Game {
         this.headerStatus.clear();
         this.gameInProgress = true;
         // reset countdown timer
-        this.frameAnimation.resetTime();
-        this.timer = new CountdownTimer(5000);
+        this.timer.resetToStart();
         // expose the boxes
         this.exposeBoxes();
     }
@@ -127,12 +122,12 @@ export class Game {
      */
     private updateFrame(now: number) {
 
-        if (!this.frameAnimation.lastFrame) {
-            this.frameAnimation.lastFrame = now;
+        if (!this.timer.lastFrame) {
+            this.timer.lastFrame = now;
         }
-        let progress: number = now - this.frameAnimation.lastFrame;
+        let progress: number = now - this.timer.lastFrame;
 
-        this.frameAnimation.rafId = window.requestAnimationFrame((now) => this.updateFrame(now));
+        this.timer.rafId = window.requestAnimationFrame((now) => this.updateFrame(now));
         this.frame(progress);
     }
 
@@ -151,7 +146,7 @@ export class Game {
             console.debug("GAME FINISHED!");
             // totally hide progress bar because it was still visible sometimes
             this.timer.resetToZero();
-            this.frameAnimation.cancelAnimation();
+            this.timer.cancelAnimation();
             this.gameFinished();
         }
     }
@@ -165,12 +160,11 @@ export class Game {
         this.level++;
         // generate new level game
         this.generateGameModel();
-        this.frameAnimation.resetTime();
-        this.timer.resetTimer();
+        this.timer = new CountdownAnimation(GameModel.getCountDownTime(this.level));
         // expose the boxes
         this.exposeBoxes();
         // Stop the countdown timer
-        // this.frameAnimation.cancelAnimation();
+        // this.timer.cancelAnimation();
     }
 
     private sumPointsForLevel() {

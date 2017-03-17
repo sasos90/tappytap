@@ -5,6 +5,7 @@ export class ScoreModel {
 
     private _total: number = 0;
     private _streak: number = 0;
+    private _combo: number = 0;
 
     constructor() {}
 
@@ -22,6 +23,18 @@ export class ScoreModel {
 
     set streak(value: number) {
         this._streak = value;
+        // log the highest streak
+        if (this.streak > this.combo) {
+            this.combo = this.streak;
+        }
+    }
+
+    get combo(): number {
+        return this._combo;
+    }
+
+    set combo(value: number) {
+        this._combo = value;
     }
 
     public add(points: number) {
@@ -31,5 +44,6 @@ export class ScoreModel {
     public reset() {
         this.total = 0;
         this.streak = 0;
+        this.combo = 0;
     }
 }

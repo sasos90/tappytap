@@ -24,7 +24,7 @@ export class GameModel {
      * Game data
      */
     private score: ScoreModel;
-    private timer: CountdownTimer;
+    // private timer: CountdownTimer;
     private headerStatus: HeaderStatus;
     private boxClickImplementations: Array<(game: GameModel, boxHit: BoxModel) => void> = [
         (game: GameModel, box: BoxModel) => {
@@ -132,7 +132,7 @@ export class GameModel {
 
     private initGameProperties() {
         this.score = this.gameInstance.score;
-        this.timer = this.gameInstance.timer;
+        // this.timer = this.gameInstance.timer;
         this.headerStatus = this.gameInstance.headerStatus;
     }
 
@@ -151,13 +151,13 @@ export class GameModel {
      */
     private handleBoxMiss(box: BoxModel) {
         this.score.streak = 0;
-        this.timer.addTime(-1000);
+        this.gameInstance.timer.addTime(-1000);
     }
 
     private levelSpecificBoxHit(game: GameModel, box: BoxModel) {
         this.generalBoxHit(game, box);
         if (game.allBoxesAreHit()) {
-            this.gameInstance.frameAnimation.addTime(1000);
+            this.gameInstance.timer.addTime(1000);
         }
     }
 
@@ -169,5 +169,16 @@ export class GameModel {
                 this.headerStatus.clear();
             }, 1000);
         }
+    }
+
+    static getCountDownTime(level: number) : number {
+        if (level < 3) {
+            return 5000;
+        } else if (level >= 3 && level < 5) {
+            return 7000;
+        } else if (level >= 5 && level < 8) {
+            return 8000;
+        }
+        return 10000;
     }
 }

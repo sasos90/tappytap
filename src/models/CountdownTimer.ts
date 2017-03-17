@@ -35,9 +35,9 @@ export class CountdownTimer {
 
     set progress(value: number) {
         // set progress
-        this._progress = this.calculateProgress(value);
+        /*this._progress = this.calculateProgress(value);
         // set percentage
-        this.percentage = this.calculatePercentage();
+        this.percentage = this.calculatePercentage();*/
     }
 
     public resetTimer() {
