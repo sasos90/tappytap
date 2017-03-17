@@ -39,6 +39,7 @@ export class GameModel {
                         this.gameInstance.exposeBoxes();
                     } else {
                         // everything was hit
+                        this.sumScoreUp();
                         this.gameInstance.onLevelFinish();
                     }
                 }
@@ -57,6 +58,13 @@ export class GameModel {
         // setup game
         this.generateTarget();
         this.generateBoxes();
+    }
+
+    private sumScoreUp() {
+        // Timer progress is the remaining miliseconds - which is the score to add eventually
+        let points: number = Math.round(this.gameInstance.timer.progress / 100);
+        console.debug(points + " points for LEVEL " + this.level);
+        this.score.add(points);
     }
 
     get targetBox(): BoxModel {
