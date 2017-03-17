@@ -31,6 +31,14 @@ export class CountdownAnimation {
         this.lastFrame = null;
     }
 
+    public addTime(miliseconds: number) {
+        this.lastFrame += miliseconds;
+    }
+
+    public subtractTime(miliseconds: number) {
+        this.lastFrame -= miliseconds;
+    }
+
     public cancelAnimation() {
         window.cancelAnimationFrame(this.rafId);
     }

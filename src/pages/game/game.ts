@@ -23,7 +23,7 @@ export class Game {
     /**
      * Model for requestAnimationFrame - countdown animation.
      */
-    private frameAnimation = new CountdownAnimation();
+    public frameAnimation = new CountdownAnimation();
     /**
      * Countdown timer object
      */
@@ -175,7 +175,6 @@ export class Game {
 
     private sumPointsForLevel() {
         // Timer progress is the remaining miliseconds - which is the score to add eventually
-        console.debug("timer", this.timer.progress);
         let points: number = Math.round(this.timer.progress / 100);
         console.debug(points + " points for LEVEL " + this.level);
         this.score.add(points);

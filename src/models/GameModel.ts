@@ -157,7 +157,7 @@ export class GameModel {
     private levelSpecificBoxHit(game: GameModel, box: BoxModel) {
         this.generalBoxHit(game, box);
         if (game.allBoxesAreHit()) {
-            this.timer.addTime(1000);
+            this.gameInstance.frameAnimation.addTime(1000);
         }
     }
 
