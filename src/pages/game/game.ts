@@ -4,9 +4,7 @@ import { NavController } from 'ionic-angular';
 import {BoxModel} from "../../models/BoxModel";
 import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
-import {CountdownAnimation} from "../../models/CountdownAnimation";
 import {ScoreModel} from "../../models/ScoreModel";
-import {HeaderStatusAnimation} from "../../models/HeaderStatusAnimation";
 import {HeaderStatus} from "../../models/HeaderStatus";
 import {NativeAudio} from "ionic-native";
 
@@ -23,7 +21,7 @@ export class Game {
     /**
      * Model for requestAnimationFrame - countdown animation.
      */
-    public timer = new CountdownAnimation(5000);
+    public timer = new CountdownTimer(5000);
     /**
      * Actual level.
      */
@@ -158,7 +156,7 @@ export class Game {
         this.level++;
         // generate new level game
         this.generateGameModel();
-        this.timer = new CountdownAnimation(GameModel.getCountDownTime(this.level));
+        this.timer = new CountdownTimer(GameModel.getCountDownTime(this.level));
         // expose the boxes
         this.exposeBoxes();
         // Stop the countdown timer
