@@ -151,15 +151,13 @@ export class GameModel {
      */
     private handleBoxMiss(box: BoxModel) {
         this.score.streak = 0;
-        this.timer.addTime(-2000);
+        this.timer.addTime(-1000);
     }
 
     private levelSpecificBoxHit(game: GameModel, box: BoxModel) {
         this.generalBoxHit(game, box);
-        if (this.level > 1) {
-            if (game.allBoxesAreHit()) {
-                this.timer.addTime(1000);
-            }
+        if (game.allBoxesAreHit()) {
+            this.timer.addTime(1000);
         }
     }
 
