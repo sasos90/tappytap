@@ -5,10 +5,13 @@ export class CountdownTimer {
 
     public percentage: number = 0;
     private _progress: number = 0;
+    private _startingPoint: number = 0;
 
     constructor(
         private _start: number
-    ) {}
+    ) {
+        this.startingPoint = this.start;
+    }
 
     get start(): number {
         return this._start;
@@ -16,6 +19,14 @@ export class CountdownTimer {
 
     set start(value: number) {
         this._start = value;
+    }
+
+    get startingPoint(): number {
+        return this._startingPoint;
+    }
+
+    set startingPoint(value: number) {
+        this._startingPoint = value;
     }
 
     get progress(): number {
@@ -32,6 +43,7 @@ export class CountdownTimer {
     public resetTimer() {
         this.percentage = 100;
         this.progress = this.start;
+        this.start = this.startingPoint;
     }
 
     public resetToZero() {

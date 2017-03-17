@@ -144,6 +144,7 @@ export class Game {
      */
     private frame(progress: number) {
         this.timer.progress = progress;
+        console.log(Math.round(this.timer.progress / 1000));
 
         if (this.timer.progress <= 0) {
             // game is finished - countdown timer elapsed
@@ -165,6 +166,7 @@ export class Game {
         // generate new level game
         this.generateGameModel();
         this.frameAnimation.resetTime();
+        this.timer.resetTimer();
         // expose the boxes
         this.exposeBoxes();
         // Stop the countdown timer
