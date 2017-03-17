@@ -8,6 +8,7 @@ import {ScoreModel} from "../../models/ScoreModel";
             <div class="headline">{{ 'GAME COMPLETED!' }}</div>
             <div class="result-wrapper">
                 <div class="total-score">{{ 'Total score:' }} {{ scoreModel.total }}</div>
+                <div class="combo">{{ 'Combo:' }} {{ scoreModel.combo }}</div>
             </div>
             <div class="navigation-wrapper">
                 <button class="btn-replay" ion-button (click)="replay()">Replay</button>
