@@ -96,17 +96,17 @@ export class GameModel {
         this.targetBox = new BoxModel(ColorHelper.getRandomColor());
     }
 
-    public generateBoxes(numberOfTargetColors?: number) {
-        let nrTargetColors: number = numberOfTargetColors || this.level;
+    public generateBoxes() {
+        let nrTargetColors: number = this.level;
         if (nrTargetColors > 6) {
             nrTargetColors = 6;
         }
         this.boxList = new BoxList();
-        // populate number of target colors
+        // populate target boxes
         for (let i = 0; i < nrTargetColors; i++) {
             this.boxList.push(new BoxModel(this.targetBox.color));
         }
-        // add missing colors
+        // add missing boxes
         while (this.boxList.length < this.numberOfBoxes) {
             let randomColor = ColorHelper.getRandomColor();
             if (randomColor !== this.targetBox.color) {
@@ -123,7 +123,7 @@ export class GameModel {
             return Dimension.DIM_3X3;
         } else if (level === 4) {
             return Dimension.DIM_4X4;
-        } else if (level >= 5 && level < 20) {
+        } else if (level >= 5 && level < 15) {
             return Dimension.DIM_5X5;
         }
         return Dimension.DIM_6X6;
@@ -182,7 +182,7 @@ export class GameModel {
             return 7000;
         } else if (level >= 5 && level < 8) {
             return 8000;
-        } else if (level >= 20) {
+        } else if (level >= 15) {
             let countDownTime: number = 10000;
             countDownTime -= (level * 10);
             return countDownTime;
