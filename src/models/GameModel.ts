@@ -122,7 +122,7 @@ export class GameModel {
             return Dimension.DIM_3X3;
         } else if (level === 4) {
             return Dimension.DIM_4X4;
-        } else if (level >= 5 && level <= 30) {
+        } else if (level >= 5 && level < 30) {
             return Dimension.DIM_5X5;
         }
         return Dimension.DIM_6X6;
@@ -184,7 +184,7 @@ export class GameModel {
             return 7000;
         } else if (level >= 5 && level < 8) {
             return 8000;
-        } else if (level > 30) {
+        } else if (level >= 30) {
             let countDownTime: number = 10000;
             countDownTime -= (level * 10);
             return countDownTime;
