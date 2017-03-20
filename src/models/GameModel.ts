@@ -113,21 +113,16 @@ export class GameModel {
     }
 
     public static generateDimensionForGame(level: number) {
-        // TODO: Needs logic for that.
-        switch(level) {
-            case 1:
-                return Dimension.DIM_2X2;
-            case 2:
-                return Dimension.DIM_2X2;
-            case 3:
-                return Dimension.DIM_3X3;
-            case 4:
-                return Dimension.DIM_4X4;
-            case 5:
-                return Dimension.DIM_5X5;
-            default:
-                return Dimension.DIM_6X6;
+        if (level === 1 || level === 2) {
+            return Dimension.DIM_2X2;
+        } else if (level === 3) {
+            return Dimension.DIM_3X3;
+        } else if (level === 4) {
+            return Dimension.DIM_4X4;
+        } else if (level >= 5 && level <= 30) {
+            return Dimension.DIM_5X5;
         }
+        return Dimension.DIM_6X6;
     }
 
     public static generateNewGame(level: number, gameInstance: Game) : GameModel {
