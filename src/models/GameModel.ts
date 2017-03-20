@@ -97,6 +97,9 @@ export class GameModel {
 
     public generateBoxes(numberOfTargetColors?: number) {
         let nrTargetColors: number = numberOfTargetColors || this.level;
+        if (nrTargetColors > 6) {
+            nrTargetColors = 6;
+        }
         this.boxList = new BoxList();
         // populate number of target colors
         for (let i = 0; i < nrTargetColors; i++) {
