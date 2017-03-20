@@ -8,7 +8,8 @@ import {ScoreModel} from "../../models/ScoreModel";
             <div class="headline">{{ 'GAME COMPLETED!' }}</div>
             <div class="result-wrapper">
                 <div class="total-score">{{ 'Total score:' }} {{ scoreModel.total }}</div>
-                <div class="combo">{{ 'Combo:' }} {{ scoreModel.combo }}</div>
+                <div class="combo">{{ 'Max combo:' }} {{ scoreModel.combo }}</div>
+                <div class="combo-bonus">{{ 'Combo bonus: X' }} {{ comboMultiplier }}</div>
             </div>
             <div class="navigation-wrapper">
                 <button class="btn-replay" ion-button (click)="replay()">Replay</button>
@@ -26,11 +27,14 @@ export class FinalResultComponent {
     private lastFrame: number;
     private totalScore: number = 0;
     private totalCombo: number = 0;
+    private comboMultiplier: number = 0;
 
     constructor() {
         setTimeout(() => {
             this.totalScore = this.scoreModel.total;
             this.totalCombo = this.scoreModel.combo;
+            this.comboMultiplier = parseFloat((Math.log10(this.totalCombo) + 1).toFixed(2));
+            console.log("LOG", this.comboMultiplier);
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
@@ -56,10 +60,12 @@ export class FinalResultComponent {
             durationPercentage = 100;
         }
 
-        let comboPart: number = Math.round(this.totalCombo * durationPercentage / 100);
+        let comboPart: number = this.comboMultiplier * durationPercentage / 100;
         console.log(comboPart);
-        this.scoreModel.total = this.totalScore + comboPart;
-        this.scoreModel.combo = this.totalCombo - comboPart;
+        if (comboPart >= 1) {
+            this.scoreModel.total = Math.round(this.totalScore * comboPart);
+        }
+        // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
         }
