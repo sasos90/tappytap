@@ -7,10 +7,10 @@ import {ScoreModel} from "../../models/ScoreModel";
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
             <div class="headline">{{ 'GAME COMPLETED!' }}</div>
             <div class="result-wrapper">
-                <div class="total-score">{{ 'Total score:' }} {{ scoreModel.total }}</div>
                 <div class="combo">{{ 'Max combo:' }} {{ scoreModel.combo }}</div>
-                <div class="combo-bonus">{{ 'Combo bonus: X' }} {{ comboMultiplier }}</div>
+                <div class="combo-bonus">{{ 'Combo bonus:' }} X{{ comboMultiplier }}</div>
             </div>
+            <div class="total-score">{{ 'Total score:' }} {{ scoreStored }}</div>
             <div class="navigation-wrapper">
                 <button class="btn-replay" ion-button (click)="replay()">Replay</button>
             </div>
@@ -25,16 +25,19 @@ export class FinalResultComponent {
 
     private rafId: number;
     private lastFrame: number;
-    private totalScore: number = 0;
-    private totalCombo: number = 0;
+    private scoreStored: number = 0;
+    private comboStored: number = 0;
     private comboMultiplier: number = 0;
+    private comboMultiplierStored: number = 0;
 
     constructor() {
         setTimeout(() => {
-            this.totalScore = this.scoreModel.total;
-            this.totalCombo = this.scoreModel.combo;
-            this.comboMultiplier = parseFloat((Math.log10(this.totalCombo) + 1).toFixed(2));
-            console.log("LOG", this.comboMultiplier);
+            this.scoreStored = this.scoreModel.total;
+            this.comboStored = this.scoreModel.combo;
+            if (this.scoreModel.total > 0) {
+                this.comboMultiplier = parseFloat((Math.log10(this.comboStored) + 1).toFixed(2));
+                this.comboMultiplierStored = this.comboMultiplier;
+            }
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
@@ -49,10 +52,10 @@ export class FinalResultComponent {
         }
         let progress: number = now - this.lastFrame;
         this.rafId = window.requestAnimationFrame((now) => this.updateComboFrame(now));
-        this.frame(progress);
+        this.comboFrame(progress);
     }
 
-    private frame(progress: number) {
+    private comboFrame(progress: number) {
         let duration: number = 1500;
         let durationPercentage: number = progress * 100 / duration;
         if (durationPercentage > 100) {
@@ -60,10 +63,11 @@ export class FinalResultComponent {
             durationPercentage = 100;
         }
 
-        let comboPart: number = this.comboMultiplier * durationPercentage / 100;
-        console.log(comboPart);
-        if (comboPart >= 1) {
-            this.scoreModel.total = Math.round(this.totalScore * comboPart);
+        let comboMultiplierProgress: number = this.comboMultiplierStored * durationPercentage / 100;
+        if (comboMultiplierProgress >= 1) {
+            // so it shows only the values above (above score total)
+            this.comboMultiplier = parseFloat((this.comboMultiplierStored - comboMultiplierProgress).toFixed(2));
+            this.scoreStored = Math.round(this.scoreModel.total * comboMultiplierProgress);
         }
         // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
