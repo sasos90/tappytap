@@ -210,6 +210,8 @@ export class Game {
     public getLevelClassSuffix() : number|string {
         if (this.level < 6) {
             return this.level;
+        } else if (this.level >= 6 && this.level < 30) {
+            return 5;
         }
         return "max";
     }

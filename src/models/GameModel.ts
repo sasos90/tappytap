@@ -58,6 +58,7 @@ export class GameModel {
         // setup game
         this.generateTarget();
         this.generateBoxes();
+        this.headerStatus.text = "Level: " + this.level;
     }
 
     private sumScoreUp() {
