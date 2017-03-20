@@ -177,13 +177,17 @@ export class GameModel {
         }
     }
 
-    static getCountDownTime(level: number) : number {
+    public static getCountDownTime(level: number) : number {
         if (level < 3) {
             return 5000;
         } else if (level >= 3 && level < 5) {
             return 7000;
         } else if (level >= 5 && level < 8) {
             return 8000;
+        } else if (level > 30) {
+            let countDownTime: number = 10000;
+            countDownTime -= (level * 10);
+            return countDownTime;
         }
         return 10000;
     }
