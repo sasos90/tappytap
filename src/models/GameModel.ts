@@ -172,9 +172,6 @@ export class GameModel {
         if (GameModel.STREAK_AWARD.indexOf(this.score.streak) !== -1) {
             this.headerStatus.text = "STREAK: " + this.score.streak;
             this.headerStatus.animation = HeaderStatusAnimation.FONT_EMBOSED;
-            setTimeout(() => {
-                this.headerStatus.clear();
-            }, 1000);
         }
     }
 

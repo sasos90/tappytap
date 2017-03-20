@@ -26,6 +26,9 @@ export class HeaderStatus {
 
     set animation(value: string) {
         this._animation = value;
+        setTimeout(() => {
+            this.clear();
+        }, 1000);
     }
 
     public clear() {
