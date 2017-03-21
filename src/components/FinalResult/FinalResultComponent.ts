@@ -5,16 +5,16 @@ import {ScoreModel} from "../../models/ScoreModel";
     selector: 'final-result',
     template: `
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
-            <div class="headline">{{ 'GAME COMPLETED!' }}</div>
+            <div class="headline">{{ 'GAME OVER' }}</div>
             <div class="result-wrapper">
                 <div class="combo result">
-                    <span class="label">{{ 'Max combo:' }}</span>
+                    <span class="label">{{ 'MAX COMBO' }}</span>
                     <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">{{ scoreModel.combo }}</span>
                 </div>
             </div>
             <div class="total-score">
                 <div class="wrapper">
-                    <span class="label">{{ 'Total score:' }}</span>
+                    <span class="label">{{ 'TOTAL SCORE' }}</span>
                     <span class="value">{{ scoreModel.total }}</span>
                 </div>
             </div>
