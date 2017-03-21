@@ -38,6 +38,7 @@ export class FinalResultComponent {
     private rafId: number;
     private lastFrame: number;
     private scoreStored: number = 0;
+    private levelBonus: number = 0;
 
     // highlighting
     private scoreSummarizing: boolean = true;
@@ -47,6 +48,8 @@ export class FinalResultComponent {
     constructor() {
         setTimeout(() => {
             this.scoreStored = this.scoreModel.total;
+            this.levelBonus = this.sumLevelBonus();
+
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
@@ -114,9 +117,8 @@ export class FinalResultComponent {
             durationPercentage = 100;
         }
 
-        let levelPart: number = Math.round(this.scoreModel.levelReached * durationPercentage / 100);
+        let levelPart: number = Math.round(this.levelBonus * durationPercentage / 100);
         // so it shows only the values above (above score total)
-        console.log(progress, duration, levelPart);
         this.scoreModel.total = this.scoreStored + levelPart;
         // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
@@ -125,5 +127,15 @@ export class FinalResultComponent {
             this.levelBonusHighlight = false;
             this.enableActionButtons();
         }
+    }
+
+    private sumLevelBonus() : number {
+        let levelReached: number = this.scoreModel.levelReached;
+        let bonus: number = 0;
+        while (levelReached > 0) {
+            bonus += levelReached;
+            levelReached--;
+        }
+        return bonus;
     }
 }
