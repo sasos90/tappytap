@@ -21,6 +21,32 @@ final-result {
             margin-bottom: 20px;
         }
 
+        .result-wrapper {
+            width: 80%;
+            margin: 0 auto;
+            font-size: 20px;
+
+            .result {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        .total-score {
+            margin-top: 20px;
+
+            .wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .label {
+                    font-size: 20px;
+                    padding-right: 20px;
+                }
+            }
+        }
+
         .navigation-wrapper {
             margin-top: 20px;
 

@@ -7,10 +7,21 @@ import {ScoreModel} from "../../models/ScoreModel";
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
             <div class="headline">{{ 'GAME COMPLETED!' }}</div>
             <div class="result-wrapper">
-                <div class="combo">{{ 'Max combo:' }} {{ scoreModel.combo }}</div>
-                <div class="combo-bonus">{{ 'Combo bonus:' }} X{{ comboMultiplier }}</div>
+                <div class="combo result">
+                    <span class="label">{{ 'Max combo:' }}</span>
+                    <span class="value">{{ scoreModel.combo }}</span>
+                </div>
+                <div class="combo-bonus result">
+                    <span class="label">{{ 'Combo bonus:' }}</span>
+                    <span class="value">X{{ comboMultiplier }}</span>
+                </div>
             </div>
-            <div class="total-score">{{ 'Total score:' }} {{ scoreStored }}</div>
+            <div class="total-score">
+                <div class="wrapper">
+                    <span class="label">{{ 'Total score:' }}</span>
+                    <span class="value">{{ scoreStored }}</span>
+                </div>
+            </div>
             <div class="navigation-wrapper">
                 <button class="btn-replay" ion-button (click)="replay()">Replay</button>
             </div>
