@@ -22,8 +22,8 @@ import {ScoreModel} from "../../models/ScoreModel";
                     <span class="value">{{ scoreStored }}</span>
                 </div>
             </div>
-            <div class="navigation-wrapper">
-                <button class="btn-replay" ion-button (click)="replay()">Replay</button>
+            <div class="action-wrapper">
+                <button class="btn-replay" ion-button [disabled]="scoreSummarizing" (click)="replay()">Replay</button>
             </div>
         </div>
         <div class="overlay-background"></div>`
@@ -33,6 +33,7 @@ export class FinalResultComponent {
     @Input() scoreModel: ScoreModel;
     @Output("replayClick") replayEvent = new EventEmitter();
     public shown: boolean = false;
+    public scoreSummarizing: boolean = true;
 
     private rafId: number;
     private lastFrame: number;
@@ -83,7 +84,12 @@ export class FinalResultComponent {
         // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
+            this.enableActionButtons();
         }
+    }
+
+    public enableActionButtons() {
+        this.scoreSummarizing = false;
     }
 
     public replay() {
