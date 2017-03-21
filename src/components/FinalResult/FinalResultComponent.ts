@@ -79,8 +79,13 @@ export class FinalResultComponent {
         // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
+
+            // start level bonus highlighting and summing up
+            this.scoreStored = this.scoreModel.total;
             this.comboBonusHighlight = false;
-            this.enableActionButtons();
+            this.levelBonusHighlight = true;
+            this.lastFrame = null;
+            this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
         }
     }
 
@@ -90,5 +95,35 @@ export class FinalResultComponent {
 
     public replay() {
         this.replayEvent.emit();
+    }
+
+    private updateLevelFrame(now: number) {
+        if (!this.lastFrame) {
+            this.lastFrame = now;
+        }
+        let progress: number = now - this.lastFrame;
+        this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
+        this.levelFrame(progress);
+    }
+
+    private levelFrame(progress: number) {
+        let duration: number = 1500;
+        let durationPercentage: number = progress * 100 / duration;
+        if (durationPercentage > 100) {
+            // so it does not exceede 100%
+            durationPercentage = 100;
+        }
+
+        let levelPart: number = Math.round(this.scoreModel.levelReached * durationPercentage / 100);
+        // so it shows only the values above (above score total)
+        console.log(progress, duration, levelPart);
+        this.scoreModel.total = this.scoreStored + levelPart;
+        // this.scoreModel.combo = this.totalCombo - comboPart;
+        if (progress > duration) {
+            window.cancelAnimationFrame(this.rafId);
+
+            this.levelBonusHighlight = false;
+            this.enableActionButtons();
+        }
     }
 }
