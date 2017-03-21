@@ -13,7 +13,7 @@ import {ScoreModel} from "../../models/ScoreModel";
                 </div>
                 <div class="combo-bonus result">
                     <span class="label">{{ 'Combo bonus:' }}</span>
-                    <span class="value">X{{ comboMultiplier }}</span>
+                    <span class="value">{{ comboMultiplier }} X</span>
                 </div>
             </div>
             <div class="total-score">
