@@ -11,6 +11,10 @@ import {ScoreModel} from "../../models/ScoreModel";
                     <span class="label">{{ 'MAX COMBO' }}</span>
                     <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">{{ scoreModel.combo }}</span>
                 </div>
+                <div class="level result">
+                    <span class="label">{{ 'LEVEL REACHED' }}</span>
+                    <span class="value" [ngClass]="{highlighted: levelBonusHighlight}">{{ scoreModel.levelReached }}</span>
+                </div>
             </div>
             <div class="total-score">
                 <div class="wrapper">
@@ -38,6 +42,7 @@ export class FinalResultComponent {
     // highlighting
     private scoreSummarizing: boolean = true;
     private comboBonusHighlight: boolean = false;
+    private levelBonusHighlight: boolean = false;
 
     constructor() {
         setTimeout(() => {

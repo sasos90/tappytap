@@ -6,6 +6,7 @@ export class ScoreModel {
     private _total: number = 0;
     private _streak: number = 0;
     private _combo: number = 0;
+    private _levelReached: number = 0;
 
     constructor() {}
 
@@ -35,6 +36,14 @@ export class ScoreModel {
 
     set combo(value: number) {
         this._combo = value;
+    }
+
+    get levelReached(): number {
+        return this._levelReached;
+    }
+
+    set levelReached(value: number) {
+        this._levelReached = value;
     }
 
     public add(points: number) {

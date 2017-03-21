@@ -66,6 +66,7 @@ export class GameModel {
         let points: number = Math.round(this.gameInstance.timer.progress / 100);
         console.debug(points + " points for LEVEL " + this.level);
         this.score.add(points);
+        this.score.levelReached = this.level;
     }
 
     get targetBox(): BoxModel {
