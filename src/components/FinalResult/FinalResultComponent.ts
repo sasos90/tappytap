@@ -8,12 +8,12 @@ import {ScoreModel} from "../../models/ScoreModel";
             <div class="headline">{{ 'GAME OVER' }}</div>
             <div class="result-wrapper">
                 <div class="combo result">
-                    <span class="label">{{ 'MAX COMBO' }}</span>
-                    <span class="value-wrapper">{{ scoreModel.combo }} <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(+ {{ scoreModel.combo }})</span></span>
+                    <div class="label">{{ 'MAX COMBO' }}</div>
+                    <div class="value-wrapper">{{ scoreModel.combo }} <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(+ {{ scoreModel.combo }})</span></div>
                 </div>
                 <div class="level result">
-                    <span class="label">{{ 'LEVEL REACHED' }}</span>
-                    <span class="value-wrapper">{{ scoreModel.levelReached }} <span class="value" [ngClass]="{highlighted: levelBonusHighlight}">(+ {{ levelBonus }})</span></span>
+                    <div class="label">{{ 'LEVEL REACHED' }}</div>
+                    <div class="value-wrapper">{{ scoreModel.levelReached }} <span class="value" [ngClass]="{highlighted: levelBonusHighlight}">(+ {{ levelBonus }})</span></div>
                 </div>
             </div>
             <div class="total-score">

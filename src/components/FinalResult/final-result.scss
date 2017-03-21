@@ -22,20 +22,24 @@ final-result {
         }
 
         .result-wrapper {
-            width: 80%;
-            margin: 0 auto;
             font-size: 20px;
 
             .result {
-                display: flex;
-                justify-content: space-between;
+                width: 100%;
+                overflow: hidden;
 
                 .label {
                     padding: 5px 0px;
+                    float: left;
+                    width: 50%;
+                    text-align: right;
                 }
 
                 .value-wrapper {
                     padding: 5px 10px;
+                    width: 50%;
+                    float: left;
+                    text-align: right;
                 }
 
                 .value {
