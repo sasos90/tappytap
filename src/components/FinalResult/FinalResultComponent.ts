@@ -9,11 +9,11 @@ import {ScoreModel} from "../../models/ScoreModel";
             <div class="result-wrapper">
                 <div class="combo result">
                     <div class="label">{{ 'MAX COMBO' }}</div>
-                    <div class="value-wrapper">{{ scoreModel.combo }} <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(+ {{ scoreModel.combo }})</span></div>
+                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.combo }}</span><span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(+ {{ scoreModel.combo }})</span></div>
                 </div>
                 <div class="level result">
                     <div class="label">{{ 'LEVEL REACHED' }}</div>
-                    <div class="value-wrapper">{{ scoreModel.levelReached }} <span class="value" [ngClass]="{highlighted: levelBonusHighlight}">(+ {{ levelBonus }})</span></div>
+                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.levelReached }}</span><span class="value" [ngClass]="{highlighted: levelBonusHighlight}">(+ {{ levelBonus }})</span></div>
                 </div>
             </div>
             <div class="total-score">

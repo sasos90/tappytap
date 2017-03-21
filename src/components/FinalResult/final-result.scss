@@ -36,19 +36,25 @@ final-result {
                 }
 
                 .value-wrapper {
-                    padding: 5px 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    padding-left: 10px;
                     width: 50%;
                     float: left;
                     text-align: right;
-                }
 
-                .value {
-                    transition: all .3s;
-                    padding: 5px 10px;
-                    border-radius: 3px;
+                    .value {
+                        transition: all .3s;
+                        padding: 5px;
+                        border-radius: 3px;
 
-                    &.highlighted {
-                        background: darkseagreen;
+                        &.highlighted {
+                            background: darkseagreen;
+                        }
+                    }
+
+                    .value-left {
+                        padding: 5px;
                     }
                 }
             }
