@@ -11,15 +11,11 @@ import {ScoreModel} from "../../models/ScoreModel";
                     <span class="label">{{ 'Max combo:' }}</span>
                     <span class="value">{{ scoreModel.combo }}</span>
                 </div>
-                <div class="combo-bonus result">
-                    <span class="label">{{ 'Combo bonus:' }}</span>
-                    <span class="value">{{ comboMultiplier }} X</span>
-                </div>
             </div>
             <div class="total-score">
                 <div class="wrapper">
                     <span class="label">{{ 'Total score:' }}</span>
-                    <span class="value">{{ scoreStored }}</span>
+                    <span class="value">{{ scoreModel.total }}</span>
                 </div>
             </div>
             <div class="action-wrapper">
@@ -38,18 +34,10 @@ export class FinalResultComponent {
     private rafId: number;
     private lastFrame: number;
     private scoreStored: number = 0;
-    private comboStored: number = 0;
-    private comboMultiplier: number = 0;
-    private comboMultiplierStored: number = 0;
 
     constructor() {
         setTimeout(() => {
             this.scoreStored = this.scoreModel.total;
-            this.comboStored = this.scoreModel.combo;
-            if (this.scoreModel.total > 0) {
-                this.comboMultiplier = parseFloat((Math.log10(this.comboStored) + 1).toFixed(2));
-                this.comboMultiplierStored = this.comboMultiplier;
-            }
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
@@ -75,12 +63,9 @@ export class FinalResultComponent {
             durationPercentage = 100;
         }
 
-        let comboMultiplierProgress: number = this.comboMultiplierStored * durationPercentage / 100;
-        if (comboMultiplierProgress >= 1) {
-            // so it shows only the values above (above score total)
-            this.comboMultiplier = parseFloat((this.comboMultiplierStored - comboMultiplierProgress).toFixed(2));
-            this.scoreStored = Math.round(this.scoreModel.total * comboMultiplierProgress);
-        }
+        let comboPart: number = Math.round(this.scoreModel.combo * durationPercentage / 100);
+        // so it shows only the values above (above score total)
+        this.scoreModel.total = this.scoreStored + comboPart;
         // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
