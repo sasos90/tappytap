@@ -9,11 +9,11 @@ import {ScoreModel} from "../../models/ScoreModel";
             <div class="result-wrapper">
                 <div class="combo result">
                     <span class="label">{{ 'MAX COMBO' }}</span>
-                    <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">{{ scoreModel.combo }}</span>
+                    <span class="value-wrapper">{{ scoreModel.combo }} <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(+ {{ scoreModel.combo }})</span></span>
                 </div>
                 <div class="level result">
                     <span class="label">{{ 'LEVEL REACHED' }}</span>
-                    <span class="value" [ngClass]="{highlighted: levelBonusHighlight}">{{ scoreModel.levelReached }}</span>
+                    <span class="value-wrapper">{{ scoreModel.levelReached }} <span class="value" [ngClass]="{highlighted: levelBonusHighlight}">(+ {{ levelBonus }})</span></span>
                 </div>
             </div>
             <div class="total-score">
@@ -45,10 +45,12 @@ export class FinalResultComponent {
     private comboBonusHighlight: boolean = false;
     private levelBonusHighlight: boolean = false;
 
-    constructor() {
+    ngOnInit() {
+        // set and store score values
+        this.scoreStored = this.scoreModel.total;
+        this.levelBonus = this.sumLevelBonus();
+        // start timeout to show the final score wrapper
         setTimeout(() => {
-            this.scoreStored = this.scoreModel.total;
-            this.levelBonus = this.sumLevelBonus();
 
             // show the result after 1 second
             this.shown = true;
