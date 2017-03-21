@@ -9,7 +9,7 @@ import {ScoreModel} from "../../models/ScoreModel";
             <div class="result-wrapper">
                 <div class="combo result">
                     <span class="label">{{ 'Max combo:' }}</span>
-                    <span class="value">{{ scoreModel.combo }}</span>
+                    <span class="value" [ngClass]="{highlighted: comboBonusHighlight}">{{ scoreModel.combo }}</span>
                 </div>
             </div>
             <div class="total-score">
@@ -29,11 +29,15 @@ export class FinalResultComponent {
     @Input() scoreModel: ScoreModel;
     @Output("replayClick") replayEvent = new EventEmitter();
     public shown: boolean = false;
-    public scoreSummarizing: boolean = true;
 
+    // scores
     private rafId: number;
     private lastFrame: number;
     private scoreStored: number = 0;
+
+    // highlighting
+    private scoreSummarizing: boolean = true;
+    private comboBonusHighlight: boolean = false;
 
     constructor() {
         setTimeout(() => {
@@ -41,6 +45,7 @@ export class FinalResultComponent {
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
+                this.comboBonusHighlight = true;
                 this.rafId = window.requestAnimationFrame((now) => this.updateComboFrame(now));
             }, 1000);
         }, 500);
@@ -69,6 +74,7 @@ export class FinalResultComponent {
         // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
+            this.comboBonusHighlight = false;
             this.enableActionButtons();
         }
     }
