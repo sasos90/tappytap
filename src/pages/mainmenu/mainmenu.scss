@@ -1,3 +1,31 @@
-mainmenu {
+main-menu {
+    .main-menu-wrapper {
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
 
+            .logo {
+                max-width: 20%;
+            }
+        }
+
+        .menu-wrapper {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 25px;
+
+            .menu-item {
+                border: 1px solid green;
+                padding: 20px;
+                margin-top: 30px;
+
+                &:active {
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
 }
