@@ -99,8 +99,8 @@ export class GameModel {
 
     public generateBoxes() {
         let nrTargetColors: number = this.level;
-        if (nrTargetColors > 6) {
-            nrTargetColors = 6;
+        if (nrTargetColors > 8) {
+            nrTargetColors = 8;
         }
         this.boxList = new BoxList();
         // populate target boxes
@@ -185,7 +185,7 @@ export class GameModel {
             return 8000;
         }
         let countDownTime: number = 10000;
-        countDownTime -= (level * 10);
+        countDownTime -= (level * 20);
         return countDownTime;
     }
 }
