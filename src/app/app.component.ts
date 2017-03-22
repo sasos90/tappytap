@@ -4,6 +4,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Page2 } from '../pages/page2/page2';
 import {Game} from "../pages/game/game";
+import {MainMenu} from "../pages/mainmenu/mainmenu";
 
 @Component({
     templateUrl: 'app.html'
@@ -11,7 +12,7 @@ import {Game} from "../pages/game/game";
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = Game;
+    rootPage: any = MainMenu;
 
     constructor(public platform: Platform) {
         this.initializeApp();
