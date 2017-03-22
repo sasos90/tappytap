@@ -1,5 +1,11 @@
+@font-face {
+    font-family: 'ArchitectsDaughter';
+    src: url('../assets/fonts/ArchitectsDaughter.ttf');
+}
+
 * {
     box-sizing: border-box;
+    font-family: ArchitectsDaughter;
 }
 
 .hidden {

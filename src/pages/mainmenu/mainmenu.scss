@@ -1,5 +1,8 @@
 main-menu {
     .main-menu-wrapper {
+        width: 80%;
+        margin: 0 auto;
+
         .logo-wrapper {
             display: flex;
             align-items: center;
@@ -11,9 +14,13 @@ main-menu {
             }
         }
 
+        .rank-wrapper {
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
         .menu-wrapper {
-            width: 80%;
-            margin: 0 auto;
             text-align: center;
             font-size: 25px;
 
