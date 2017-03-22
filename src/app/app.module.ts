@@ -8,6 +8,7 @@ import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent"
 import {FinalResultComponent} from "../components/FinalResult/FinalResultComponent";
 import {BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from "@angular/platform-browser";
 import {MainMenu} from "../pages/mainmenu/mainmenu";
+import {Instructions} from "../pages/instructions/instructions";
 
 export class MyHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -26,7 +27,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
         Page2,
         ReadySetGoComponent,
         FinalResultComponent,
-        MainMenu
+        MainMenu,
+        Instructions
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -39,7 +41,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
         Page2,
         ReadySetGoComponent,
         FinalResultComponent,
-        MainMenu
+        MainMenu,
+        Instructions
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
