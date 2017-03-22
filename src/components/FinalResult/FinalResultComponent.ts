@@ -85,12 +85,14 @@ export class FinalResultComponent {
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
 
-            // start level bonus highlighting and summing up
-            this.scoreStored = this.scoreModel.total;
-            this.comboBonusHighlight = false;
-            this.levelBonusHighlight = true;
-            this.lastFrame = null;
-            this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
+            setTimeout(() => {
+                // start level bonus highlighting and summing up
+                this.scoreStored = this.scoreModel.total;
+                this.comboBonusHighlight = false;
+                this.levelBonusHighlight = true;
+                this.lastFrame = null;
+                this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
+            }, 500);
         }
     }
 
