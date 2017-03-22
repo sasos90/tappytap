@@ -19,7 +19,7 @@ export class GameModel {
     /**
      * Definition of awarded streaks.
      */
-    private static STREAK_AWARD = [5, 10, 20, 30, 50, 80, 100, 150, 200, 250, 300];
+    private static STREAK_AWARD = [5, 10, 20, 30, 50, 80, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000, 1200, 1400, 1600, 1800, 2000];
     /**
      * Game data
      */
@@ -58,7 +58,6 @@ export class GameModel {
         // setup game
         this.generateTarget();
         this.generateBoxes();
-        this.headerStatus.text = "Level: " + this.level;
     }
 
     private sumScoreUp() {
