@@ -9,6 +9,7 @@ import {HeaderStatus} from "../../models/HeaderStatus";
 import {NativeAudio} from "ionic-native";
 import {Game} from "../game/game";
 import {Instructions} from "../instructions/instructions";
+import {HighScore} from "../highscore/highscore";
 
 @Component({
     selector: 'main-menu',
@@ -26,5 +27,9 @@ export class MainMenu {
 
     public instructionsMenu() {
         this.navCtrl.push(Instructions);
+    }
+
+    public highscoreMenu() {
+        this.navCtrl.push(HighScore);
     }
 }
