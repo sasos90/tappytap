@@ -7,6 +7,7 @@ import {CountdownTimer} from "../../models/CountdownTimer";
 import {ScoreModel} from "../../models/ScoreModel";
 import {HeaderStatus} from "../../models/HeaderStatus";
 import {NativeAudio} from "ionic-native";
+import {Game} from "../game/game";
 
 @Component({
     selector: 'main-menu',
@@ -17,4 +18,8 @@ export class MainMenu {
     constructor(public navCtrl: NavController) {}
 
     ngOnInit() {}
+
+    public startGameMenu() {
+        this.navCtrl.setRoot(Game);
+    }
 }

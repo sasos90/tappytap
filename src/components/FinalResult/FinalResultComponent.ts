@@ -1,5 +1,7 @@
 import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {ScoreModel} from "../../models/ScoreModel";
+import {NavController} from "ionic-angular";
+import {MainMenu} from "../../pages/mainmenu/mainmenu";
 
 @Component({
     selector: 'final-result',
@@ -24,6 +26,7 @@ import {ScoreModel} from "../../models/ScoreModel";
             </div>
             <div class="action-wrapper">
                 <button class="btn-replay" ion-button [disabled]="scoreSummarizing" (click)="replay()">Replay</button>
+                <button class="btn-main-menu" ion-button [disabled]="scoreSummarizing" (click)="mainMenu()">Main menu</button>
             </div>
         </div>
         <div class="overlay-background"></div>`
@@ -44,6 +47,10 @@ export class FinalResultComponent {
     private scoreSummarizing: boolean = true;
     private comboBonusHighlight: boolean = false;
     private levelBonusHighlight: boolean = false;
+
+    constructor(protected nav: NavController) {
+
+    }
 
     ngOnInit() {
         // set and store score values
@@ -102,6 +109,10 @@ export class FinalResultComponent {
 
     public replay() {
         this.replayEvent.emit();
+    }
+
+    public mainMenu() {
+        this.nav.setRoot(MainMenu);
     }
 
     private updateLevelFrame(now: number) {
