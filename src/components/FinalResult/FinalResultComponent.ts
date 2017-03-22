@@ -18,7 +18,7 @@ import {ScoreModel} from "../../models/ScoreModel";
             </div>
             <div class="total-score">
                 <div class="wrapper">
-                    <span class="label">{{ 'TOTAL SCORE' }}</span>
+                    <span class="label">{{ 'SCORE' }}</span>
                     <span class="value">{{ scoreModel.total }}</span>
                 </div>
             </div>
