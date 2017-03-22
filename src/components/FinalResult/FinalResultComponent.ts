@@ -78,7 +78,7 @@ export class FinalResultComponent {
     }
 
     private comboFrame(progress: number) {
-        let duration: number = 1500;
+        let duration: number = 500;
         let durationPercentage: number = progress * 100 / duration;
         if (durationPercentage > 100) {
             // so it does not exceede 100%
@@ -99,7 +99,7 @@ export class FinalResultComponent {
                 this.levelBonusHighlight = true;
                 this.lastFrame = null;
                 this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
-            }, 500);
+            }, 100);
         }
     }
 
@@ -125,7 +125,7 @@ export class FinalResultComponent {
     }
 
     private levelFrame(progress: number) {
-        let duration: number = 1500;
+        let duration: number = 500;
         let durationPercentage: number = progress * 100 / duration;
         if (durationPercentage > 100) {
             // so it does not exceede 100%
