@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
-import {BoxModel} from "../../models/BoxModel";
-import {GameModel} from "../../models/GameModel";
-import {CountdownTimer} from "../../models/CountdownTimer";
-import {ScoreModel} from "../../models/ScoreModel";
-import {HeaderStatus} from "../../models/HeaderStatus";
-import {NativeAudio} from "ionic-native";
 import {Game} from "../game/game";
 import {Instructions} from "../instructions/instructions";
 import {HighScore} from "../highscore/highscore";
+import {Settings} from "../settings/settings";
 
 @Component({
     selector: 'main-menu',
@@ -31,5 +26,9 @@ export class MainMenu {
 
     public highscoreMenu() {
         this.navCtrl.push(HighScore);
+    }
+
+    public settingsMenu() {
+        this.navCtrl.push(Settings);
     }
 }

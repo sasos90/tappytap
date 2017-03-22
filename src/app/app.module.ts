@@ -10,6 +10,7 @@ import {BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from "@angula
 import {MainMenu} from "../pages/mainmenu/mainmenu";
 import {Instructions} from "../pages/instructions/instructions";
 import {HighScore} from "../pages/highscore/highscore";
+import {Settings} from "../pages/settings/settings";
 
 export class MyHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -30,7 +31,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
         FinalResultComponent,
         MainMenu,
         Instructions,
-        HighScore
+        HighScore,
+        Settings
     ],
     imports: [
         IonicModule.forRoot(MyApp),
@@ -45,7 +47,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
         FinalResultComponent,
         MainMenu,
         Instructions,
-        HighScore
+        HighScore,
+        Settings
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
