@@ -4,15 +4,12 @@
 export class ColorHelper {
 
     public static MATERIAL_COLORS: Array<string> = [
-        "#F44336",
-        "#607D8B",
-        "#9E9E9E",
+        "#f43325",
+        "#3F51B5",
         "#4CAF50",
         "#FFEB3B",
-        "#FF9800",
         "#795548",
-        "#3F51B5",
-        "#2196F3"
+        "#55aef6"
     ];
 
     public static getRandomColor() {
