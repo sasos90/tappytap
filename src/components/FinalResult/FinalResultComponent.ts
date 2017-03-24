@@ -42,12 +42,9 @@ export class FinalResultComponent {
     private lastFrame: number;
     private scoreStored: number = 0;
     private levelBonus: number = 0;
-
-    // new
     private comboStored: number = 0;
     private comboMultiplier: number = 0;
     private comboMultiplierStored: number = 0;
-
 
     // highlighting
     private scoreSummarizing: boolean = true;
@@ -62,7 +59,6 @@ export class FinalResultComponent {
         // set and store score values
         this.scoreStored = this.scoreModel.total;
         this.levelBonus = this.sumLevelBonus();
-        // new
         this.comboStored = this.scoreModel.combo;
         if (this.scoreModel.total > 0) {
             this.comboMultiplier = parseFloat((Math.log10(this.comboStored) + 1).toFixed(2));
@@ -75,8 +71,8 @@ export class FinalResultComponent {
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
-                this.comboBonusHighlight = true;
-                this.rafId = window.requestAnimationFrame((now) => this.updateComboFrame(now));
+                this.levelBonusHighlight = true;
+                this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
             }, 1000);
         }, 500);
     }
@@ -101,7 +97,7 @@ export class FinalResultComponent {
         let comboMultiplierProgress: number = this.comboMultiplierStored * durationPercentage / 100;
         if (comboMultiplierProgress >= 1) {
             // so it shows only the values above (above score total)
-            this.comboMultiplier = parseFloat((this.comboMultiplierStored - comboMultiplierProgress).toFixed(2));
+            // this.comboMultiplier = parseFloat((this.comboMultiplierStored - comboMultiplierProgress).toFixed(2));
             this.scoreModel.total = Math.round(this.scoreStored * comboMultiplierProgress);
         }
         // let comboPart: number = Math.round(this.scoreModel.combo * durationPercentage / 100);
@@ -111,14 +107,7 @@ export class FinalResultComponent {
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
 
-            setTimeout(() => {
-                // start level bonus highlighting and summing up
-                this.scoreStored = this.scoreModel.total;
-                this.comboBonusHighlight = false;
-                this.levelBonusHighlight = true;
-                this.lastFrame = null;
-                this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
-            }, 100);
+            this.enableActionButtons();
         }
     }
 
@@ -158,8 +147,14 @@ export class FinalResultComponent {
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
 
-            this.levelBonusHighlight = false;
-            this.enableActionButtons();
+            setTimeout(() => {
+                // start level bonus highlighting and summing up
+                this.scoreStored = this.scoreModel.total;
+                this.levelBonusHighlight = false;
+                this.comboBonusHighlight = true;
+                this.lastFrame = null;
+                this.rafId = window.requestAnimationFrame((now) => this.updateComboFrame(now));
+            }, 1000);
         }
     }
 
