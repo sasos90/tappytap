@@ -9,13 +9,13 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
             <div class="headline">{{ 'GAME OVER' }}</div>
             <div class="result-wrapper">
-                <div class="combo result">
-                    <div class="label">{{ 'MAX COMBO' }}</div>
-                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.combo }}</span><span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(+ {{ scoreModel.combo }})</span></div>
-                </div>
                 <div class="level result">
                     <div class="label">{{ 'LEVEL REACHED' }}</div>
                     <div class="value-wrapper"><span class="value-left">{{ scoreModel.levelReached }}</span><span class="value" [ngClass]="{highlighted: levelBonusHighlight}">(+ {{ levelBonus }})</span></div>
+                </div>
+                <div class="combo result">
+                    <div class="label">{{ 'MAX COMBO' }}</div>
+                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.combo }}</span><span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(× {{ comboMultiplier }})</span></div>
                 </div>
             </div>
             <div class="total-score">
@@ -43,6 +43,12 @@ export class FinalResultComponent {
     private scoreStored: number = 0;
     private levelBonus: number = 0;
 
+    // new
+    private comboStored: number = 0;
+    private comboMultiplier: number = 0;
+    private comboMultiplierStored: number = 0;
+
+
     // highlighting
     private scoreSummarizing: boolean = true;
     private comboBonusHighlight: boolean = false;
@@ -56,6 +62,13 @@ export class FinalResultComponent {
         // set and store score values
         this.scoreStored = this.scoreModel.total;
         this.levelBonus = this.sumLevelBonus();
+        // new
+        this.comboStored = this.scoreModel.combo;
+        if (this.scoreModel.total > 0) {
+            this.comboMultiplier = parseFloat((Math.log10(this.comboStored) + 1).toFixed(2));
+            this.comboMultiplierStored = this.comboMultiplier;
+        }
+
         // start timeout to show the final score wrapper
         setTimeout(() => {
 
@@ -85,9 +98,15 @@ export class FinalResultComponent {
             durationPercentage = 100;
         }
 
-        let comboPart: number = Math.round(this.scoreModel.combo * durationPercentage / 100);
+        let comboMultiplierProgress: number = this.comboMultiplierStored * durationPercentage / 100;
+        if (comboMultiplierProgress >= 1) {
+            // so it shows only the values above (above score total)
+            this.comboMultiplier = parseFloat((this.comboMultiplierStored - comboMultiplierProgress).toFixed(2));
+            this.scoreModel.total = Math.round(this.scoreStored * comboMultiplierProgress);
+        }
+        // let comboPart: number = Math.round(this.scoreModel.combo * durationPercentage / 100);
         // so it shows only the values above (above score total)
-        this.scoreModel.total = this.scoreStored + comboPart;
+        // this.scoreModel.total = this.scoreStored + comboPart;
         // this.scoreModel.combo = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
