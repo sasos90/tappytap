@@ -217,6 +217,6 @@ export class Game {
     private preloadSounds() {
         // preload sounds
         NativeAudio.preloadSimple("hit", "assets/sounds/hit.mp3");
-        NativeAudio.preloadSimple("miss", "assets/sounds/miss.wav");
+        NativeAudio.preloadSimple("miss", "assets/sounds/miss.mp3");
     }
 }
