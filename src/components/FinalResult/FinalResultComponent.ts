@@ -9,13 +9,13 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
             <div class="headline">{{ 'GAME OVER' }}</div>
             <div class="result-wrapper">
-                <div class="level result">
+                <div class="level result" [ngClass]="{invisible: !levelBonusRowShow}">
                     <div class="label">{{ 'LEVEL REACHED' }}</div>
-                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.levelReached }}</span><span class="value" [ngClass]="{highlighted: levelBonusHighlight}">(+ {{ levelBonus }})</span></div>
+                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.levelReached }}</span><span class="value" [ngClass]="{highlighted: levelBonusPointsHighlight}">(+ {{ levelBonus }})</span></div>
                 </div>
-                <div class="combo result">
+                <div class="combo result" [ngClass]="{invisible: !comboBonusRowShow}">
                     <div class="label">{{ 'MAX COMBO' }}</div>
-                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.combo }}</span><span class="value" [ngClass]="{highlighted: comboBonusHighlight}">(× {{ comboMultiplier }})</span></div>
+                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.combo }}</span><span class="value" [ngClass]="{highlighted: comboBonusPointsHighlight}">(× {{ comboMultiplier }})</span></div>
                 </div>
             </div>
             <div class="total-score">
@@ -48,8 +48,10 @@ export class FinalResultComponent {
 
     // highlighting
     private scoreSummarizing: boolean = true;
-    private comboBonusHighlight: boolean = false;
-    private levelBonusHighlight: boolean = false;
+    private comboBonusPointsHighlight: boolean = false;
+    private comboBonusRowShow: boolean = false;
+    private levelBonusPointsHighlight: boolean = false;
+    private levelBonusRowShow: boolean = false;
 
     constructor(protected nav: NavController) {
 
@@ -71,7 +73,8 @@ export class FinalResultComponent {
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
-                this.levelBonusHighlight = true;
+                this.levelBonusRowShow = true;
+                this.levelBonusPointsHighlight = true;
                 this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
             }, 1000);
         }, 500);
@@ -87,7 +90,7 @@ export class FinalResultComponent {
     }
 
     private comboFrame(progress: number) {
-        let duration: number = 500;
+        let duration: number = 1000;
         let durationPercentage: number = progress * 100 / duration;
         if (durationPercentage > 100) {
             // so it does not exceede 100%
@@ -107,6 +110,7 @@ export class FinalResultComponent {
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
 
+            this.comboBonusPointsHighlight = false;
             this.enableActionButtons();
         }
     }
@@ -133,7 +137,7 @@ export class FinalResultComponent {
     }
 
     private levelFrame(progress: number) {
-        let duration: number = 500;
+        let duration: number = 1000;
         let durationPercentage: number = progress * 100 / duration;
         if (durationPercentage > 100) {
             // so it does not exceede 100%
@@ -150,11 +154,12 @@ export class FinalResultComponent {
             setTimeout(() => {
                 // start level bonus highlighting and summing up
                 this.scoreStored = this.scoreModel.total;
-                this.levelBonusHighlight = false;
-                this.comboBonusHighlight = true;
+                this.levelBonusPointsHighlight = false;
+                this.comboBonusRowShow = true;
+                this.comboBonusPointsHighlight = true;
                 this.lastFrame = null;
                 this.rafId = window.requestAnimationFrame((now) => this.updateComboFrame(now));
-            }, 1000);
+            }, 500);
         }
     }
 
