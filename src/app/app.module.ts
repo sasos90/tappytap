@@ -16,7 +16,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
         "tap": {
             time: 1000,
-            threshold: 999
+            threshold: 9999999
         } // override default settings
     }
 }
