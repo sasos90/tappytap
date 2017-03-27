@@ -46,6 +46,6 @@ export class BoxComponent {
         this.hit = true;
         setTimeout(() => {
             this.hideBox = true;
-        }, 500);
+        }, 300);
     }
 }
