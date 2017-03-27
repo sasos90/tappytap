@@ -25,8 +25,8 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
                 </div>
             </div>
             <div class="action-wrapper">
-                <button class="btn-replay" ion-button [disabled]="scoreSummarizing" (click)="replay()">Replay</button>
-                <button class="btn-main-menu" ion-button [disabled]="scoreSummarizing" (click)="mainMenu()">Main menu
+                <button class="btn-replay" ion-button (click)="replay()">Replay</button>
+                <button class="btn-main-menu" ion-button (click)="mainMenu()">Main menu
                 </button>
             </div>
         </div>
