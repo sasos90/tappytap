@@ -40,7 +40,9 @@ export class GameModel {
                     } else {
                         // everything was hit
                         this.sumScoreUp();
-                        this.gameInstance.onLevelFinish();
+                        setTimeout(() => {
+                            this.gameInstance.onLevelFinish();
+                        }, 300);
                     }
                 }
             } else {
