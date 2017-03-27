@@ -5,7 +5,7 @@ export class ScoreModel {
 
     private _total: number = 0;
     private _streak: number = 0;
-    private _combo: number = 0;
+    private _maxStreak: number = 0;
     private _comboLog: number = 1;
     private _levelReached: number = 0;
 
@@ -26,18 +26,18 @@ export class ScoreModel {
     set streak(value: number) {
         this._streak = value;
         // log the highest streak
-        if (this.streak > this.combo) {
-            this.combo = this.streak;
+        if (this.streak > this.maxStreak) {
+            this.maxStreak = this.streak;
         }
         this.comboLog = this.streak > 0 ? parseFloat((Math.log(this.streak + 1) + 1).toFixed(2)) : 1;
     }
 
-    get combo(): number {
-        return this._combo;
+    get maxStreak(): number {
+        return this._maxStreak;
     }
 
-    set combo(value: number) {
-        this._combo = value;
+    set maxStreak(value: number) {
+        this._maxStreak = value;
     }
 
     get comboLog(): number {
@@ -63,7 +63,7 @@ export class ScoreModel {
     public reset() {
         this.total = 0;
         this.streak = 0;
-        this.combo = 0;
+        this.maxStreak = 0;
         this.comboLog = 1;
     }
 }

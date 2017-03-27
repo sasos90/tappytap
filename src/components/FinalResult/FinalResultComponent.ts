@@ -9,13 +9,13 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
         <div class="level-complete-wrapper material-shadow" *ngIf="shown">
             <div class="headline">{{ 'GAME OVER' }}</div>
             <div class="result-wrapper">
-                <div class="level result" [ngClass]="{invisible: !levelBonusRowShow}">
+                <div class="level result">
                     <div class="label">{{ 'LEVEL REACHED' }}</div>
-                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.levelReached }}</span><span class="value" [ngClass]="{highlighted: levelBonusPointsHighlight}">(+ {{ levelBonus }})</span></div>
+                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.levelReached }}</span></div>
                 </div>
-                <div class="combo result" [ngClass]="{invisible: !comboBonusRowShow}">
+                <div class="combo result">
                     <div class="label">{{ 'MAX COMBO' }}</div>
-                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.combo }}</span><span class="value" [ngClass]="{highlighted: comboBonusPointsHighlight}">(× {{ comboMultiplier }})</span></div>
+                    <div class="value-wrapper"><span class="value-left">{{ scoreModel.maxStreak }}</span><span class="value">(× {{ comboMultiplier }})</span></div>
                 </div>
             </div>
             <div class="total-score">
@@ -26,7 +26,8 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
             </div>
             <div class="action-wrapper">
                 <button class="btn-replay" ion-button [disabled]="scoreSummarizing" (click)="replay()">Replay</button>
-                <button class="btn-main-menu" ion-button [disabled]="scoreSummarizing" (click)="mainMenu()">Main menu</button>
+                <button class="btn-main-menu" ion-button [disabled]="scoreSummarizing" (click)="mainMenu()">Main menu
+                </button>
             </div>
         </div>
         <div class="overlay-background"></div>`
@@ -61,7 +62,7 @@ export class FinalResultComponent {
         // set and store score values
         this.scoreStored = this.scoreModel.total;
         this.levelBonus = this.sumLevelBonus();
-        this.comboStored = this.scoreModel.combo;
+        this.comboStored = this.scoreModel.maxStreak;
         if (this.scoreModel.total > 0) {
             this.comboMultiplier = parseFloat((Math.log10(this.comboStored) + 1).toFixed(2));
             this.comboMultiplierStored = this.comboMultiplier;
@@ -73,14 +74,15 @@ export class FinalResultComponent {
             // show the result after 1 second
             this.shown = true;
             setTimeout(() => {
-                this.levelBonusRowShow = true;
+                // turn off every animation
+                /*this.levelBonusRowShow = true;
                 this.levelBonusPointsHighlight = true;
-                this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));
+                this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));*/
             }, 1000);
         }, 500);
     }
 
-    private updateComboFrame(now) {
+    /*private updateComboFrame(now) {
         if (!this.lastFrame) {
             this.lastFrame = now;
         }
@@ -103,17 +105,17 @@ export class FinalResultComponent {
             // this.comboMultiplier = parseFloat((this.comboMultiplierStored - comboMultiplierProgress).toFixed(2));
             this.scoreModel.total = Math.round(this.scoreStored * comboMultiplierProgress);
         }
-        // let comboPart: number = Math.round(this.scoreModel.combo * durationPercentage / 100);
+        // let comboPart: number = Math.round(this.scoreModel.maxStreak * durationPercentage / 100);
         // so it shows only the values above (above score total)
         // this.scoreModel.total = this.scoreStored + comboPart;
-        // this.scoreModel.combo = this.totalCombo - comboPart;
+        // this.scoreModel.maxStreak = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
 
             this.comboBonusPointsHighlight = false;
             this.enableActionButtons();
         }
-    }
+    }*/
 
     public enableActionButtons() {
         this.scoreSummarizing = false;
@@ -127,7 +129,7 @@ export class FinalResultComponent {
         this.nav.setRoot(MainMenu);
     }
 
-    private updateLevelFrame(now: number) {
+    /*private updateLevelFrame(now: number) {
         if (!this.lastFrame) {
             this.lastFrame = now;
         }
@@ -147,7 +149,7 @@ export class FinalResultComponent {
         let levelPart: number = Math.round(this.levelBonus * durationPercentage / 100);
         // so it shows only the values above (above score total)
         this.scoreModel.total = this.scoreStored + levelPart;
-        // this.scoreModel.combo = this.totalCombo - comboPart;
+        // this.scoreModel.maxStreak = this.totalCombo - comboPart;
         if (progress > duration) {
             window.cancelAnimationFrame(this.rafId);
 
@@ -161,7 +163,7 @@ export class FinalResultComponent {
                 this.rafId = window.requestAnimationFrame((now) => this.updateComboFrame(now));
             }, 500);
         }
-    }
+    }*/
 
     private sumLevelBonus() : number {
         let levelReached: number = this.scoreModel.levelReached;
