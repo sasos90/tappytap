@@ -6,6 +6,7 @@ export class ScoreModel {
     private _total: number = 0;
     private _streak: number = 0;
     private _combo: number = 0;
+    private _comboLog: number = 1;
     private _levelReached: number = 0;
 
     constructor() {}
@@ -28,6 +29,7 @@ export class ScoreModel {
         if (this.streak > this.combo) {
             this.combo = this.streak;
         }
+        this.comboLog = this.streak > 0 ? parseFloat((Math.log(this.streak + 1) + 1).toFixed(2)) : 1;
     }
 
     get combo(): number {
@@ -36,6 +38,14 @@ export class ScoreModel {
 
     set combo(value: number) {
         this._combo = value;
+    }
+
+    get comboLog(): number {
+        return this._comboLog;
+    }
+
+    set comboLog(value: number) {
+        this._comboLog = value;
     }
 
     get levelReached(): number {
@@ -54,5 +64,6 @@ export class ScoreModel {
         this.total = 0;
         this.streak = 0;
         this.combo = 0;
+        this.comboLog = 1;
     }
 }
