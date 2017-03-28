@@ -83,10 +83,11 @@ game {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            letter-spacing: 1px;
 
             .text-left {
                 font-weight: bold;
-                font-size: 18px;
+                font-size: 15px;
                 margin-bottom: 0px;
                 transition: all 1s;
 
