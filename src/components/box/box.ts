@@ -8,7 +8,7 @@ import {NativeAudio} from "ionic-native";
         <div class="box-wrapper" [ngClass]="{hit: hit}" *ngIf="!hideBox">
             <div class="box front" [ngStyle]="{'background': box.color}" (tap)="tap(box)" (click)="tap(box)" (swipe)="tap(box)" [ngClass]="{target: box.doesMatch(target) && exposed}"></div>
             <!-- Remove back figure if you don't want the whole flip but just 50% -->
-            <div class="box back" [ngStyle]="{'background': box.color}" (tap)="tap(target)"></div>
+            <div class="box back" [ngStyle]="{'background': box.color}" (tap)="tap(target)" (click)="tap(target)" (swipe)="tap(target)" ></div>
         </div>`
 })
 export class BoxComponent {
@@ -35,6 +35,9 @@ export class BoxComponent {
                 NativeAudio.play("miss");
                 this.onBoxTap.emit(this.box);
                 this.box.color = this.target.color;
+                setTimeout(() => {
+                    this.tapped = false;
+                }, 100);
             }
         }
     }
