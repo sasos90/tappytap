@@ -25,12 +25,16 @@ main-menu {
             font-size: 25px;
 
             .menu-item {
-                border: 1px solid green;
-                padding: 20px;
                 margin-top: 30px;
 
-                &:active {
-                    border: 1px solid red;
+                button {
+                    background-color: $primary-color-dark;
+                    padding: 0 5em;
+                    height: 5.5rem;
+
+                    &:active {
+                        background-color: $primary-color;
+                    }
                 }
             }
         }

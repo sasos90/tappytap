@@ -2,13 +2,21 @@
     <div class="main-menu-wrapper">
         <div class="logo-wrapper"><img class="logo" src="assets/images/logo.png" alt="" /></div>
         <div class="rank-wrapper">
-            <span>Rank:</span> <span>155.</span>
+            <span>No highscore yet</span>
         </div>
         <div class="menu-wrapper">
-            <div class="menu-item" (click)="startGameMenu()">START GAME</div>
-            <div class="menu-item" (click)="instructionsMenu()">INSTRUCTIONS</div>
-            <div class="menu-item" (click)="highscoreMenu()">HIGHSCORE</div>
-            <div class="menu-item" (click)="settingsMenu()">SETTINGS</div>
+            <div class="menu-item" (click)="startGameMenu()">
+                <button ion-button full>START GAME</button>
+            </div>
+            <!--<div class="menu-item" (click)="instructionsMenu()">
+                <button ion-button full>INSTRUCTIONS</button>
+            </div>
+            <div class="menu-item" (click)="highscoreMenu()">
+                <button ion-button full>HIGHSCORE</button>
+            </div>-->
+            <div class="menu-item" (click)="settingsMenu()">
+                <button ion-button full>SETTINGS</button>
+            </div>
         </div>
     </div>
 </ion-content>
