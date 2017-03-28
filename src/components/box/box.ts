@@ -26,7 +26,6 @@ export class BoxComponent {
     ngOnInit() {}
 
     public tap(tappedBox: BoxModel) {
-        console.debug("TAAAP");
         if (!this.tapped) {
             this.tapped = true;
             if (this.target.doesMatch(tappedBox)) {
