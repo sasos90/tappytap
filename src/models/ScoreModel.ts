@@ -1,3 +1,5 @@
+import {LSK} from "./LSK";
+import {LocalStorage} from "../services/LocalStorage";
 /**
  * Created by saso on 3/8/17.
  */
@@ -65,5 +67,21 @@ export class ScoreModel {
         this.streak = 0;
         this.maxStreak = 0;
         this.comboLog = 1;
+    }
+
+    public isBestScore() : boolean {
+        let storedHighscore: number = LocalStorage.get(LSK.HIGHSCORE);
+        if (storedHighscore) {
+            return this.total > storedHighscore;
+        }
+        return true;
+    }
+
+    public saveScoreIfBest() : boolean {
+        if (this.isBestScore()) {
+            LocalStorage.set(LSK.HIGHSCORE, this.total);
+            return true;
+        }
+        return false;
     }
 }

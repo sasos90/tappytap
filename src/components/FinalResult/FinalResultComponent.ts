@@ -78,6 +78,9 @@ export class FinalResultComponent {
                 /*this.levelBonusRowShow = true;
                 this.levelBonusPointsHighlight = true;
                 this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));*/
+                if (this.scoreModel.saveScoreIfBest()) {
+                    console.log("TOP SCORE");
+                }
             }, 1000);
         }, 500);
     }
