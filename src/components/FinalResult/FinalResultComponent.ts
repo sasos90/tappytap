@@ -70,18 +70,17 @@ export class FinalResultComponent {
 
         // start timeout to show the final score wrapper
         setTimeout(() => {
-
+            if (this.scoreModel.saveScoreIfBest()) {
+                console.log("TOP SCORE");
+            }
             // show the result after 1 second
             this.shown = true;
-            setTimeout(() => {
+            /*setTimeout(() => {
                 // turn off every animation
-                /*this.levelBonusRowShow = true;
+                /!*this.levelBonusRowShow = true;
                 this.levelBonusPointsHighlight = true;
-                this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));*/
-                if (this.scoreModel.saveScoreIfBest()) {
-                    console.log("TOP SCORE");
-                }
-            }, 1000);
+                this.rafId = window.requestAnimationFrame((now) => this.updateLevelFrame(now));*!/
+            }, 1000);*/
         }, 500);
     }
 
