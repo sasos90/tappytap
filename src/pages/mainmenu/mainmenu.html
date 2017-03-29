@@ -5,7 +5,8 @@
             <div class="game-name">Tappy Tap</div>
         </div>
         <div class="rank-wrapper">
-            <span>No highscore yet</span>
+            <span *ngIf="!highscore">No highscore yet</span>
+            <span *ngIf="highscore">Your highscore: {{ highscore }}</span>
         </div>
         <div class="menu-wrapper">
             <div class="menu-item" (click)="startGameMenu()">

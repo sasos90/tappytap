@@ -5,6 +5,8 @@ import {Game} from "../game/game";
 import {Instructions} from "../instructions/instructions";
 import {HighScore} from "../highscore/highscore";
 import {Settings} from "../settings/settings";
+import {LocalStorage} from "../../services/LocalStorage";
+import {LSK} from "../../models/LSK";
 
 @Component({
     selector: 'main-menu',
@@ -12,7 +14,11 @@ import {Settings} from "../settings/settings";
 })
 export class MainMenu {
 
-    constructor(public navCtrl: NavController) {}
+    public highscore: number;
+
+    constructor(public navCtrl: NavController) {
+        this.highscore = LocalStorage.get(LSK.HIGHSCORE);
+    }
 
     ngOnInit() {}
 
