@@ -1,14 +1,17 @@
 main-menu {
     .main-menu-wrapper {
+        display: flex;
+        flex-direction: column;
         width: 80%;
         margin: 0 auto;
+        height: calc(100vh - 50px);
 
         .logo-wrapper {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 50px;
 
             .logo {
                 max-width: 20%;
@@ -32,14 +35,16 @@ main-menu {
         .menu-wrapper {
             text-align: center;
             font-size: 25px;
+            flex: 1;
 
             .menu-item {
                 margin-top: 30px;
+                height: 12%;
 
                 button {
                     background-color: $primary-color-dark;
                     padding: 0 5em;
-                    height: 5.5rem;
+                    height: 100%;
 
                     &:active {
                         background-color: $primary-color;
