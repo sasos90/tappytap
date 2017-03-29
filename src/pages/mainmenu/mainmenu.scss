@@ -4,6 +4,7 @@ main-menu {
         margin: 0 auto;
 
         .logo-wrapper {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -11,6 +12,13 @@ main-menu {
 
             .logo {
                 max-width: 20%;
+                opacity: 0.3;
+            }
+
+            .game-name {
+                position: absolute;
+                font-size: 20px;
+                font-weight: bold;
             }
         }
 
