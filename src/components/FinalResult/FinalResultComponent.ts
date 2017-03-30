@@ -19,6 +19,9 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
                 </div>
             </div>
             <div class="total-score">
+                <div class="new-highscore" *ngIf="newHighscore">
+                    <span class="text">NEW HIGHSCORE!</span>
+                </div>
                 <div class="wrapper">
                     <span class="label">{{ 'SCORE' }}</span>
                     <span class="value">{{ scoreModel.total }}</span>
@@ -26,8 +29,7 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
             </div>
             <div class="action-wrapper">
                 <button class="btn-replay" ion-button (click)="replay()">Replay</button>
-                <button class="btn-main-menu" ion-button (click)="mainMenu()">Main menu
-                </button>
+                <button class="btn-main-menu" ion-button (click)="mainMenu()">Main menu</button>
             </div>
         </div>
         <div class="overlay-background"></div>`
@@ -49,6 +51,7 @@ export class FinalResultComponent {
 
     // highlighting
     private scoreSummarizing: boolean = true;
+    private newHighscore: boolean = false;
     private comboBonusPointsHighlight: boolean = false;
     private comboBonusRowShow: boolean = false;
     private levelBonusPointsHighlight: boolean = false;
@@ -71,7 +74,8 @@ export class FinalResultComponent {
         // start timeout to show the final score wrapper
         setTimeout(() => {
             if (this.scoreModel.saveScoreIfBest()) {
-                console.log("TOP SCORE");
+                // TOP SCORE
+                this.newHighscore = true;
             }
             // show the result after 1 second
             this.shown = true;

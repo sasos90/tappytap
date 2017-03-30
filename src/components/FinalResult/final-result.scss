@@ -8,7 +8,7 @@ final-result {
 
     .level-complete-wrapper {
         position: absolute;
-        background: beige;
+        background: $primary-color-light;
         top: 50%;
         left: 50%;
         font-size: 26px;
@@ -81,6 +81,13 @@ final-result {
 
         .action-wrapper {
             margin-top: 20px;
+            display: flex;
+
+            button {
+                background-color: $primary-color-dark;
+                width: 50%;
+                margin: 0 10px;
+            }
 
             .btn-next-level {
                 padding: 20px;
