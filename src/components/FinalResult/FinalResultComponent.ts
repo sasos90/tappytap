@@ -22,7 +22,7 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
                 <div class="new-highscore" *ngIf="newHighscore">
                     <span class="text">NEW HIGHSCORE!</span>
                 </div>
-                <div class="wrapper">
+                <div class="score">
                     <span class="label">{{ 'SCORE' }}</span>
                     <span class="value">{{ scoreModel.total }}</span>
                 </div>

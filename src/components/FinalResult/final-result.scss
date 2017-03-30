@@ -71,7 +71,7 @@ final-result {
                 color: $accent-color;
             }
 
-            .wrapper {
+            .score {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -79,6 +79,10 @@ final-result {
                 .label {
                     font-size: 20px;
                     padding-right: 20px;
+                }
+
+                .value {
+                    font-weight: bold;
                 }
             }
         }
