@@ -7,11 +7,21 @@ import { NavController } from 'ionic-angular';
 })
 export class Settings {
 
+    public pushNotifications: boolean = true;
+    public sound: boolean = true;
+
     constructor(public navCtrl: NavController) {}
 
     ngOnInit() {}
 
     public back() {
+        this.navCtrl.pop();
+    }
+
+    public save() {
+        // TODO: implement that method
+        console.log(this.pushNotifications, this.sound);
+        console.error("Implement the saving to local store and show toast");
         this.navCtrl.pop();
     }
 }
