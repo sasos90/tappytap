@@ -10,8 +10,4 @@ export class Settings {
     constructor(public navCtrl: NavController) {}
 
     ngOnInit() {}
-
-    public back() {
-        this.navCtrl.pop();
-    }
 }

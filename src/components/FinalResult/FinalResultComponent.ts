@@ -28,8 +28,8 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
                 </div>
             </div>
             <div class="action-wrapper">
-                <button class="btn-replay" ion-button (click)="replay()">Replay</button>
-                <button class="btn-main-menu" ion-button (click)="mainMenu()">Main menu</button>
+                <button class="tappy-button btn-replay" ion-button (click)="replay()">Replay</button>
+                <button class="tappy-button btn-main-menu" ion-button (click)="mainMenu()">Main menu</button>
             </div>
         </div>
         <div class="overlay-background"></div>`
