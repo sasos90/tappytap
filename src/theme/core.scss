@@ -1,11 +1,12 @@
 @font-face {
     font-family: 'ArchitectsDaughter';
-    src: url('../assets/fonts/ArchitectsDaughter.ttf');
+    src: url('../assets/fonts/SFAtarianSystem.ttf');
 }
 
 * {
     box-sizing: border-box;
     font-family: ArchitectsDaughter;
+    letter-spacing: 2px;
 }
 
 .hidden {

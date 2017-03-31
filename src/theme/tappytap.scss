@@ -1,7 +1,12 @@
 button {
     &.tappy-button {
-        background-color: $primary-color-dark;
+        background-color: $primary-color;
         width: 50%;
         margin: 0 10px;
+        font-size: 20px;
+
+        &.highlighted {
+            background-color: $primary-color-dark !important;
+        }
     }
 }
