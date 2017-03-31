@@ -5,6 +5,7 @@ main-menu {
         width: 80%;
         margin: 0 auto;
         height: calc(100vh - 50px);
+        color: $primary-text-color;
 
         .logo-wrapper {
             display: flex;

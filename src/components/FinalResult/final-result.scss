@@ -27,6 +27,7 @@ final-result {
 
         .result-wrapper {
             font-size: 20px;
+            color: $primary-text-color;
 
             .result {
                 width: 100%;
@@ -79,6 +80,7 @@ final-result {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                color: $primary-text-color;
 
                 .label {
                     font-size: 20px;

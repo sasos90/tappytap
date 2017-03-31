@@ -77,7 +77,7 @@ game {
             top: 50%;
             left: 0;
             transform: translateY(-50%);
-            color: rgba(0, 13, 13, 1);
+            color: $primary-text-color;
             width: 100%;
             padding: 0px 10px;
             display: flex;
