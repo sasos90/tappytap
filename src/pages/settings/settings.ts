@@ -25,7 +25,6 @@ export class Settings {
 
     public save() {
         // TODO: implement that method
-        console.log(this.pushNotifications, this.sound);
         LocalStorage.set(LSK.PUSH_NOTIFICATIONS, this.pushNotifications)
         LocalStorage.set(LSK.SOUND, this.sound)
         // TODO: Show toast if needed
