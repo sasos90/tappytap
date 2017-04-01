@@ -14,7 +14,10 @@ export class Settings {
 
     constructor(public navCtrl: NavController) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS) || true;
+        this.sound = LocalStorage.get(LSK.SOUND) || true;
+    }
 
     public back() {
         this.navCtrl.pop();
