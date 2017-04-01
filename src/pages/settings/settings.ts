@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {LSK} from "../../models/LSK";
+import {LocalStorage} from "../../services/LocalStorage";
 
 @Component({
     selector: 'settings',
@@ -21,7 +23,10 @@ export class Settings {
     public save() {
         // TODO: implement that method
         console.log(this.pushNotifications, this.sound);
-        console.error("Implement the saving to local store and show toast");
+        LocalStorage.set(LSK.PUSH_NOTIFICATIONS, this.pushNotifications)
+        LocalStorage.set(LSK.SOUND, this.sound)
+        // TODO: Show toast if needed
+        console.warn("Show toast if needed");
         this.navCtrl.pop();
     }
 }

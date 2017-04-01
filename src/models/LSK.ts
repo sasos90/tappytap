@@ -5,5 +5,7 @@
  * Keys for local storage.
  */
 export class LSK {
-    public static HIGHSCORE = "highscore";
+    public static HIGHSCORE: string = "highscore";
+    public static PUSH_NOTIFICATIONS: string = "pushNotifications";
+    public static SOUND: string = "sound";
 }
