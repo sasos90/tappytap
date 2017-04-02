@@ -17,10 +17,15 @@ ready-set-go {
 
         .relative-wrapper {
             position: relative;
+            color: $accent-color;
 
             .step {
                 text-align: center;
             }
         }
+    }
+
+    .overlay-background {
+        background: white;
     }
 }
