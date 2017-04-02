@@ -1,6 +1,6 @@
 import {Component, Input, EventEmitter, Output} from '@angular/core';
 import {BoxModel} from "../../models/BoxModel";
-import {NativeAudio} from "ionic-native";
+import {Sound} from "../../services/Sound";
 
 @Component({
     selector: 'box',
@@ -32,7 +32,7 @@ export class BoxComponent {
                 // HIT SUCCESSED
                 this.onSuccessHit();
             } else {
-                NativeAudio.play("miss");
+                Sound.play("miss");
                 this.onBoxTap.emit(this.box);
                 this.box.color = this.target.color;
                 setTimeout(() => {

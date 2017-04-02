@@ -7,6 +7,7 @@ import {CountdownTimer} from "../../models/CountdownTimer";
 import {ScoreModel} from "../../models/ScoreModel";
 import {HeaderStatus} from "../../models/HeaderStatus";
 import {NativeAudio} from "ionic-native";
+import {Sound} from "../../services/Sound";
 
 @Component({
     selector: 'game',
@@ -216,7 +217,7 @@ export class Game {
 
     private preloadSounds() {
         // preload sounds
-        NativeAudio.preloadSimple("hit", "assets/sounds/hit.mp3");
-        NativeAudio.preloadSimple("miss", "assets/sounds/miss.mp3");
+        Sound.load("hit", "assets/sounds/hit.mp3");
+        Sound.load("miss", "assets/sounds/miss.mp3");
     }
 }
