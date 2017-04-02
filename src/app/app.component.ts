@@ -34,6 +34,11 @@ export class MyApp {
                 this.firebase.onTokenRefresh().subscribe((token: string) => {
                     LocalStorage.set(LSK.FIREBASE_TOKEN, token);
                 });
+
+                // permissions for push notifications - iOS
+                if (!this.firebase.hasPermission()) {
+                    this.firebase.grantPermission();
+                }
             }
 
             this.statusBar.styleDefault();
