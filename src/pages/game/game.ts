@@ -29,6 +29,7 @@ export class Game {
     public level: number = 1;
     public readySetGo: boolean = false;
     public gameInProgress: boolean = true;
+    public showTapInstruction: boolean = true;
     public finalResult: boolean = false;
     public score: ScoreModel = new ScoreModel();
 
@@ -51,13 +52,10 @@ export class Game {
 
         // hide the game layout
         this.gameWrapper.classList.add("invisible");
+        this.setLayoutPosition();
 
-        setTimeout(() => {
-            this.setLayoutPosition();
-
-            // simulate starting the game
-            this.showReadySetGo();
-        }, 200);
+        // start first level
+        this.showReadySetGo();
         window.onresize = (event) => {
             this.setLayoutPosition();
         };
@@ -93,6 +91,7 @@ export class Game {
         this.hideReadySetGo();
         this.headerStatus.clear();
         this.gameInProgress = true;
+        this.showTapInstruction = false;
         // reset countdown timer
         this.timer.resetToStart();
         // expose the boxes
@@ -179,6 +178,7 @@ export class Game {
         this.score.reset();
         // Set game in progress flag to hide progress bar and boxes
         this.gameInProgress = true;
+        this.showTapInstruction = true;
         // Start counting down READY SET GO for next level
         this.showReadySetGo();
     }
