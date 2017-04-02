@@ -28,7 +28,7 @@ export class Game {
      */
     public level: number = 1;
     public readySetGo: boolean = false;
-    public gameInProgress: boolean = false;
+    public gameInProgress: boolean = true;
     public finalResult: boolean = false;
     public score: ScoreModel = new ScoreModel();
 
@@ -178,7 +178,7 @@ export class Game {
         this.hideFinalResult();
         this.score.reset();
         // Set game in progress flag to hide progress bar and boxes
-        this.gameInProgress = false;
+        this.gameInProgress = true;
         // Start counting down READY SET GO for next level
         this.showReadySetGo();
     }
