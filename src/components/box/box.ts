@@ -34,7 +34,7 @@ export class BoxComponent {
                 // HIT SUCCESSED
                 this.onSuccessHit();
             } else {
-                if (LocalStorage.get(LSK.SOUND) === true) {
+                if (LocalStorage.get(LSK.SOUND) === "true") {
                     this.nativeAudio.play("miss");
                 }
                 this.onBoxTap.emit(this.box);

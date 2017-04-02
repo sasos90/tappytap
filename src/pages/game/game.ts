@@ -220,10 +220,15 @@ export class Game {
     }
 
     private preloadSounds() {
-        if (LocalStorage.get(LSK.SOUND) === true) {
+        if (LocalStorage.get(LSK.SOUND) === "true") {
             // preload sounds
             this.nativeAudio.preloadSimple("hit", "assets/sounds/hit.mp3");
             this.nativeAudio.preloadSimple("miss", "assets/sounds/miss.mp3");
+            console.log("LOADED AUDIO");
+        } else {
+            // unload audio from memory
+            this.nativeAudio.unload("hit");
+            this.nativeAudio.unload("miss");
         }
     }
 }

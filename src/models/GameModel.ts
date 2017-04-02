@@ -31,7 +31,7 @@ export class GameModel {
             if (box.isHit) {
                 this.handleBoxHit(game, box);
                 if (game.allBoxesAreHit()) {
-                    if (LocalStorage.get(LSK.SOUND) === true) {
+                    if (LocalStorage.get(LSK.SOUND) === "true") {
                         this.gameInstance.nativeAudio.play("hit");
 
                     }
