@@ -149,7 +149,6 @@ export class GameModel {
      */
     private handleBoxHit(game: GameModel, box: BoxModel) {
         this.score.streak++;
-        console.log("Streak: ", this.score.streak);
 
         this.levelSpecificBoxHit(game, box);
     }
