@@ -48,6 +48,7 @@ export class Game {
         public nativeAudio: NativeAudio,
         public firebase: Firebase
     ) {
+        this.firebase.setScreenName("game_screen");
         this.preloadSounds();
     }
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {LSK} from "../../models/LSK";
 import {LocalStorage} from "../../services/LocalStorage";
+import {Firebase} from "@ionic-native/firebase";
 
 @Component({
     selector: 'settings',
@@ -12,7 +13,12 @@ export class Settings {
     public pushNotifications: boolean = true;
     public sound: boolean = true;
 
-    constructor(public navCtrl: NavController) {}
+    constructor(
+        public navCtrl: NavController,
+        public firebase: Firebase
+    ) {
+        this.firebase.setScreenName("settings_screen");
+    }
 
     ngOnInit() {
         this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS) || true;
@@ -20,12 +26,23 @@ export class Settings {
     }
 
     public back() {
+        this.firebase.logEvent("discard_settings", {
+            pushNotifications: this.pushNotifications,
+            sound: this.sound
+        });
         this.navCtrl.pop();
     }
 
     public save() {
-        LocalStorage.set(LSK.PUSH_NOTIFICATIONS, this.pushNotifications)
-        LocalStorage.set(LSK.SOUND, this.sound)
+        // firebase
+        this.firebase.logEvent("save_settings", {
+            pushNotifications: this.pushNotifications,
+            sound: this.sound
+        });
+
+        // save to storage
+        LocalStorage.set(LSK.PUSH_NOTIFICATIONS, this.pushNotifications);
+        LocalStorage.set(LSK.SOUND, this.sound);
         // TODO: Show toast if needed
         console.warn("Show toast if needed");
         this.navCtrl.pop();

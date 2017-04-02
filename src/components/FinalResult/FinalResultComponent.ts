@@ -2,6 +2,7 @@ import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {ScoreModel} from "../../models/ScoreModel";
 import {NavController} from "ionic-angular";
 import {MainMenu} from "../../pages/mainmenu/mainmenu";
+import {Firebase} from "@ionic-native/firebase";
 
 @Component({
     selector: 'final-result',
@@ -57,9 +58,10 @@ export class FinalResultComponent {
     private levelBonusPointsHighlight: boolean = false;
     private levelBonusRowShow: boolean = false;
 
-    constructor(protected nav: NavController) {
-
-    }
+    constructor(
+        protected nav: NavController,
+        protected firebase: Firebase
+    ) {}
 
     ngOnInit() {
         // set and store score values
@@ -76,6 +78,9 @@ export class FinalResultComponent {
             if (this.scoreModel.saveScoreIfBest()) {
                 // TOP SCORE
                 this.newHighscore = true;
+                this.firebase.logEvent("FINAL_RESULT_best_score", {
+                    score: this.scoreModel.total
+                });
             }
             // show the result after 1 second
             this.shown = true;
@@ -128,10 +133,14 @@ export class FinalResultComponent {
     }
 
     public replay() {
+        // store to firebase
+        this.firebase.logEvent("FINAL_RESULT_replay_the_game", {});
         this.replayEvent.emit();
     }
 
     public mainMenu() {
+        // store to firebase
+        this.firebase.logEvent("FINAL_RESULT_to_mainmenu", {});
         this.nav.setRoot(MainMenu);
     }
 

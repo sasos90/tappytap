@@ -3,6 +3,7 @@ import {BoxModel} from "../../models/BoxModel";
 import {NativeAudio} from "@ionic-native/native-audio";
 import {LocalStorage} from "../../services/LocalStorage";
 import {LSK} from "../../models/LSK";
+import {Firebase} from "@ionic-native/firebase";
 
 @Component({
     selector: 'box',
@@ -23,7 +24,10 @@ export class BoxComponent {
     public hideBox: boolean = false;
     private tapped: boolean = false;
 
-    constructor(public nativeAudio: NativeAudio) {}
+    constructor(
+        public nativeAudio: NativeAudio,
+        public firebase: Firebase
+    ) {}
 
     ngOnInit() {}
 
@@ -34,6 +38,8 @@ export class BoxComponent {
                 // HIT SUCCESSED
                 this.onSuccessHit();
             } else {
+                // store missed box on firebase
+                this.firebase.logEvent("missed_box", {});
                 if (LocalStorage.get(LSK.SOUND) === "true") {
                     this.nativeAudio.play("miss");
                 }
