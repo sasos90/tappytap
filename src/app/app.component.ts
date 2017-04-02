@@ -5,6 +5,8 @@ import {MainMenu} from "../pages/mainmenu/mainmenu";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {Firebase} from "@ionic-native/firebase";
+import {LocalStorage} from "../services/LocalStorage";
+import {LSK} from "../models/LSK";
 
 @Component({
     templateUrl: 'app.html'
@@ -30,7 +32,7 @@ export class MyApp {
 
             if (this.platform.is("cordova")) {
                 this.firebase.onTokenRefresh().subscribe((token: string) => {
-                    console.log(`Got a new token ${token}`);
+                    LocalStorage.set(LSK.FIREBASE_TOKEN, token);
                 });
             }
 
