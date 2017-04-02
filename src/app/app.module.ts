@@ -11,6 +11,9 @@ import {MainMenu} from "../pages/mainmenu/mainmenu";
 import {Instructions} from "../pages/instructions/instructions";
 import {HighScore} from "../pages/highscore/highscore";
 import {Settings} from "../pages/settings/settings";
+import {SplashScreen} from "@ionic-native/splash-screen";
+import {StatusBar} from "@ionic-native/status-bar";
+import {NativeAudio} from "@ionic-native/native-audio";
 
 export class MyHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -51,6 +54,9 @@ export class MyHammerConfig extends HammerGestureConfig  {
         Settings
     ],
     providers: [
+        StatusBar,
+        SplashScreen,
+        NativeAudio,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
     ]

@@ -6,8 +6,9 @@ import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
 import {ScoreModel} from "../../models/ScoreModel";
 import {HeaderStatus} from "../../models/HeaderStatus";
-import {NativeAudio} from "ionic-native";
-import {Sound} from "../../services/Sound";
+import {NativeAudio} from "@ionic-native/native-audio";
+import {LocalStorage} from "../../services/LocalStorage";
+import {LSK} from "../../models/LSK";
 
 @Component({
     selector: 'game',
@@ -41,7 +42,10 @@ export class Game {
     public exposed: boolean = false;
     public headerStatus: HeaderStatus = new HeaderStatus("HIT");
 
-    constructor(public navCtrl: NavController) {
+    constructor(
+        public navCtrl: NavController,
+        public nativeAudio: NativeAudio
+    ) {
         this.preloadSounds();
     }
 
@@ -216,8 +220,10 @@ export class Game {
     }
 
     private preloadSounds() {
-        // preload sounds
-        Sound.load("hit", "assets/sounds/hit.mp3");
-        Sound.load("miss", "assets/sounds/miss.mp3");
+        if (LocalStorage.get(LSK.SOUND) === true) {
+            // preload sounds
+            this.nativeAudio.preloadSimple("hit", "assets/sounds/hit.mp3");
+            this.nativeAudio.preloadSimple("miss", "assets/sounds/miss.mp3");
+        }
     }
 }

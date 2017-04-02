@@ -7,7 +7,8 @@ import {Game} from "../pages/game/game";
 import {ScoreModel} from "./ScoreModel";
 import {HeaderStatus} from "./HeaderStatus";
 import {HeaderStatusAnimation} from "./HeaderStatusAnimation";
-import {Sound} from "../services/Sound";
+import {LocalStorage} from "../services/LocalStorage";
+import {LSK} from "./LSK";
 /**
  * Created by saso on 1/17/17.
  */
@@ -30,7 +31,10 @@ export class GameModel {
             if (box.isHit) {
                 this.handleBoxHit(game, box);
                 if (game.allBoxesAreHit()) {
-                    Sound.play("hit");
+                    if (LocalStorage.get(LSK.SOUND) === true) {
+                        this.gameInstance.nativeAudio.play("hit");
+
+                    }
                     // set another target
                     let untouchedBox: BoxModel = game.boxList.findUntouchedBox();
                     if (untouchedBox) {

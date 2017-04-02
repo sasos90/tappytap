@@ -1,6 +1,8 @@
 import {Component, Input, EventEmitter, Output} from '@angular/core';
 import {BoxModel} from "../../models/BoxModel";
-import {Sound} from "../../services/Sound";
+import {NativeAudio} from "@ionic-native/native-audio";
+import {LocalStorage} from "../../services/LocalStorage";
+import {LSK} from "../../models/LSK";
 
 @Component({
     selector: 'box',
@@ -21,7 +23,7 @@ export class BoxComponent {
     public hideBox: boolean = false;
     private tapped: boolean = false;
 
-    constructor() {}
+    constructor(public nativeAudio: NativeAudio) {}
 
     ngOnInit() {}
 
@@ -32,7 +34,9 @@ export class BoxComponent {
                 // HIT SUCCESSED
                 this.onSuccessHit();
             } else {
-                Sound.play("miss");
+                if (LocalStorage.get(LSK.SOUND) === true) {
+                    this.nativeAudio.play("miss");
+                }
                 this.onBoxTap.emit(this.box);
                 this.box.color = this.target.color;
                 setTimeout(() => {
