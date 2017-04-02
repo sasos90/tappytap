@@ -224,7 +224,6 @@ export class Game {
             // preload sounds
             this.nativeAudio.preloadSimple("hit", "assets/sounds/hit.mp3");
             this.nativeAudio.preloadSimple("miss", "assets/sounds/miss.mp3");
-            console.log("LOADED AUDIO");
         } else {
             // unload audio from memory
             this.nativeAudio.unload("hit");
