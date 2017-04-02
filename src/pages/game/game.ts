@@ -9,6 +9,7 @@ import {HeaderStatus} from "../../models/HeaderStatus";
 import {NativeAudio} from "@ionic-native/native-audio";
 import {LocalStorage} from "../../services/LocalStorage";
 import {LSK} from "../../models/LSK";
+import {Firebase} from "@ionic-native/firebase";
 
 @Component({
     selector: 'game',
@@ -44,7 +45,8 @@ export class Game {
 
     constructor(
         public navCtrl: NavController,
-        public nativeAudio: NativeAudio
+        public nativeAudio: NativeAudio,
+        public firebase: Firebase
     ) {
         this.preloadSounds();
     }

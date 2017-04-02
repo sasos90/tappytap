@@ -4,6 +4,7 @@ import { Nav, Platform } from 'ionic-angular';
 import {MainMenu} from "../pages/mainmenu/mainmenu";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
+import {Firebase} from "@ionic-native/firebase";
 
 @Component({
     templateUrl: 'app.html'
@@ -13,7 +14,12 @@ export class MyApp {
 
     rootPage: any = MainMenu;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    constructor(
+        public platform: Platform,
+        public statusBar: StatusBar,
+        public splashScreen: SplashScreen,
+        public firebase: Firebase
+    ) {
         this.initializeApp();
     }
 
@@ -21,6 +27,13 @@ export class MyApp {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
+
+            if (this.platform.is("cordova")) {
+                this.firebase.onTokenRefresh().subscribe((token: string) => {
+                    console.log(`Got a new token ${token}`);
+                });
+            }
+
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
