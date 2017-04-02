@@ -31,7 +31,7 @@ export class ScoreModel {
         if (this.streak > this.maxStreak) {
             this.maxStreak = this.streak;
         }
-        this.comboLog = this.streak > 0 ? parseFloat((Math.log(this.streak + 1) + 1).toFixed(2)) : 1;
+        this.comboLog = this.streak > 0 ? parseFloat((Math.log(this.streak) + 1).toFixed(2)) : 1;
     }
 
     get maxStreak(): number {

@@ -67,7 +67,7 @@ export class FinalResultComponent {
         this.levelBonus = this.sumLevelBonus();
         this.comboStored = this.scoreModel.maxStreak;
         if (this.scoreModel.total > 0) {
-            this.comboMultiplier = parseFloat((Math.log10(this.comboStored) + 1).toFixed(2));
+            this.comboMultiplier = parseFloat((Math.log(this.comboStored) + 1).toFixed(2));
             this.comboMultiplierStored = this.comboMultiplier;
         }
 
