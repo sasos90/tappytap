@@ -16,8 +16,12 @@ export class FBKey {
     };
 
     public static FINAL_RESULT: any = {
-        BEST_SCORE: "FINAL_RESULT_best_score"
+        BEST_SCORE: "FINAL_RESULT_best_score",
+        REPLAY: "FINAL_RESULT_replay_the_game",
+        MAIN_MENU: "FINAL_RESULT_to_mainmenu"
     };
 
-    // TODO: Add rest...
+    public static BOX: any = {
+        MISSED: "BOX_missed_box"
+    };
 }

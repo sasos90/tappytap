@@ -55,8 +55,7 @@ export class MyApp {
                     position: this.admob.AD_POSITION.BOTTOM_CENTER,
                     isTesting: this.isTestingBanner()
                 }).then((par) => {
-                    console.warn("ADMOB");
-                    console.warn(par);
+                    console.log("ADMOB", par);
                 });
             }
 
@@ -66,6 +65,7 @@ export class MyApp {
     }
 
     private isTestingBanner() : boolean {
+        // list the device.uuid which will have the test banner
         let arrayOfDevices: Array<string> = [
             "7b9ba921977ca9d0"
         ];

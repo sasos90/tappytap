@@ -81,6 +81,8 @@ export class FinalResultComponent {
                 this.newHighscore = true;
                 this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
                     score: this.scoreModel.total
+                }).then((success) => {
+                    console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
                 });
             }
             // show the result after 1 second
@@ -135,13 +137,17 @@ export class FinalResultComponent {
 
     public replay() {
         // store to firebase
-        this.firebase.logEvent("FINAL_RESULT_replay_the_game", {});
+        this.firebase.logEvent(FBKey.FINAL_RESULT.REPLAY, {}).then((success) => {
+            console.log("FB: " + FBKey.FINAL_RESULT.REPLAY, success);
+        });
         this.replayEvent.emit();
     }
 
     public mainMenu() {
         // store to firebase
-        this.firebase.logEvent("FINAL_RESULT_to_mainmenu", {});
+        this.firebase.logEvent(FBKey.FINAL_RESULT.MAIN_MENU, {}).then((success) => {
+            console.log("FB: " + FBKey.FINAL_RESULT.MAIN_MENU, success);
+        });
         this.nav.setRoot(MainMenu);
     }
 
