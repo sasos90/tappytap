@@ -18,7 +18,9 @@ export class Settings {
         public navCtrl: NavController,
         public firebase: Firebase
     ) {
-        this.firebase.logEvent(FBKey.SETTINGS.SCREEN, {});
+        this.firebase.logEvent(FBKey.SETTINGS.SCREEN, {}).then((success) => {
+            console.log("FB: " + FBKey.SETTINGS.SCREEN, success);
+        });
     }
 
     ngOnInit() {
@@ -30,6 +32,8 @@ export class Settings {
         this.firebase.logEvent(FBKey.SETTINGS.DISCARD, {
             pushNotifications: this.pushNotifications,
             sound: this.sound
+        }).then((success) => {
+            console.log("FB: " + FBKey.SETTINGS.DISCARD, success);
         });
         this.navCtrl.pop();
     }
@@ -39,6 +43,8 @@ export class Settings {
         this.firebase.logEvent(FBKey.SETTINGS.SAVE, {
             pushNotifications: this.pushNotifications,
             sound: this.sound
+        }).then((success) => {
+            console.log("FB: " + FBKey.SETTINGS.SAVE, success);
         });
 
         // save to storage

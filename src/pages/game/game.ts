@@ -49,7 +49,9 @@ export class Game {
         public nativeAudio: NativeAudio,
         public firebase: Firebase
     ) {
-        this.firebase.logEvent(FBKey.GAME.SCREEN, {});
+        this.firebase.logEvent(FBKey.GAME.SCREEN, {}).then((success) => {
+            console.log("FB: " + FBKey.GAME.SCREEN, success);
+        });
         this.preloadSounds();
     }
 
