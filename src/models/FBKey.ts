@@ -18,4 +18,6 @@ export class FBKey {
     public static FINAL_RESULT: any = {
         BEST_SCORE: "FINAL_RESULT_best_score"
     };
+
+    // TODO: Add rest...
 }
