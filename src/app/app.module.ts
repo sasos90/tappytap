@@ -16,6 +16,7 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {NativeAudio} from "@ionic-native/native-audio";
 import {Firebase} from "@ionic-native/firebase";
 import {AdMob} from '@ionic-native/admob';
+import {Device} from "@ionic-native/device";
 
 export class MyHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -61,6 +62,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
         NativeAudio,
         Firebase,
         AdMob,
+        Device,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
     ]

@@ -10,6 +10,7 @@ import {LSK} from "../models/LSK";
 import { AdMob, AdMobOptions, AdSize, AdExtras } from '@ionic-native/admob';
 import {Config} from "../services/Config";
 import {Environment} from "../models/Environment";
+import {Device} from "@ionic-native/device";
 
 @Component({
     templateUrl: 'app.html'
@@ -24,7 +25,8 @@ export class MyApp {
         public statusBar: StatusBar,
         public splashScreen: SplashScreen,
         public firebase: Firebase,
-        public admob: AdMob
+        public admob: AdMob,
+        public device: Device
     ) {
         this.initializeApp();
     }
@@ -45,11 +47,13 @@ export class MyApp {
                     this.firebase.grantPermission();
                 }
 
+                // device uuid
+                console.log("Device uuid:", this.device.uuid);
                 // admob AD
                 this.admob.createBanner({
                     adId: "ca-app-pub-8663484789528557/4325806029",
                     position: this.admob.AD_POSITION.BOTTOM_CENTER,
-                    isTesting: Config.ENV === Environment.DEVELOP
+                    isTesting: this.isTestingBanner()
                 }).then((par) => {
                     console.warn("ADMOB");
                     console.warn(par);
@@ -59,5 +63,14 @@ export class MyApp {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
+    }
+
+    private isTestingBanner() : boolean {
+        let arrayOfDevices: Array<string> = [
+            "7b9ba921977ca9d0"
+        ];
+        let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(this.device.uuid) !== -1;
+        console.log("Is testing banner?", isTestingBanner);
+        return isTestingBanner;
     }
 }

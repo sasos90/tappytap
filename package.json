@@ -21,6 +21,7 @@
     "@angular/platform-server": "2.4.8",
     "@ionic-native/admob": "^3.4.4",
     "@ionic-native/core": "3.1.0",
+    "@ionic-native/device": "^3.4.4",
     "@ionic-native/firebase": "^3.4.4",
     "@ionic-native/native-audio": "^3.4.4",
     "@ionic-native/splash-screen": "3.1.0",
