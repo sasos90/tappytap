@@ -17,7 +17,7 @@ export class Settings {
         public navCtrl: NavController,
         public firebase: Firebase
     ) {
-        this.firebase.setScreenName("settings_screen");
+        this.firebase.logEvent("settings_screen", {});
     }
 
     ngOnInit() {
