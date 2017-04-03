@@ -32,11 +32,12 @@ export class MyApp {
 
             if (this.platform.is("cordova")) {
                 this.firebase.onTokenRefresh().subscribe((token: string) => {
+                    console.log("Firebase token: " + token);
                     LocalStorage.set(LSK.FIREBASE_TOKEN, token);
                 });
 
                 // permissions for push notifications - iOS
-                if (!this.firebase.hasPermission()) {
+                if (this.platform.is("ios") && !this.firebase.hasPermission()) {
                     this.firebase.grantPermission();
                 }
             }
