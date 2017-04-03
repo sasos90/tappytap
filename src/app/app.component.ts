@@ -8,6 +8,8 @@ import {Firebase} from "@ionic-native/firebase";
 import {LocalStorage} from "../services/LocalStorage";
 import {LSK} from "../models/LSK";
 import { AdMob, AdMobOptions, AdSize, AdExtras } from '@ionic-native/admob';
+import {Config} from "../services/Config";
+import {Environment} from "../models/Environment";
 
 @Component({
     templateUrl: 'app.html'
@@ -42,6 +44,16 @@ export class MyApp {
                 if (this.platform.is("ios") && !this.firebase.hasPermission()) {
                     this.firebase.grantPermission();
                 }
+
+                // admob AD
+                this.admob.createBanner({
+                    adId: "ca-app-pub-8663484789528557/4325806029",
+                    position: this.admob.AD_POSITION.BOTTOM_CENTER,
+                    isTesting: Config.ENV === Environment.DEVELOP
+                }).then((par) => {
+                    console.warn("ADMOB");
+                    console.warn(par);
+                });
             }
 
             this.statusBar.styleDefault();
