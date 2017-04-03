@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'ArchitectsDaughter';
+    src: url('../assets/fonts/SFAtarianSystem.ttf');
+}
+
 * {
     box-sizing: border-box;
+    font-family: ArchitectsDaughter;
+    letter-spacing: 2px;
 }
 
 .hidden {
@@ -8,4 +15,19 @@
 
 .invisible {
     visibility: hidden;
+}
+
+.overlay-background {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: gray;
+    opacity: 0.6;
+    z-index: -1;
+}
+
+.material-shadow {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }

@@ -1,0 +1,26 @@
+<ion-content>
+    <div class="main-menu-wrapper">
+        <div class="logo-wrapper">
+            <img class="logo" src="assets/images/logo.png" alt="" />
+            <div class="game-name">Tappy Tap</div>
+        </div>
+        <div class="rank-wrapper">
+            <span *ngIf="!highscore">No highscore yet</span>
+            <span *ngIf="highscore">Your highscore: {{ highscore }}</span>
+        </div>
+        <div class="menu-wrapper">
+            <div class="menu-item" (click)="startGameMenu()">
+                <button class="tappy-button highlighted" ion-button full>START GAME</button>
+            </div>
+            <!--<div class="menu-item" (click)="instructionsMenu()">
+                <button ion-button full>INSTRUCTIONS</button>
+            </div>
+            <div class="menu-item" (click)="highscoreMenu()">
+                <button ion-button full>HIGHSCORE</button>
+            </div>-->
+            <div class="menu-item" (click)="settingsMenu()">
+                <button class="tappy-button" ion-button full>SETTINGS</button>
+            </div>
+        </div>
+    </div>
+</ion-content>

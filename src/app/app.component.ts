@@ -1,9 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { Page2 } from '../pages/page2/page2';
-import {Game} from "../pages/game/game";
+import {MainMenu} from "../pages/mainmenu/mainmenu";
+import {StatusBar} from "@ionic-native/status-bar";
+import {SplashScreen} from "@ionic-native/splash-screen";
+import {Firebase} from "@ionic-native/firebase";
+import {LocalStorage} from "../services/LocalStorage";
+import {LSK} from "../models/LSK";
+import { AdMob, AdMobOptions, AdSize, AdExtras } from '@ionic-native/admob';
+import {Config} from "../services/Config";
+import {Environment} from "../models/Environment";
+import {Device} from "@ionic-native/device";
 
 @Component({
     templateUrl: 'app.html'
@@ -11,32 +18,59 @@ import {Game} from "../pages/game/game";
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
 
-    rootPage: any = Game;
+    rootPage: any = MainMenu;
 
-    pages: Array<{title: string, component: any}>;
-
-    constructor(public platform: Platform) {
+    constructor(
+        public platform: Platform,
+        public statusBar: StatusBar,
+        public splashScreen: SplashScreen,
+        public firebase: Firebase,
+        public admob: AdMob,
+        public device: Device
+    ) {
         this.initializeApp();
-
-        // used for an example of ngFor and navigation
-        this.pages = [
-        { title: 'Game', component: Game },
-        { title: 'Page Two', component: Page2 }
-        ];
     }
 
     initializeApp() {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            StatusBar.styleDefault();
-            Splashscreen.hide();
+
+            if (this.platform.is("cordova")) {
+                this.firebase.onTokenRefresh().subscribe((token: string) => {
+                    console.log("Firebase token: " + token);
+                    LocalStorage.set(LSK.FIREBASE_TOKEN, token);
+                });
+
+                // permissions for push notifications - iOS
+                if (this.platform.is("ios") && !this.firebase.hasPermission()) {
+                    this.firebase.grantPermission();
+                }
+
+                // device uuid
+                console.log("Device uuid:", this.device.uuid);
+                // admob AD
+                this.admob.createBanner({
+                    adId: "ca-app-pub-8663484789528557/4325806029",
+                    position: this.admob.AD_POSITION.BOTTOM_CENTER,
+                    isTesting: this.isTestingBanner()
+                }).then((par) => {
+                    console.warn("ADMOB");
+                    console.warn(par);
+                });
+            }
+
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
         });
     }
 
-    openPage(page) {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(page.component);
+    private isTestingBanner() : boolean {
+        let arrayOfDevices: Array<string> = [
+            "7b9ba921977ca9d0"
+        ];
+        let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(this.device.uuid) !== -1;
+        console.log("Is testing banner?", isTestingBanner);
+        return isTestingBanner;
     }
 }

@@ -1,5 +1,6 @@
 box {
     margin: 1%;
+    float: left;
     position: relative;
     perspective: 800px;
 
@@ -14,7 +15,7 @@ box {
         height: 100%;
         position: absolute;
         transform-style: preserve-3d;
-        transition: transform 1s;
+        transition: transform 0.3s;
 
         .box {
             padding: 2px;
@@ -25,6 +26,14 @@ box {
             display: block;
             position: absolute;
             backface-visibility: hidden;
+
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+            &.front {
+                &.target {
+                    box-shadow: inset 0px 0px 0px 8px rgba(0, 13, 13, 1);
+                }
+            }
 
             &.back {
                 transform: rotateY( 180deg );
@@ -38,7 +47,6 @@ box {
     }
 }
 
-// TODO: Check https://desandro.github.io/3dtransforms/docs/card-flip.html
 @keyframes spin {
     100% {
         transform:rotateY(180deg);
