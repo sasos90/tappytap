@@ -10,6 +10,7 @@ import {NativeAudio} from "@ionic-native/native-audio";
 import {LocalStorage} from "../../services/LocalStorage";
 import {LSK} from "../../models/LSK";
 import {Firebase} from "@ionic-native/firebase";
+import {FBKey} from "../../models/FBKey";
 
 @Component({
     selector: 'game',
@@ -48,7 +49,7 @@ export class Game {
         public nativeAudio: NativeAudio,
         public firebase: Firebase
     ) {
-        this.firebase.logEvent("game_screen", {});
+        this.firebase.logEvent(FBKey.GAME.SCREEN, {});
         this.preloadSounds();
     }
 

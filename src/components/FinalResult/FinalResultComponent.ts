@@ -3,6 +3,7 @@ import {ScoreModel} from "../../models/ScoreModel";
 import {NavController} from "ionic-angular";
 import {MainMenu} from "../../pages/mainmenu/mainmenu";
 import {Firebase} from "@ionic-native/firebase";
+import {FBKey} from "../../models/FBKey";
 
 @Component({
     selector: 'final-result',
@@ -78,7 +79,7 @@ export class FinalResultComponent {
             if (this.scoreModel.saveScoreIfBest()) {
                 // TOP SCORE
                 this.newHighscore = true;
-                this.firebase.logEvent("FINAL_RESULT_best_score", {
+                this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
                     score: this.scoreModel.total
                 });
             }

@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {LSK} from "../../models/LSK";
 import {LocalStorage} from "../../services/LocalStorage";
 import {Firebase} from "@ionic-native/firebase";
+import {FBKey} from "../../models/FBKey";
 
 @Component({
     selector: 'settings',
@@ -17,7 +18,7 @@ export class Settings {
         public navCtrl: NavController,
         public firebase: Firebase
     ) {
-        this.firebase.logEvent("settings_screen", {});
+        this.firebase.logEvent(FBKey.SETTINGS.SCREEN, {});
     }
 
     ngOnInit() {
@@ -26,7 +27,7 @@ export class Settings {
     }
 
     public back() {
-        this.firebase.logEvent("discard_settings", {
+        this.firebase.logEvent(FBKey.SETTINGS.DISCARD, {
             pushNotifications: this.pushNotifications,
             sound: this.sound
         });
@@ -35,7 +36,7 @@ export class Settings {
 
     public save() {
         // firebase
-        this.firebase.logEvent("save_settings", {
+        this.firebase.logEvent(FBKey.SETTINGS.SAVE, {
             pushNotifications: this.pushNotifications,
             sound: this.sound
         });
