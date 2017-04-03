@@ -15,6 +15,7 @@ import {SplashScreen} from "@ionic-native/splash-screen";
 import {StatusBar} from "@ionic-native/status-bar";
 import {NativeAudio} from "@ionic-native/native-audio";
 import {Firebase} from "@ionic-native/firebase";
+import {AdMob} from '@ionic-native/admob';
 
 export class MyHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -59,6 +60,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
         SplashScreen,
         NativeAudio,
         Firebase,
+        AdMob,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
     ]

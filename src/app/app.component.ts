@@ -7,6 +7,7 @@ import {SplashScreen} from "@ionic-native/splash-screen";
 import {Firebase} from "@ionic-native/firebase";
 import {LocalStorage} from "../services/LocalStorage";
 import {LSK} from "../models/LSK";
+import { AdMob, AdMobOptions, AdSize, AdExtras } from '@ionic-native/admob';
 
 @Component({
     templateUrl: 'app.html'
@@ -20,7 +21,8 @@ export class MyApp {
         public platform: Platform,
         public statusBar: StatusBar,
         public splashScreen: SplashScreen,
-        public firebase: Firebase
+        public firebase: Firebase,
+        public admob: AdMob
     ) {
         this.initializeApp();
     }
