@@ -7,6 +7,7 @@ import {HighScore} from "../highscore/highscore";
 import {Settings} from "../settings/settings";
 import {LocalStorage} from "../../services/LocalStorage";
 import {LSK} from "../../models/LSK";
+import {Config} from "../../services/Config";
 
 @Component({
     selector: 'main-menu',
@@ -15,6 +16,7 @@ import {LSK} from "../../models/LSK";
 export class MainMenu {
 
     public highscore: number;
+    public version: string = Config.VERSION;
 
     constructor(public navCtrl: NavController) {
         this.highscore = LocalStorage.get(LSK.HIGHSCORE);
