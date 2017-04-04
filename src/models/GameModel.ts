@@ -183,7 +183,7 @@ export class GameModel {
 
     public static getCountDownTime(level: number) : number {
         if (level < 4) {
-            return 5000;
+            return 3000;
         } else if (level >= 4 && level < 5) {
             return 7000;
         } else if (level >= 5 && level < 8) {
