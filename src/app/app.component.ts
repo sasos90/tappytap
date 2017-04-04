@@ -69,7 +69,8 @@ export class MyApp {
     private isTestingBanner() : boolean {
         // list the device.uuid which will have the test banner
         let arrayOfDevices: Array<string> = [
-            "7b9ba921977ca9d0"
+            "7b9ba921977ca9d0", // Saso
+            "37e758f5d5c8f245"  // Masa
         ];
         let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(this.device.uuid) !== -1;
         console.log("Is testing banner?", isTestingBanner);
