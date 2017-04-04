@@ -35,6 +35,7 @@ export class MyApp {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
+            this.initLocalStorageValues();
 
             if (this.platform.is("cordova")) {
                 this.firebase.onTokenRefresh().subscribe((token: string) => {
@@ -72,5 +73,18 @@ export class MyApp {
         let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(this.device.uuid) !== -1;
         console.log("Is testing banner?", isTestingBanner);
         return isTestingBanner;
+    }
+
+    private initLocalStorageValues() {
+        // push notifications
+        let pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
+        if (!pushNotifications) {
+            LocalStorage.set(LSK.PUSH_NOTIFICATIONS, true);
+        }
+        // sound
+        let sound = LocalStorage.get(LSK.SOUND);
+        if (!pushNotifications) {
+            LocalStorage.set(LSK.SOUND, true);
+        }
     }
 }

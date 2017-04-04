@@ -55,4 +55,17 @@ main-menu {
             }
         }
     }
+
+    .footer {
+        &:before {
+            background: none;
+        }
+
+        .version {
+            float: right;
+            padding: 5px;
+            font-weight: normal;
+            color: $secondary-text-color;
+        }
+    }
 }
