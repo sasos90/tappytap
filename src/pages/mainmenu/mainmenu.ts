@@ -40,7 +40,6 @@ export class MainMenu {
     }
 
     public rankingsMenu() {
-        console.log("toast");
         this.toast.create({
             message: "Rankings are comming soon!",
             duration: 3000
