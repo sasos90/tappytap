@@ -188,7 +188,7 @@ export class GameModel {
             return 8000;
         }
         let countDownTime: number = 10000;
-        countDownTime -= (level * 20);
+        countDownTime -= (level * 40);
         return countDownTime;
     }
 }
