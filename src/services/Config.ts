@@ -4,5 +4,5 @@ import {Environment} from "../models/Environment";
  */
 export class Config {
     public static ENV: Environment = Environment.DEVELOP;
-    public static VERSION: string = "0.0.2";
+    public static VERSION: string = "1.0.0";
 }
