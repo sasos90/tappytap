@@ -11,6 +11,7 @@ import { AdMob, AdMobOptions, AdSize, AdExtras } from '@ionic-native/admob';
 import {Config} from "../services/Config";
 import {Environment} from "../models/Environment";
 import {Device} from "@ionic-native/device";
+import {IHighScore} from "../models/IHighScore";
 
 @Component({
     templateUrl: 'app.html'
@@ -76,6 +77,14 @@ export class MyApp {
     }
 
     private initLocalStorageValues() {
+        let to: IHighScore = {
+            score: 12,
+            sync: true
+        };
+        LocalStorage.set("hs", JSON.stringify(to));
+        let out: IHighScore = JSON.parse(LocalStorage.get("hs"));
+        console.log("Out", out);
+
         // push notifications
         let pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
         if (!pushNotifications) {
