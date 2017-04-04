@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import {NavController, Platform} from 'ionic-angular';
 import {BoxModel} from "../../models/BoxModel";
 import {GameModel} from "../../models/GameModel";
 import {CountdownTimer} from "../../models/CountdownTimer";
@@ -47,11 +47,14 @@ export class Game {
     constructor(
         public navCtrl: NavController,
         public nativeAudio: NativeAudio,
-        public firebase: Firebase
+        public firebase: Firebase,
+        public platform: Platform
     ) {
-        this.firebase.logEvent(FBKey.GAME.SCREEN, {}).then((success) => {
-            console.log("FB: " + FBKey.GAME.SCREEN, success);
-        });
+        if (this.platform.is("cordova")) {
+            this.firebase.logEvent(FBKey.GAME.SCREEN, {}).then((success) => {
+                console.log("FB: " + FBKey.GAME.SCREEN, success);
+            });
+        }
         this.preloadSounds();
     }
 

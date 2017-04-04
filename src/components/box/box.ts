@@ -5,6 +5,7 @@ import {LocalStorage} from "../../services/LocalStorage";
 import {LSK} from "../../models/LSK";
 import {Firebase} from "@ionic-native/firebase";
 import {FBKey} from "../../models/FBKey";
+import {Platform} from "ionic-angular";
 
 @Component({
     selector: 'box',
@@ -27,7 +28,8 @@ export class BoxComponent {
 
     constructor(
         public nativeAudio: NativeAudio,
-        public firebase: Firebase
+        public firebase: Firebase,
+        public platform: Platform
     ) {}
 
     ngOnInit() {}
@@ -40,9 +42,11 @@ export class BoxComponent {
                 this.onSuccessHit();
             } else {
                 // store missed box on firebase
-                this.firebase.logEvent(FBKey.BOX.MISSED, {}).then((success) => {
-                    console.log("FB: " + FBKey.BOX.MISSED, success);
-                });
+                if (this.platform.is("cordova")) {
+                    this.firebase.logEvent(FBKey.BOX.MISSED, {}).then((success) => {
+                        console.log("FB: " + FBKey.BOX.MISSED, success);
+                    });
+                }
                 if (LocalStorage.get(LSK.SOUND) === "true") {
                     this.nativeAudio.play("miss");
                 }
