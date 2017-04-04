@@ -1,6 +1,6 @@
 import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {ScoreModel} from "../../models/ScoreModel";
-import {NavController} from "ionic-angular";
+import {NavController, Platform} from "ionic-angular";
 import {MainMenu} from "../../pages/mainmenu/mainmenu";
 import {Firebase} from "@ionic-native/firebase";
 import {FBKey} from "../../models/FBKey";
@@ -61,7 +61,8 @@ export class FinalResultComponent {
 
     constructor(
         protected nav: NavController,
-        protected firebase: Firebase
+        protected firebase: Firebase,
+        protected platform: Platform
     ) {}
 
     ngOnInit() {
@@ -79,11 +80,13 @@ export class FinalResultComponent {
             if (this.scoreModel.saveScoreIfBest()) {
                 // TOP SCORE
                 this.newHighscore = true;
-                this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
-                    score: this.scoreModel.total
-                }).then((success) => {
-                    console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
-                });
+                if (this.platform.is("cordova")) {
+                    this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
+                        score: this.scoreModel.total
+                    }).then((success) => {
+                        console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
+                    });
+                }
             }
             // show the result after 1 second
             this.shown = true;
@@ -136,18 +139,22 @@ export class FinalResultComponent {
     }
 
     public replay() {
-        // store to firebase
-        this.firebase.logEvent(FBKey.FINAL_RESULT.REPLAY, {}).then((success) => {
-            console.log("FB: " + FBKey.FINAL_RESULT.REPLAY, success);
-        });
+        if (this.platform.is("cordova")) {
+            // store to firebase
+            this.firebase.logEvent(FBKey.FINAL_RESULT.REPLAY, {}).then((success) => {
+                console.log("FB: " + FBKey.FINAL_RESULT.REPLAY, success);
+            });
+        }
         this.replayEvent.emit();
     }
 
     public mainMenu() {
-        // store to firebase
-        this.firebase.logEvent(FBKey.FINAL_RESULT.MAIN_MENU, {}).then((success) => {
-            console.log("FB: " + FBKey.FINAL_RESULT.MAIN_MENU, success);
-        });
+        if (this.platform.is("cordova")) {
+            // store to firebase
+            this.firebase.logEvent(FBKey.FINAL_RESULT.MAIN_MENU, {}).then((success) => {
+                console.log("FB: " + FBKey.FINAL_RESULT.MAIN_MENU, success);
+            });
+        }
         this.nav.setRoot(MainMenu);
     }
 

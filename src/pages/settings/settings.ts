@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, Platform} from 'ionic-angular';
 import {LSK} from "../../models/LSK";
 import {LocalStorage} from "../../services/LocalStorage";
 import {Firebase} from "@ionic-native/firebase";
@@ -16,36 +16,43 @@ export class Settings {
 
     constructor(
         public navCtrl: NavController,
-        public firebase: Firebase
+        public firebase: Firebase,
+        public platform: Platform
     ) {
-        this.firebase.logEvent(FBKey.SETTINGS.SCREEN, {}).then((success) => {
-            console.log("FB: " + FBKey.SETTINGS.SCREEN, success);
-        });
+        if (this.platform.is("cordova")) {
+            this.firebase.logEvent(FBKey.SETTINGS.SCREEN, {}).then((success) => {
+                console.log("FB: " + FBKey.SETTINGS.SCREEN, success);
+            });
+        }
     }
 
     ngOnInit() {
-        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS) || true;
-        this.sound = LocalStorage.get(LSK.SOUND) || true;
+        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
+        this.sound = LocalStorage.get(LSK.SOUND);
     }
 
     public back() {
-        this.firebase.logEvent(FBKey.SETTINGS.DISCARD, {
-            pushNotifications: this.pushNotifications,
-            sound: this.sound
-        }).then((success) => {
-            console.log("FB: " + FBKey.SETTINGS.DISCARD, success);
-        });
+        if (this.platform.is("cordova")) {
+            this.firebase.logEvent(FBKey.SETTINGS.DISCARD, {
+                pushNotifications: this.pushNotifications,
+                sound: this.sound
+            }).then((success) => {
+                console.log("FB: " + FBKey.SETTINGS.DISCARD, success);
+            });
+        }
         this.navCtrl.pop();
     }
 
     public save() {
-        // firebase
-        this.firebase.logEvent(FBKey.SETTINGS.SAVE, {
-            pushNotifications: this.pushNotifications,
-            sound: this.sound
-        }).then((success) => {
-            console.log("FB: " + FBKey.SETTINGS.SAVE, success);
-        });
+        if (this.platform.is("cordova")) {
+            // firebase
+            this.firebase.logEvent(FBKey.SETTINGS.SAVE, {
+                pushNotifications: this.pushNotifications,
+                sound: this.sound
+            }).then((success) => {
+                console.log("FB: " + FBKey.SETTINGS.SAVE, success);
+            });
+        }
 
         // save to storage
         LocalStorage.set(LSK.PUSH_NOTIFICATIONS, this.pushNotifications);
