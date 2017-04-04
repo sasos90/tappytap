@@ -24,8 +24,8 @@ export class Settings {
     }
 
     ngOnInit() {
-        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS) || true;
-        this.sound = LocalStorage.get(LSK.SOUND) || true;
+        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
+        this.sound = LocalStorage.get(LSK.SOUND);
     }
 
     public back() {
