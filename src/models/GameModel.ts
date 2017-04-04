@@ -67,8 +67,10 @@ export class GameModel {
 
     private sumScoreUp() {
         // Timer progress is the remaining miliseconds - which is the score to add eventually
-        let points: number = Math.round(this.gameInstance.timer.progress / 100);
-        console.debug(this.level + " LVL points: " + points, points * (Math.log(this.score.maxStreak) + 1), " => Combo: " + (Math.log(this.score.maxStreak) + 1) + " [" + this.score.maxStreak + "]");
+        let timeLeft = Math.round(this.gameInstance.timer.progress / 100);
+        let multiplier = (Math.log(this.score.maxStreak) + 1);
+        let points: number = Math.round((timeLeft + this.level) * multiplier);
+        console.debug(this.level + " LVL points: " + points, "Time left: " + timeLeft, "* Combo: " + multiplier + " [" + this.score.maxStreak + "]");
         this.score.add(points);
         this.score.levelReached = this.level;
     }
