@@ -27,8 +27,8 @@ export class Settings {
     }
 
     ngOnInit() {
-        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
-        this.sound = LocalStorage.get(LSK.SOUND);
+        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS) === "true";
+        this.sound = LocalStorage.get(LSK.SOUND) === "true";
     }
 
     public back() {
@@ -55,13 +55,13 @@ export class Settings {
 
             if (this.pushNotifications === true) {
                 // Subscribe for push notifications
-                this.firebase.subscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then(() => {
-                    console.debug("Subscribed for push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP);
+                this.firebase.subscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then((success) => {
+                    console.debug("Subscribed for push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP, success);
                 });
             } else {
                 // Unsubscribe for push notifications
-                this.firebase.unsubscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then(() => {
-                    console.debug("Unsubscribed from push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP);
+                this.firebase.unsubscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then((success) => {
+                    console.debug("Unsubscribed from push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP, success);
                 });
             }
         }
