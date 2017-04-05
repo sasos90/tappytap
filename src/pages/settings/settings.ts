@@ -44,6 +44,7 @@ export class Settings {
     }
 
     public save() {
+	// TODO: Unsubscribe from GAME topic.
         if (this.platform.is("cordova")) {
             // firebase
             this.firebase.logEvent(FBKey.SETTINGS.SAVE, {
