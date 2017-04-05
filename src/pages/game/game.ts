@@ -236,7 +236,7 @@ export class Game {
             // Full screen ad
             this.adPrepared = false;
             this.admob.prepareInterstitial(<AdMobOptions> {
-                adId: "NEEDS_ID",
+                adId: "ca-app-pub-8663484789528557/3381319629",
                 position: this.admob.AD_POSITION.CENTER,
                 isTesting: MyApp.isTestingBanner(this.device)
             }).then((par) => {

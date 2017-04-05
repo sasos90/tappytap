@@ -26,6 +26,6 @@ export class FBKey {
     };
 
     public static SUBSCRIBE_TOPIC: any = {
-        TAPPY_TAP: "/topic/tappytap"
+        TAPPY_TAP: "tappytap"
     };
 }
