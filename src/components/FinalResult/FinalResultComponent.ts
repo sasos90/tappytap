@@ -82,7 +82,7 @@ export class FinalResultComponent {
                 this.newHighscore = true;
                 if (this.platform.is("cordova")) {
                     this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
-                        score: this.scoreModel.total
+                        value: this.scoreModel.total
                     }).then((success) => {
                         console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
                     });
