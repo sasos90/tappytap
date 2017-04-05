@@ -76,6 +76,7 @@ export class Game {
 
         // start first level
         this.showReadySetGo();
+        this.prepareInterstitialAd();
         window.onresize = (event) => {
             this.setLayoutPosition();
         };
@@ -85,7 +86,6 @@ export class Game {
 
         let width = this.gameWrapper.offsetWidth;
         let height = this.gameWrapper.offsetHeight;
-        console.debug("w=" + width + " h=" + height);
         if (width >= height) {
             this.gameElement.style.width = height + "px";
         } else {
@@ -201,11 +201,14 @@ export class Game {
         this.showTapInstruction = true;
         // Start counting down READY SET GO for next level
         this.showReadySetGo();
+        this.prepareInterstitialAd();
     }
 
     private gameFinished() {
+        this.gameCounter++;
         // Method for showing the final score result of the game
         this.showFinalResult();
+        this.showInterstitialAd();
     }
 
     private generateGameModel() {
@@ -214,14 +217,15 @@ export class Game {
 
     private showFinalResult() {
         this.finalResult = true;
-
-        this.showInterstitialAd();
     }
 
     private showInterstitialAd() {
+        console.warn("SHOW INTERSTITIAL?", this.adPrepared, this.isEveryFifth());
         if (this.adPrepared && this.isEveryFifth()) {
             // admob AD
+            console.debug("Show INTERSTITIAL AD");
             this.admob.showInterstitial();
+            this.adPrepared = false;
         }
     }
 
@@ -231,14 +235,16 @@ export class Game {
 
     private showReadySetGo() {
         this.readySetGo = true;
+    }
 
-        if (this.platform.is("cordova")) {
-            // Full screen ad
-            this.adPrepared = false;
+    private prepareInterstitialAd() {
+        if (this.platform.is("cordova") && !this.adPrepared) {
+            // Full screen AD
             this.admob.prepareInterstitial(<AdMobOptions> {
                 adId: "ca-app-pub-8663484789528557/3381319629",
                 position: this.admob.AD_POSITION.CENTER,
-                isTesting: MyApp.isTestingBanner(this.device)
+                isTesting: MyApp.isTestingBanner(this.device),
+                autoShow: false
             }).then((par) => {
                 console.log("ADMOB interstitial prepared", par);
                 this.adPrepared = true;
