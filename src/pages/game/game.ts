@@ -220,7 +220,6 @@ export class Game {
     }
 
     private showInterstitialAd() {
-        console.warn("SHOW INTERSTITIAL?", this.adPrepared, this.isEveryFifth());
         if (this.adPrepared && this.isEveryFifth()) {
             // admob AD
             console.debug("Show INTERSTITIAL AD");
