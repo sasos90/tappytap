@@ -80,7 +80,7 @@ export class FinalResultComponent {
             if (this.scoreModel.saveScoreIfBest()) {
                 // TOP SCORE
                 this.newHighscore = true;
-                if (this.platform.is("cordova")) {
+                if (this.scoreModel.total > 0 && this.platform.is("cordova")) {
                     this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
                         value: this.scoreModel.total
                     }).then((success) => {
