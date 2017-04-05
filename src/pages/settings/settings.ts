@@ -44,8 +44,7 @@ export class Settings {
     }
 
     public save() {
-	// TODO: Unsubscribe from GAME topic.
-        if (this.platform.is("cordova")) {
+	    if (this.platform.is("cordova")) {
             // firebase
             this.firebase.logEvent(FBKey.SETTINGS.SAVE, {
                 pushNotifications: this.pushNotifications,
@@ -53,6 +52,18 @@ export class Settings {
             }).then((success) => {
                 console.log("FB: " + FBKey.SETTINGS.SAVE, success);
             });
+
+            if (this.pushNotifications === true) {
+                // Subscribe for push notifications
+                this.firebase.subscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then(() => {
+                    console.debug("Subscribed for push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP);
+                });
+            } else {
+                // Unsubscribe for push notifications
+                this.firebase.unsubscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then(() => {
+                    console.debug("Unsubscribed from push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP);
+                });
+            }
         }
 
         // save to storage

@@ -24,4 +24,8 @@ export class FBKey {
     public static BOX: any = {
         MISSED: "BOX_missed_box"
     };
+
+    public static SUBSCRIBE_TOPIC: any = {
+        TAPPY_TAP: "/topic/tappytap"
+    };
 }

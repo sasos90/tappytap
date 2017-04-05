@@ -12,6 +12,7 @@ import {Config} from "../services/Config";
 import {Environment} from "../models/Environment";
 import {Device} from "@ionic-native/device";
 import {IHighScore} from "../models/IHighScore";
+import {FBKey} from "../models/FBKey";
 
 @Component({
     templateUrl: 'app.html'
@@ -39,12 +40,18 @@ export class MyApp {
             this.initLocalStorageValues();
 
             if (this.platform.is("cordova")) {
+                // FIREBASE - TOKEN
                 this.firebase.onTokenRefresh().subscribe((token: string) => {
                     console.log("Firebase token: " + token);
                     LocalStorage.set(LSK.FIREBASE_TOKEN, token);
                 });
 
-                // permissions for push notifications - iOS
+                // FIREBASE - SUBSCRIBE TO SUBSCRIBE_TOPIC
+                this.firebase.subscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then(() => {
+                    console.debug("Subscribed for push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP);
+                });
+
+                // FIREBASE - permissions for push notifications - iOS
                 if (this.platform.is("ios") && !this.firebase.hasPermission()) {
                     this.firebase.grantPermission();
                 }
