@@ -78,13 +78,13 @@ export class MyApp {
     }
 
     private initLocalStorageValues() {
-        let to: IHighScore = {
+        /*let to: IHighScore = {
             score: 12,
             sync: true
         };
         LocalStorage.set("hs", JSON.stringify(to));
         let out: IHighScore = JSON.parse(LocalStorage.get("hs"));
-        console.log("Out", out);
+        console.log("Out", out);*/
 
         // push notifications
         let pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
