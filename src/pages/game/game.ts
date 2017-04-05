@@ -11,6 +11,9 @@ import {LocalStorage} from "../../services/LocalStorage";
 import {LSK} from "../../models/LSK";
 import {Firebase} from "@ionic-native/firebase";
 import {FBKey} from "../../models/FBKey";
+import {MyApp} from "../../app/app.component";
+import {AdMob, AdMobOptions} from '@ionic-native/admob';
+import {Device} from "@ionic-native/device";
 
 @Component({
     selector: 'game',
@@ -35,6 +38,7 @@ export class Game {
     public showTapInstruction: boolean = true;
     public finalResult: boolean = false;
     public score: ScoreModel = new ScoreModel();
+    public adPrepared: boolean = false;
 
     /**
      * Game data
@@ -43,12 +47,15 @@ export class Game {
     private exposedTimeout: number;
     public exposed: boolean = false;
     public headerStatus: HeaderStatus = new HeaderStatus("HIT");
+    private gameCounter: number = 0;
 
     constructor(
         public navCtrl: NavController,
         public nativeAudio: NativeAudio,
         public firebase: Firebase,
-        public platform: Platform
+        public platform: Platform,
+        public admob: AdMob,
+        public device: Device
     ) {
         if (this.platform.is("cordova")) {
             this.firebase.logEvent(FBKey.GAME.SCREEN, {}).then((success) => {
@@ -207,6 +214,15 @@ export class Game {
 
     private showFinalResult() {
         this.finalResult = true;
+
+        this.showInterstitialAd();
+    }
+
+    private showInterstitialAd() {
+        if (this.adPrepared && this.isEveryFifth()) {
+            // admob AD
+            this.admob.showInterstitial();
+        }
     }
 
     private hideFinalResult() {
@@ -215,6 +231,19 @@ export class Game {
 
     private showReadySetGo() {
         this.readySetGo = true;
+
+        if (this.platform.is("cordova")) {
+            // Full screen ad
+            this.adPrepared = false;
+            this.admob.prepareInterstitial(<AdMobOptions> {
+                adId: "NEEDS_ID",
+                position: this.admob.AD_POSITION.CENTER,
+                isTesting: MyApp.isTestingBanner(this.device)
+            }).then((par) => {
+                console.log("ADMOB interstitial prepared", par);
+                this.adPrepared = true;
+            });
+        }
     }
 
     private hideReadySetGo() {
@@ -238,5 +267,13 @@ export class Game {
             this.nativeAudio.unload("hit");
             this.nativeAudio.unload("miss");
         }
+    }
+
+    /**
+     * Show AD on every fifth finish of the game, starting after 2nd replay.
+     * @return {boolean}
+     */
+    private isEveryFifth() {
+        return this.gameCounter % 5 === 2;
     }
 }

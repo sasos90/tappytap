@@ -59,10 +59,10 @@ export class MyApp {
                 // device uuid
                 console.log("Device uuid:", this.device.uuid);
                 // admob AD
-                this.admob.createBanner({
+                this.admob.createBanner(<AdMobOptions> {
                     adId: "ca-app-pub-8663484789528557/4325806029",
                     position: this.admob.AD_POSITION.BOTTOM_CENTER,
-                    isTesting: this.isTestingBanner()
+                    isTesting: MyApp.isTestingBanner(this.device)
                 }).then((par) => {
                     console.log("ADMOB", par);
                 });
@@ -73,13 +73,13 @@ export class MyApp {
         });
     }
 
-    private isTestingBanner() : boolean {
+    public static isTestingBanner(device: Device) : boolean {
         // list the device.uuid which will have the test banner
         let arrayOfDevices: Array<string> = [
             "7b9ba921977ca9d0", // Saso
             "37e758f5d5c8f245"  // Masa
         ];
-        let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(this.device.uuid) !== -1;
+        let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(device.uuid) !== -1;
         console.log("Is testing banner?", isTestingBanner);
         return isTestingBanner;
     }
