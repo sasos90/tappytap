@@ -34,7 +34,7 @@ import {Backend} from "../../services/Backend";
                 <div class="level result">
                     <div class="label">{{ 'RANK' }}</div>
                     <div class="value-wrapper">
-                        <span *ngIf="!rank" class="value-left">SPIN</span>
+                        <span *ngIf="!rank" class="value-left"><ion-spinner></ion-spinner></span>
                         <span *ngIf="rank" class="value-left">{{ rank }}</span>
                     </div>
                 </div>
