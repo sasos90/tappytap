@@ -27,8 +27,8 @@ export class Settings {
     }
 
     ngOnInit() {
-        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
-        this.sound = LocalStorage.get(LSK.SOUND);
+        this.pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS) === "true";
+        this.sound = LocalStorage.get(LSK.SOUND) === "true";
     }
 
     public back() {
@@ -44,7 +44,7 @@ export class Settings {
     }
 
     public save() {
-        if (this.platform.is("cordova")) {
+	    if (this.platform.is("cordova")) {
             // firebase
             this.firebase.logEvent(FBKey.SETTINGS.SAVE, {
                 pushNotifications: this.pushNotifications,
@@ -52,6 +52,18 @@ export class Settings {
             }).then((success) => {
                 console.log("FB: " + FBKey.SETTINGS.SAVE, success);
             });
+
+            if (this.pushNotifications === true) {
+                // Subscribe for push notifications
+                this.firebase.subscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then((success) => {
+                    console.debug("Subscribed for push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP, success);
+                });
+            } else {
+                // Unsubscribe for push notifications
+                this.firebase.unsubscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then((success) => {
+                    console.debug("Unsubscribed from push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP, success);
+                });
+            }
         }
 
         // save to storage

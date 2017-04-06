@@ -11,6 +11,8 @@ import { AdMob, AdMobOptions, AdSize, AdExtras } from '@ionic-native/admob';
 import {Config} from "../services/Config";
 import {Environment} from "../models/Environment";
 import {Device} from "@ionic-native/device";
+import {IHighScore} from "../models/IHighScore";
+import {FBKey} from "../models/FBKey";
 
 @Component({
     templateUrl: 'app.html'
@@ -38,12 +40,18 @@ export class MyApp {
             this.initLocalStorageValues();
 
             if (this.platform.is("cordova")) {
+                // FIREBASE - TOKEN
                 this.firebase.onTokenRefresh().subscribe((token: string) => {
                     console.log("Firebase token: " + token);
                     LocalStorage.set(LSK.FIREBASE_TOKEN, token);
                 });
 
-                // permissions for push notifications - iOS
+                // FIREBASE - SUBSCRIBE TO SUBSCRIBE_TOPIC
+                this.firebase.subscribe(FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP).then(() => {
+                    console.debug("Subscribed for push notifications. Topic: ", FBKey.SUBSCRIBE_TOPIC.TAPPY_TAP);
+                });
+
+                // FIREBASE - permissions for push notifications - iOS
                 if (this.platform.is("ios") && !this.firebase.hasPermission()) {
                     this.firebase.grantPermission();
                 }
@@ -51,10 +59,10 @@ export class MyApp {
                 // device uuid
                 console.log("Device uuid:", this.device.uuid);
                 // admob AD
-                this.admob.createBanner({
+                this.admob.createBanner(<AdMobOptions> {
                     adId: "ca-app-pub-8663484789528557/4325806029",
                     position: this.admob.AD_POSITION.BOTTOM_CENTER,
-                    isTesting: this.isTestingBanner()
+                    isTesting: MyApp.isTestingBanner(this.device)
                 }).then((par) => {
                     console.log("ADMOB", par);
                 });
@@ -65,17 +73,26 @@ export class MyApp {
         });
     }
 
-    private isTestingBanner() : boolean {
+    public static isTestingBanner(device: Device) : boolean {
         // list the device.uuid which will have the test banner
         let arrayOfDevices: Array<string> = [
-            "7b9ba921977ca9d0"
+            "7b9ba921977ca9d0", // Saso
+            "37e758f5d5c8f245"  // Masa
         ];
-        let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(this.device.uuid) !== -1;
+        let isTestingBanner = Config.ENV === Environment.DEVELOP || arrayOfDevices.indexOf(device.uuid) !== -1;
         console.log("Is testing banner?", isTestingBanner);
         return isTestingBanner;
     }
 
     private initLocalStorageValues() {
+        /*let to: IHighScore = {
+            score: 12,
+            sync: true
+        };
+        LocalStorage.set("hs", JSON.stringify(to));
+        let out: IHighScore = JSON.parse(LocalStorage.get("hs"));
+        console.log("Out", out);*/
+
         // push notifications
         let pushNotifications = LocalStorage.get(LSK.PUSH_NOTIFICATIONS);
         if (!pushNotifications) {

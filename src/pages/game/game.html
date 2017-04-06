@@ -2,7 +2,16 @@
     <div class="content-wrapper">
         <div id="goal-wrapper">
             <div class="status-header">
-                <div class="text-left {{ headerStatus.animation }}">{{ score.comboLog > 1 ? 'Combo ×' + score.comboLog : '' }}</div>
+                <div class="text-left {{ headerStatus.animation }}">
+                    <span class="combo">
+                        <span class="label">Combo:</span>
+                        <span>×{{ score.comboLog > 1 ? score.comboLog : 1 }}</span>
+                    </span>
+                    <span class="level">
+                        <span class="label">Level:</span>
+                        <span>{{ level }}</span>
+                    </span>
+                </div>
                 <div class="text-right" *ngIf="gameInProgress">{{ score.total }}</div>
             </div>
             <div class="target-wrapper">
