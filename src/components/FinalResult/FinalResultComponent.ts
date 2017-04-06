@@ -89,7 +89,7 @@ export class FinalResultComponent {
 
         // store scores to backend
         // TODO: Move that code to run only when best score
-        this.backend.sendScore(this.scoreModel.total, (rank) => {
+        this.backend.sendScore(this.scoreModel, (rank) => {
             console.debug("Rank: " + rank);
             this.rank = rank;
         }, () => {
