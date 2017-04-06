@@ -11,9 +11,12 @@ export class Backend {
         public http: Http
     ) {}
 
-    public sendScore() {
+    public sendScore(score: number, successCb: (rank: number) => any, errorCb: () => any) {
 
-        this.http.post(Config.BACKEND_HOST + "requestname", {
+        setTimeout(() => {
+            successCb(1983);
+        }, 1500);
+        /*this.http.post(Config.BACKEND_HOST + "requestname", {
             score: 1337
         }).subscribe((response) => {
             // next
@@ -21,6 +24,6 @@ export class Backend {
             // error
         }, () => {
             // complete
-        });
+        });*/
     }
 }

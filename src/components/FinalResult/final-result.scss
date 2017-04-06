@@ -74,6 +74,7 @@ final-result {
 
             .new-highscore {
                 color: $accent-color;
+                margin-bottom: 15px;
             }
 
             .score {
@@ -90,6 +91,12 @@ final-result {
                 .value {
                     font-weight: bold;
                     font-size: 40px;
+                }
+
+                .rank-wrapper {
+                    .rank {
+                        font-weight: bold;
+                    }
                 }
             }
         }

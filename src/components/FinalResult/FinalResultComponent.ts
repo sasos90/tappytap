@@ -4,6 +4,7 @@ import {NavController, Platform} from "ionic-angular";
 import {MainMenu} from "../../pages/mainmenu/mainmenu";
 import {Firebase} from "@ionic-native/firebase";
 import {FBKey} from "../../models/FBKey";
+import {Backend} from "../../services/Backend";
 
 @Component({
     selector: 'final-result',
@@ -29,6 +30,15 @@ import {FBKey} from "../../models/FBKey";
                     <span class="value">{{ scoreModel.total }}</span>
                 </div>
             </div>
+            <div class="result-wrapper">
+                <div class="level result">
+                    <div class="label">{{ 'RANK' }}</div>
+                    <div class="value-wrapper">
+                        <span *ngIf="!rank" class="value-left">SPIN</span>
+                        <span *ngIf="rank" class="value-left">{{ rank }}</span>
+                    </div>
+                </div>
+            </div>
             <div class="action-wrapper">
                 <button class="tappy-button btn-replay" ion-button (click)="replay()">Replay</button>
                 <button class="tappy-button btn-main-menu" ion-button (click)="mainMenu()">Main menu</button>
@@ -50,6 +60,7 @@ export class FinalResultComponent {
     private comboStored: number = 0;
     private comboMultiplier: number = 0;
     private comboMultiplierStored: number = 0;
+    private rank: number;
 
     // highlighting
     private scoreSummarizing: boolean = true;
@@ -62,7 +73,8 @@ export class FinalResultComponent {
     constructor(
         protected nav: NavController,
         protected firebase: Firebase,
-        protected platform: Platform
+        protected platform: Platform,
+        protected backend: Backend
     ) {}
 
     ngOnInit() {
@@ -75,19 +87,29 @@ export class FinalResultComponent {
             this.comboMultiplierStored = this.comboMultiplier;
         }
 
+        // store scores to backend
+        // TODO: Move that code to run only when best score
+        this.backend.sendScore(this.scoreModel.total, (rank) => {
+            console.debug("Rank: " + rank);
+            this.rank = rank;
+        }, () => {
+
+        });
+
+        if (this.scoreModel.saveScoreIfBest()) {
+            // TOP SCORE
+            this.newHighscore = true;
+            if (this.scoreModel.total > 0 && this.platform.is("cordova")) {
+                this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
+                    value: this.scoreModel.total
+                }).then((success) => {
+                    console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
+                });
+            }
+        }
+
         // start timeout to show the final score wrapper
         setTimeout(() => {
-            if (this.scoreModel.saveScoreIfBest()) {
-                // TOP SCORE
-                this.newHighscore = true;
-                if (this.scoreModel.total > 0 && this.platform.is("cordova")) {
-                    this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
-                        value: this.scoreModel.total
-                    }).then((success) => {
-                        console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
-                    });
-                }
-            }
             // show the result after 1 second
             this.shown = true;
             /*setTimeout(() => {
