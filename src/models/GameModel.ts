@@ -175,10 +175,10 @@ export class GameModel {
     }
 
     private generalBoxHit(game: GameModel, box: BoxModel) {
-        if (GameModel.STREAK_AWARD.indexOf(this.score.streak) !== -1) {
-            this.headerStatus.text = "STREAK: " + this.score.streak;
-            this.headerStatus.animation = HeaderStatusAnimation.FONT_EMBOSED;
-        }
+        // if (GameModel.STREAK_AWARD.indexOf(this.score.streak) !== -1) {
+            // this.headerStatus.text = "STREAK: " + this.score.streak;
+            // this.headerStatus.animation = HeaderStatusAnimation.FONT_EMBOSED;
+        // }
     }
 
     public static getCountDownTime(level: number) : number {

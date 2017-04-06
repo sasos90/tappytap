@@ -86,10 +86,28 @@ game {
             letter-spacing: 1px;
 
             .text-left {
-                font-weight: bold;
-                font-size: 15px;
+                font-size: 20px;
+                margin-top: 10px;
                 margin-bottom: 0px;
                 transition: all 1s;
+                display: flex;
+                flex-direction: column;
+
+                .combo {
+                    .label {
+                        display: inline-block;
+                        width: 60px;
+                    }
+                }
+
+                .level {
+                    color: $accent-color;
+
+                    .label {
+                        display: inline-block;
+                        width: 73px;
+                    }
+                }
 
                 &.blinking {
                     visibility: hidden;
@@ -116,7 +134,8 @@ game {
             }
 
             .text-right {
-                font-size: 25px;
+                font-weight: bold;
+                font-size: 35px;
             }
         }
 

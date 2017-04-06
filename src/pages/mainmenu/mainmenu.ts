@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import {NavController, ToastController} from 'ionic-angular';
 import {Game} from "../game/game";
 import {Instructions} from "../instructions/instructions";
 import {HighScore} from "../highscore/highscore";
@@ -18,7 +18,10 @@ export class MainMenu {
     public highscore: number;
     public version: string = Config.VERSION;
 
-    constructor(public navCtrl: NavController) {
+    constructor(
+        public navCtrl: NavController,
+        public toast: ToastController
+    ) {
         this.highscore = LocalStorage.get(LSK.HIGHSCORE);
     }
 
@@ -34,6 +37,13 @@ export class MainMenu {
 
     public highscoreMenu() {
         this.navCtrl.push(HighScore);
+    }
+
+    public rankingsMenu() {
+        this.toast.create({
+            message: "Rankings are comming soon!",
+            duration: 3000
+        }).present();
     }
 
     public settingsMenu() {
