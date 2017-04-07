@@ -35,6 +35,11 @@ main-menu {
                 margin-top: 10px;
             }
 
+            ion-spinner {
+                width: 17px;
+                height: 17px;
+            }
+
             .no-sync-warning {
                 font-size: 1em;
                 color: $accent-color;

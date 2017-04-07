@@ -92,7 +92,7 @@ export class FinalResultComponent {
 
         // store scores to backend
         // TODO: Move that code to run only when best score SEE BELOW
-        this.backend.sendScore(this.scoreModel, (rank) => {
+        this.backend.sendScore(this.scoreModel.total, this.scoreModel.levelReached, (rank) => {
             console.debug("Rank: " + rank);
             this.rank = rank;
             // LocalStorage.set(LSK.HIGHSCORE_SYNCED, false);
@@ -239,8 +239,8 @@ export class FinalResultComponent {
     }
 
     private saveBestScoreToLocalStorage() {
-        let highscore = this.scoreModel.total;
-        LocalStorage.set(LSK.HIGHSCORE, highscore);
+        LocalStorage.set(LSK.HIGHSCORE, this.scoreModel.total);
+        LocalStorage.set(LSK.LEVEL_REACHED, this.scoreModel.levelReached);
         LocalStorage.set(LSK.HIGHSCORE_SYNCED, false);
     }
 }

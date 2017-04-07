@@ -4,6 +4,7 @@ import {Config} from "./Config";
 import {Device} from "@ionic-native/device";
 import {IScoreRequest} from "../models/IScoreRequest";
 import {ScoreModel} from "../models/ScoreModel";
+import {IRankRequest} from "../models/IRankRequest";
 /**
  * Created by saso on 4/5/17.
  */
@@ -15,13 +16,13 @@ export class Backend {
         public http: Http
     ) {}
 
-    public sendScore(score: ScoreModel, successCb: (rank: number) => any, errorCb: () => any) {
+    public sendScore(total: number, levelReached: number, successCb: (rank: number) => any, errorCb: () => any) {
 
         let date = new Date();
         let request: IScoreRequest = {
             time: Math.round(date.getTime() / 1000),
-            score: score.total,
-            level: score.levelReached,
+            score: total,
+            level: levelReached,
             deviceUuid: this.device.uuid,
             hash: "HASH_FROM_INPUTS_WITH_SALT_FROM_CONFIG"
         };
@@ -40,5 +41,17 @@ export class Backend {
         }, () => {
             // complete
         });*/
+    }
+
+    public getRank(successCb: (rank: number) => any, errorCb: () => any) {
+
+        let request: IRankRequest = {
+            deviceUuid: this.device.uuid
+        };
+
+        setTimeout(() => {
+            // successCb(135);
+            errorCb();
+        }, 1500);
     }
 }
