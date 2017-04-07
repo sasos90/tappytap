@@ -50,8 +50,8 @@ export class Backend {
         };
 
         setTimeout(() => {
-            // successCb(135);
-            errorCb();
+            successCb(135);
+            // errorCb();
         }, 1500);
     }
 }
