@@ -26,17 +26,21 @@ main-menu {
             }
         }
 
-        .rank-wrapper {
+        .highscore-wrapper {
             font-size: 20px;
             margin-top: 30px;
             text-align: center;
+
+            .rank {
+                margin-top: 10px;
+            }
         }
 
         .menu-wrapper {
             text-align: center;
             font-size: 25px;
             flex: 1;
-            padding-top: 30px;
+            padding-top: 20px;
 
             .menu-item {
                 margin-top: 30px;
