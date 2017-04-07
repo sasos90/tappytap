@@ -16,20 +16,15 @@ import {IHighScore} from "../../models/IHighScore";
 })
 export class MainMenu {
 
-    public highscore: IHighScore = {
-        best: 0,
-        sync: true
-    };
+    public highscore: number = LocalStorage.get(LSK.HIGHSCORE);
+    public highscoreSynced: boolean = LocalStorage.get(LSK.HIGHSCORE_SYNCED) === "true" || false;
     public synchronizingBestScore: boolean = false;
     public version: string = Config.VERSION;
 
     constructor(
         public navCtrl: NavController,
         public toast: ToastController
-    ) {
-        this.highscore = JSON.parse(LocalStorage.get(LSK.HIGHSCORE));
-        console.log("HIGHSCORE:", this.highscore);
-    }
+    ) {}
 
     ngOnInit() {}
 

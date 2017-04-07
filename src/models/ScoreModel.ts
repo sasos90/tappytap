@@ -71,10 +71,9 @@ export class ScoreModel {
     }
 
     public isBestScore() : boolean {
-        let storedHighscore: IHighScore = JSON.parse(LocalStorage.get(LSK.HIGHSCORE));
+        let storedHighscore: number = JSON.parse(LocalStorage.get(LSK.HIGHSCORE));
         if (storedHighscore) {
-            console.log(this.total, storedHighscore.best);
-            return this.total > storedHighscore.best;
+            return this.total > storedHighscore;
         }
         return true;
     }

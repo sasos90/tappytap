@@ -95,6 +95,7 @@ export class FinalResultComponent {
         this.backend.sendScore(this.scoreModel, (rank) => {
             console.debug("Rank: " + rank);
             this.rank = rank;
+            // LocalStorage.set(LSK.HIGHSCORE_SYNCED, false);
         }, () => {
 
         });
@@ -238,10 +239,8 @@ export class FinalResultComponent {
     }
 
     private saveBestScoreToLocalStorage() {
-        let highscore: IHighScore = {
-            best: this.scoreModel.total,
-            sync: false
-        };
-        LocalStorage.set(LSK.HIGHSCORE, JSON.stringify(highscore));
+        let highscore = this.scoreModel.total;
+        LocalStorage.set(LSK.HIGHSCORE, highscore);
+        LocalStorage.set(LSK.HIGHSCORE_SYNCED, false);
     }
 }

@@ -5,13 +5,13 @@
             <div class="game-name">Tappy Tap</div>
         </div>
         <div class="highscore-wrapper">
-            <div *ngIf="!highscore.best">No highscore yet</div>
-            <div *ngIf="highscore.best">
-                <span>Your highscore: {{ highscore.best }}</span>
-                <ion-icon *ngIf="!highscore.sync" class="no-sync-warning" name="arrow-back"></ion-icon>
+            <div *ngIf="!highscore">No highscore yet</div>
+            <div *ngIf="highscore">
+                <span>Your highscore: {{ highscore }}</span>
+                <ion-icon *ngIf="!highscoreSynced" class="no-sync-warning" name="warning"></ion-icon>
                 <ion-spinner *ngIf="synchronizingBestScore"></ion-spinner>
             </div>
-            <div *ngIf="highscore.best" class="rank">Rank: {{ highscore.best }}</div>
+            <div *ngIf="highscore" class="rank">Rank: {{ highscore }}</div>
         </div>
         <div class="menu-wrapper">
             <div class="menu-item" (click)="startGameMenu()">
