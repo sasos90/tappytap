@@ -8,6 +8,7 @@ import {Settings} from "../settings/settings";
 import {LocalStorage} from "../../services/LocalStorage";
 import {LSK} from "../../models/LSK";
 import {Config} from "../../services/Config";
+import {IHighScore} from "../../models/IHighScore";
 
 @Component({
     selector: 'main-menu',
@@ -15,14 +16,19 @@ import {Config} from "../../services/Config";
 })
 export class MainMenu {
 
-    public highscore: number;
+    public highscore: IHighScore = {
+        best: 0,
+        sync: true
+    };
+    public synchronizingBestScore: boolean = false;
     public version: string = Config.VERSION;
 
     constructor(
         public navCtrl: NavController,
         public toast: ToastController
     ) {
-        this.highscore = LocalStorage.get(LSK.HIGHSCORE);
+        this.highscore = JSON.parse(LocalStorage.get(LSK.HIGHSCORE));
+        console.log("HIGHSCORE:", this.highscore);
     }
 
     ngOnInit() {}
