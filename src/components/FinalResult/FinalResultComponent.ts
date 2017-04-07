@@ -5,6 +5,9 @@ import {MainMenu} from "../../pages/mainmenu/mainmenu";
 import {Firebase} from "@ionic-native/firebase";
 import {FBKey} from "../../models/FBKey";
 import {Backend} from "../../services/Backend";
+import {IHighScore} from "../../models/IHighScore";
+import {LocalStorage} from "../../services/LocalStorage";
+import {LSK} from "../../models/LSK";
 
 @Component({
     selector: 'final-result',
@@ -88,7 +91,7 @@ export class FinalResultComponent {
         }
 
         // store scores to backend
-        // TODO: Move that code to run only when best score
+        // TODO: Move that code to run only when best score SEE BELOW
         this.backend.sendScore(this.scoreModel, (rank) => {
             console.debug("Rank: " + rank);
             this.rank = rank;
@@ -96,15 +99,23 @@ export class FinalResultComponent {
 
         });
 
-        if (this.scoreModel.saveScoreIfBest()) {
+        if (this.scoreModel.isBestScore()) {
             // TOP SCORE
             this.newHighscore = true;
-            if (this.scoreModel.total > 0 && this.platform.is("cordova")) {
-                this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
-                    value: this.scoreModel.total
-                }).then((success) => {
-                    console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
-                });
+            if (this.scoreModel.total > 0) {
+                // save to local storage
+                this.saveBestScoreToLocalStorage();
+
+                // TODO: SYNC TO BACKEND HERE!
+
+                // send to FIREBASE
+                if (this.platform.is("cordova")) {
+                    this.firebase.logEvent(FBKey.FINAL_RESULT.BEST_SCORE, {
+                        value: this.scoreModel.total
+                    }).then((success) => {
+                        console.log("FB: " + FBKey.FINAL_RESULT.BEST_SCORE, success);
+                    });
+                }
             }
         }
 
@@ -224,5 +235,13 @@ export class FinalResultComponent {
             levelReached--;
         }
         return bonus;
+    }
+
+    private saveBestScoreToLocalStorage() {
+        let highscore: IHighScore = {
+            best: this.scoreModel.total,
+            sync: false
+        };
+        LocalStorage.set(LSK.HIGHSCORE, JSON.stringify(highscore));
     }
 }

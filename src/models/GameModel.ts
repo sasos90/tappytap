@@ -6,7 +6,6 @@ import {Dimension} from "./Dimension";
 import {Game} from "../pages/game/game";
 import {ScoreModel} from "./ScoreModel";
 import {HeaderStatus} from "./HeaderStatus";
-import {HeaderStatusAnimation} from "./HeaderStatusAnimation";
 import {LocalStorage} from "../services/LocalStorage";
 import {LSK} from "./LSK";
 /**
