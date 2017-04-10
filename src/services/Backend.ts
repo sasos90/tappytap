@@ -27,8 +27,9 @@ export class Backend {
             level: levelReached,
             deviceUuid: this.device.uuid,
             name: "Name Johnnyyy",
-            hash: "HASH_FROM_INPUTS_WITH_SALT_FROM_CONFIG"
+            hash: null
         };
+        request.hash = this.createSalt(request);
         // Config.SALT
         console.log("Request:", request);
 
@@ -64,5 +65,10 @@ export class Backend {
         }, () => {
             // complete
         });
+    }
+
+    private createSalt(request: IScoreRequest) : string {
+        // TODO use MD5 for that string
+        return request.time + request.deviceUuid + request.level + request.name + request.score;
     }
 }
