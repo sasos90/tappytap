@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, RequestOptionsArgs} from "@angular/http";
 import {Config} from "./Config";
 import {Device} from "@ionic-native/device";
 import {IScoreRequest} from "../models/IScoreRequest";
@@ -11,47 +11,58 @@ import {IRankRequest} from "../models/IRankRequest";
 @Injectable()
 export class Backend {
 
+    public URL: string = Config.BACKEND_HOST + "rankings/";
+
     constructor(
         public device: Device,
         public http: Http
     ) {}
 
     public sendScore(total: number, levelReached: number, successCb: (rank: number) => any, errorCb: () => any) {
-
+        let url = this.URL + "sendScore";
         let date = new Date();
         let request: IScoreRequest = {
             time: Math.round(date.getTime() / 1000),
             score: total,
             level: levelReached,
             deviceUuid: this.device.uuid,
+            name: "Name Johnnyyy",
             hash: "HASH_FROM_INPUTS_WITH_SALT_FROM_CONFIG"
         };
         // Config.SALT
         console.log("Request:", request);
 
+        this.http.post(url, request).subscribe((response) => {
+            // next
+            console.log("Next: ", response);
+        }, (response) => {
+            // error
+            console.error(response);
+        }, () => {
+            // complete
+        });
+
         setTimeout(() => {
             successCb(1983);
         }, 1500);
-        /*this.http.post(Config.BACKEND_HOST + "requestname", {
-            score: 1337
-        }).subscribe((response) => {
-            // next
-        }, (response) => {
-            // error
-        }, () => {
-            // complete
-        });*/
     }
 
     public getRank(successCb: (rank: number) => any, errorCb: () => any) {
-
+        let url = this.URL + "getRank";
         let request: IRankRequest = {
             deviceUuid: this.device.uuid
         };
 
-        setTimeout(() => {
-            successCb(135);
-            // errorCb();
-        }, 1500);
+        this.http.post(url, request).subscribe((response) => {
+            // next
+            console.log("Response: ", response.json());
+            let res = response.json();
+            successCb(res.rank);
+        }, (response) => {
+            // error
+            console.error(response);
+        }, () => {
+            // complete
+        });
     }
 }

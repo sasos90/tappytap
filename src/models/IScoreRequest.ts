@@ -6,5 +6,6 @@ export interface IScoreRequest {
     score: number;
     level: number;
     deviceUuid: string;
+    name: string;
     hash: string;
 }
