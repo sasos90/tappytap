@@ -95,7 +95,7 @@ export class FinalResultComponent {
         this.backend.sendScore(this.scoreModel.total, this.scoreModel.levelReached, (rank) => {
             console.debug("Rank: " + rank);
             this.rank = rank;
-            // LocalStorage.set(LSK.HIGHSCORE_SYNCED, false);
+            LocalStorage.set(LSK.HIGHSCORE_SYNCED, false);
         }, () => {
 
         });
