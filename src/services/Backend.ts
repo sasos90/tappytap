@@ -5,6 +5,7 @@ import {Device} from "@ionic-native/device";
 import {IScoreRequest} from "../models/IScoreRequest";
 import {ScoreModel} from "../models/ScoreModel";
 import {IRankRequest} from "../models/IRankRequest";
+import {Md5} from "ts-md5/dist/md5";
 /**
  * Created by saso on 4/5/17.
  */
@@ -29,7 +30,7 @@ export class Backend {
             name: "Name Johnnyyy",
             hash: null
         };
-        request.hash = this.createSalt(request);
+        request.hash = Backend.createHash(request);
         console.log("Request:", request);
 
         this.http.post(url, request).subscribe((response) => {
@@ -66,8 +67,7 @@ export class Backend {
         });
     }
 
-    private createSalt(request: IScoreRequest) : string {
-        // TODO use MD5 for that string
-        return request.time + request.deviceUuid + request.level + request.name + request.score;
+    public static createHash(request: IScoreRequest) : string {
+        return Md5.hashStr(request.time + request.deviceUuid + request.level + request.name + request.score + Config.SALT).toString();
     }
 }
