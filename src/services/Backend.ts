@@ -30,22 +30,20 @@ export class Backend {
             hash: null
         };
         request.hash = this.createSalt(request);
-        // Config.SALT
         console.log("Request:", request);
 
         this.http.post(url, request).subscribe((response) => {
             // next
-            console.log("Next: ", response);
+            console.log("Send score RESPONSE: ", response);
+            let res = response.json();
+            successCb(res.rank);
         }, (response) => {
             // error
             console.error(response);
+            errorCb();
         }, () => {
             // complete
         });
-
-        setTimeout(() => {
-            successCb(1983);
-        }, 1500);
     }
 
     public getRank(successCb: (rank: number) => any, errorCb: () => any) {
@@ -62,6 +60,7 @@ export class Backend {
         }, (response) => {
             // error
             console.error(response);
+            errorCb();
         }, () => {
             // complete
         });
