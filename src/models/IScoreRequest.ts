@@ -4,7 +4,7 @@
 export interface IScoreRequest {
     time: number;
     score: number;
-    level: number;
+    levelReached: number;
     deviceUuid: string;
     name: string;
     hash: string;

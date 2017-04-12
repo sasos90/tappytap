@@ -23,11 +23,11 @@ export class Backend {
         let url = this.URL + "sendScore";
         let date = new Date();
         let request: IScoreRequest = {
-            time: Math.round(date.getTime() / 1000),
+            time: this.getTodaysTimestamp(),
             score: total,
-            level: levelReached,
+            levelReached: levelReached,
             deviceUuid: this.device.uuid,
-            name: "Name Johnnyyy",
+            name: "Fourty four",
             hash: null
         };
         request.hash = Backend.createHash(request);
@@ -68,6 +68,19 @@ export class Backend {
     }
 
     public static createHash(request: IScoreRequest) : string {
-        return Md5.hashStr(request.time + request.deviceUuid + request.level + request.name + request.score + Config.SALT).toString();
+        return Md5.hashStr(request.time + request.deviceUuid + request.levelReached + request.name + request.score + Config.SALT).toString();
+    }
+
+
+    private getTodaysTimestamp() : number {
+        let now = new Date();
+        let today = new Date();
+        today.setUTCDate(now.getUTCDate());
+        today.setUTCMonth(now.getUTCMonth())
+        today.setUTCFullYear(now.getUTCFullYear())
+        today.setUTCHours(0, 0, 0, 0);
+
+        let timestamp = today.getTime() / 1000;
+        return timestamp;
     }
 }
