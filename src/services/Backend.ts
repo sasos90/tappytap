@@ -26,7 +26,7 @@ export class Backend {
             time: this.getTodaysTimestamp(),
             score: total,
             levelReached: levelReached,
-            deviceUuid: this.device.uuid,
+            deviceUuid: this.device.uuid || "TEST_DEVICE",
             name: "Fourty four",
             hash: null
         };
@@ -50,7 +50,7 @@ export class Backend {
     public getRank(successCb: (rank: number) => any, errorCb: () => any) {
         let url = this.URL + "getRank";
         let request: IRankRequest = {
-            deviceUuid: this.device.uuid
+            deviceUuid: this.device.uuid || "TEST_DEVICE"
         };
 
         this.http.post(url, request).subscribe((response) => {
