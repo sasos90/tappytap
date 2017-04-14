@@ -17,6 +17,8 @@ import {NativeAudio} from "@ionic-native/native-audio";
 import {Firebase} from "@ionic-native/firebase";
 import {AdMob} from '@ionic-native/admob';
 import {Device} from "@ionic-native/device";
+import {Backend} from "../services/Backend";
+import {HttpModule} from "@angular/http";
 
 export class MyHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -42,7 +44,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     ],
     imports: [
         IonicModule.forRoot(MyApp),
-        BrowserModule
+        BrowserModule,
+        HttpModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -63,6 +66,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
         Firebase,
         AdMob,
         Device,
+        Backend,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig}
     ]
