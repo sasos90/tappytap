@@ -18,7 +18,7 @@ import {Backend} from "../../services/Backend";
 export class MainMenu {
 
     public highscore: number = parseInt(LocalStorage.get(LSK.HIGHSCORE));
-    public levelReached: number = parseInt(LocalStorage.get(LSK.LEVEL_REACHED));
+    public levelReached: number = parseInt(LocalStorage.get(LSK.LEVEL_REACHED) || 1);
     public highscoreSynced: boolean = LocalStorage.get(LSK.HIGHSCORE_SYNCED) === "true" || false;
     public synchronizingBestScore: boolean = false;
     public rank: number;
