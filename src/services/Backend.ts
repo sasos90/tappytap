@@ -37,7 +37,11 @@ export class Backend {
             // next
             console.log("Send score RESPONSE: ", response);
             let res = response.json();
-            successCb(res.rank);
+            if (res.success) {
+                successCb(res.rank);
+            } else {
+                errorCb();
+            }
         }, (response) => {
             // error
             console.error(response);
@@ -57,7 +61,11 @@ export class Backend {
             // next
             console.log("Response: ", response.json());
             let res = response.json();
-            successCb(res.rank);
+            if (res.success) {
+                successCb(res.rank);
+            } else {
+                errorCb();
+            }
         }, (response) => {
             // error
             console.error(response);
