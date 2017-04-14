@@ -32,7 +32,7 @@ export class MainMenu {
     ) {}
 
     ngOnInit() {
-        if (!this.highscoreSynced) {
+        if (!this.highscoreSynced && this.highscore > 0) {
             console.debug("Sync score");
             this.synchronizingBestScore = true;
             this.retrievingRank = true;
