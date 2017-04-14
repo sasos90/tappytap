@@ -91,15 +91,6 @@ export class FinalResultComponent {
         }
 
         // store scores to backend
-        // TODO: Move that code to run only when best score SEE BELOW
-        this.backend.sendScore(this.scoreModel.total, this.scoreModel.levelReached, (rank) => {
-            console.debug("Rank: " + rank);
-            this.rank = rank;
-            LocalStorage.set(LSK.HIGHSCORE_SYNCED, true);
-        }, () => {
-
-        });
-
         if (this.scoreModel.isBestScore()) {
             // TOP SCORE
             this.newHighscore = true;
@@ -107,7 +98,14 @@ export class FinalResultComponent {
                 // save to local storage
                 this.saveBestScoreToLocalStorage();
 
-                // TODO: SYNC TO BACKEND HERE!
+                // save to backend
+                this.backend.sendScore(this.scoreModel.total, this.scoreModel.levelReached, (rank) => {
+                    console.debug("Rank: " + rank);
+                    this.rank = rank;
+                    LocalStorage.set(LSK.HIGHSCORE_SYNCED, true);
+                }, () => {
+
+                });
 
                 // send to FIREBASE
                 if (this.platform.is("cordova")) {
