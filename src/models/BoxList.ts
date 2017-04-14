@@ -6,6 +6,7 @@ export class BoxList extends Array<BoxModel> {
 
     constructor() {
         super();
+        Object.setPrototypeOf(this, BoxList.prototype);
     }
 
     public allHit(boxTarget: BoxModel) : boolean {

@@ -6,6 +6,8 @@
  */
 export class LSK {
     public static HIGHSCORE: string = "highscore";
+    public static LEVEL_REACHED: string = "levelReached";
+    public static HIGHSCORE_SYNCED: string = "highscoreSynced";
     public static PUSH_NOTIFICATIONS: string = "pushNotifications";
     public static SOUND: string = "sound";
     public static FIREBASE_TOKEN: string = "firebaseToken";
