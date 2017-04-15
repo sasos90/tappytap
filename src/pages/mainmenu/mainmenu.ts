@@ -74,13 +74,6 @@ export class MainMenu {
         this.navCtrl.push(HighScore);
     }
 
-    public rankingsMenu() {
-        this.toast.create({
-            message: "Rankings are comming soon!",
-            duration: 3000
-        }).present();
-    }
-
     public settingsMenu() {
         this.navCtrl.push(Settings);
     }
