@@ -116,6 +116,8 @@ export class FinalResultComponent {
                     });
                 }
             }
+        } else {
+            // TODO: get rank for score
         }
 
         // start timeout to show the final score wrapper
