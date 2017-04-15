@@ -11,6 +11,7 @@ export class HighScore {
 
     // TODO needs interface
     public allTimeHighscores: Array<any> = [];
+    public notTop10Rank: any;
 
     constructor(
         public navCtrl: NavController,
@@ -21,6 +22,7 @@ export class HighScore {
     ngOnInit() {
         this.backend.getHighscores((highscores) => {
             this.allTimeHighscores = highscores.allTime;
+            this.notTop10Rank = highscores.userRank;
         }, () => {
 
         });
