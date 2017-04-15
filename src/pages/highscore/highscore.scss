@@ -1,3 +1,30 @@
 highscore {
+    .header-wrapper {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 30px;
+        color: $primary-text-color;
+    }
 
+    .highscore-wrapper {
+        padding: 20px;
+
+        .highscore {
+            margin: 30px;
+            margin-left: 0px;
+
+            .label-md {
+                color: $primary-text-color;
+            }
+        }
+    }
+
+    .action-wrapper {
+        display: flex;
+        padding: 20px 0px;
+
+        .tappy-button {
+            width: 100%;
+        }
+    }
 }
