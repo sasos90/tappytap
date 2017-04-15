@@ -6,16 +6,12 @@ highscore {
         color: $primary-text-color;
     }
 
-    .highscore-wrapper {
+    .highscores-wrapper {
         padding: 20px;
 
-        .highscore {
+        .highscores {
             margin: 30px;
             margin-left: 0px;
-
-            .label-md {
-                color: $primary-text-color;
-            }
         }
     }
 
