@@ -7,6 +7,7 @@ import {ScoreModel} from "../models/ScoreModel";
 import {IRankRequest} from "../models/IRankRequest";
 import {Md5} from "ts-md5/dist/md5";
 import {IHighscoresRequest} from "../models/IHighscoresRequest";
+import {IRankForScoreRequest} from "../models/IRankForScoreRequest";
 /**
  * Created by saso on 4/5/17.
  */
@@ -56,6 +57,31 @@ export class Backend {
         let url = this.URL + "getRank";
         let request: IRankRequest = {
             deviceUuid: this.device.uuid || "TEST_DEVICE"
+        };
+
+        this.http.post(url, request).subscribe((response) => {
+            // next
+            console.log("Response: ", response.json());
+            let res = response.json();
+            if (res.success) {
+                successCb(res.rank);
+            } else {
+                errorCb();
+            }
+        }, (response) => {
+            // error
+            console.error(response);
+            errorCb();
+        }, () => {
+            // complete
+        });
+    }
+
+    public getRankForScore(total: number, successCb: (rank: number) => any, errorCb: () => any) {
+        let url = this.URL + "getRankForScore";
+        let request: IRankForScoreRequest = {
+            deviceUuid: this.device.uuid || "TEST_DEVICE",
+            score: total
         };
 
         this.http.post(url, request).subscribe((response) => {

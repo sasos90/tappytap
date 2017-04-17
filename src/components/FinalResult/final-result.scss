@@ -29,6 +29,24 @@ final-result {
             font-size: 20px;
             color: $primary-text-color;
 
+            &.rank {
+                .result {
+                    .value-wrapper {
+                        justify-content: flex-start;
+
+                        .rank-value {
+                            font-size: 24px;
+                        }
+
+                        .no-sync-warning {
+                            font-size: 24px;
+                            color: $accent-color;
+                            padding: 0px;
+                        }
+                    }
+                }
+            }
+
             .result {
                 width: 100%;
                 overflow: hidden;
@@ -67,8 +85,8 @@ final-result {
                     }
 
                     ion-spinner {
-                        width: 18px;
-                        height: 18px;
+                        width: 20px;
+                        height: 20px;
                     }
                 }
             }
