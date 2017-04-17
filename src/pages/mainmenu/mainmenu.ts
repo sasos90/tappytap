@@ -28,6 +28,7 @@ export class MainMenu {
     // name
     public name: string = LocalStorage.get(LSK.NAME);
     public nameInvalid: boolean = false; // name is required
+    public nameEdit: boolean = !this.name || false;
 
     constructor(
         public navCtrl: NavController,
@@ -87,13 +88,18 @@ export class MainMenu {
         this.navCtrl.push(Settings);
     }
 
-    private saveName(notification: boolean = true) {
-        LocalStorage.set(LSK.NAME, this.name);
-        if (notification) {
-            this.toast.create({
-                message: "Nickname saved",
-                duration: 3000
-            }).present();
+    public saveName(notification: boolean = true) {
+        if (this.name && this.name !== "") {
+            LocalStorage.set(LSK.NAME, this.name);
+            if (notification) {
+                this.toast.create({
+                    message: "Nickname saved",
+                    duration: 3000
+                }).present();
+            }
+            this.nameEdit = false;
+        } else {
+            this.nameInvalid = true;
         }
     }
 }
