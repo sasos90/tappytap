@@ -8,6 +8,8 @@ import {IRankRequest} from "../models/IRankRequest";
 import {Md5} from "ts-md5/dist/md5";
 import {IHighscoresRequest} from "../models/IHighscoresRequest";
 import {IRankForScoreRequest} from "../models/IRankForScoreRequest";
+import {LSK} from "../models/LSK";
+import {LocalStorage} from "./LocalStorage";
 /**
  * Created by saso on 4/5/17.
  */
@@ -29,7 +31,7 @@ export class Backend {
             score: total,
             levelReached: levelReached,
             deviceUuid: this.device.uuid || "TEST_DEVICE",
-            name: "Fourty four",
+            name: LocalStorage.get(LSK.NAME),
             hash: null
         };
         request.hash = Backend.createHash(request);
