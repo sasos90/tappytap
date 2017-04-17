@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, Platform} from 'ionic-angular';
+import {NavController, Platform, ToastController} from 'ionic-angular';
 import {LSK} from "../../models/LSK";
 import {LocalStorage} from "../../services/LocalStorage";
 import {Firebase} from "@ionic-native/firebase";
@@ -17,6 +17,7 @@ export class Settings {
     constructor(
         public navCtrl: NavController,
         public firebase: Firebase,
+        public toast: ToastController,
         public platform: Platform
     ) {
         if (this.platform.is("cordova")) {
@@ -69,8 +70,10 @@ export class Settings {
         // save to storage
         LocalStorage.set(LSK.PUSH_NOTIFICATIONS, this.pushNotifications);
         LocalStorage.set(LSK.SOUND, this.sound);
-        // TODO: Show toast if needed
-        console.warn("Show toast if needed");
+        this.toast.create({
+            message: "Settings saved",
+            duration: 3000
+        }).present();
         this.navCtrl.pop();
     }
 }
