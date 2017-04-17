@@ -68,7 +68,7 @@ export class MainMenu {
 
     public startGameMenu() {
         if (this.name && this.name !== "") {
-            this.saveName();
+            this.saveName(false);
             this.navCtrl.setRoot(Game);
         } else {
             this.nameInvalid = true;
@@ -87,7 +87,13 @@ export class MainMenu {
         this.navCtrl.push(Settings);
     }
 
-    private saveName() {
+    private saveName(notification: boolean = true) {
         LocalStorage.set(LSK.NAME, this.name);
+        if (notification) {
+            this.toast.create({
+                message: "Nickname saved",
+                duration: 3000
+            }).present();
+        }
     }
 }

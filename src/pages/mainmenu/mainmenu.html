@@ -9,7 +9,7 @@
                 <ion-label>Nickname</ion-label>
                 <ion-input type="text" name="title" [(ngModel)]="name" [ngModelOptions]="{standalone: true}"></ion-input>
             </ion-item>
-            <button ion-button type="submit" (click)="saveName()">Submit</button>
+            <button ion-button type="submit" (click)="saveName()">Save</button>
         </div>
         <div class="highscore-wrapper">
             <div *ngIf="!highscore">No highscore yet</div>
