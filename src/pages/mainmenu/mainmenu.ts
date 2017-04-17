@@ -25,6 +25,10 @@ export class MainMenu {
     public retrievingRank: boolean = false;
     public version: string = Config.VERSION;
 
+    // name
+    public name: string = LocalStorage.get(LSK.NAME);
+    public nameInvalid: boolean = false; // name is required
+
     constructor(
         public navCtrl: NavController,
         public toast: ToastController,
@@ -63,7 +67,12 @@ export class MainMenu {
     }
 
     public startGameMenu() {
-        this.navCtrl.setRoot(Game);
+        if (this.name && this.name !== "") {
+            this.saveName();
+            this.navCtrl.setRoot(Game);
+        } else {
+            this.nameInvalid = true;
+        }
     }
 
     public instructionsMenu() {
@@ -76,5 +85,9 @@ export class MainMenu {
 
     public settingsMenu() {
         this.navCtrl.push(Settings);
+    }
+
+    private saveName() {
+        LocalStorage.set(LSK.NAME, this.name);
     }
 }
