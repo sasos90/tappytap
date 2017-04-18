@@ -25,6 +25,11 @@ export class MainMenu {
     public retrievingRank: boolean = false;
     public version: string = Config.VERSION;
 
+    // name
+    public name: string = LocalStorage.get(LSK.NAME);
+    public nameInvalid: boolean = false; // name is required
+    public nameEdit: boolean = !this.name || false;
+
     constructor(
         public navCtrl: NavController,
         public toast: ToastController,
@@ -32,7 +37,7 @@ export class MainMenu {
     ) {}
 
     ngOnInit() {
-        if (!this.highscoreSynced && this.highscore > 0) {
+        if (!this.highscoreSynced && this.highscore > 0 && this.name) {
             console.debug("Sync score");
             this.synchronizingBestScore = true;
             this.retrievingRank = true;
@@ -63,7 +68,12 @@ export class MainMenu {
     }
 
     public startGameMenu() {
-        this.navCtrl.setRoot(Game);
+        if (this.name && this.name !== "") {
+            this.saveName(false);
+            this.navCtrl.setRoot(Game);
+        } else {
+            this.nameInvalid = true;
+        }
     }
 
     public instructionsMenu() {
@@ -74,14 +84,22 @@ export class MainMenu {
         this.navCtrl.push(HighScore);
     }
 
-    public rankingsMenu() {
-        this.toast.create({
-            message: "Rankings are comming soon!",
-            duration: 3000
-        }).present();
-    }
-
     public settingsMenu() {
         this.navCtrl.push(Settings);
+    }
+
+    public saveName(notification: boolean = true) {
+        if (this.name && this.name !== "") {
+            LocalStorage.set(LSK.NAME, this.name);
+            if (notification) {
+                this.toast.create({
+                    message: "Nickname saved",
+                    duration: 3000
+                }).present();
+            }
+            this.nameEdit = false;
+        } else {
+            this.nameInvalid = true;
+        }
     }
 }

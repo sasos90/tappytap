@@ -4,6 +4,13 @@
             <img class="logo" src="assets/images/logo.png" alt="" />
             <div class="game-name">Tappy Tap</div>
         </div>
+        <div class="your-name-wrapper">
+            <ion-item [ngClass]="{'name-error': nameInvalid}">
+                <ion-label>Nickname</ion-label>
+                <ion-input type="text" name="name" [(ngModel)]="name" (focus)="nameEdit = true" [ngModelOptions]="{standalone: true}"></ion-input>
+            </ion-item>
+            <button *ngIf="nameEdit" ion-button type="submit" (click)="saveName()">Save</button>
+        </div>
         <div class="highscore-wrapper">
             <div *ngIf="!highscore">No highscore yet</div>
             <div *ngIf="highscore">
@@ -24,12 +31,9 @@
             </div>
             <!--<div class="menu-item" (click)="instructionsMenu()">
                 <button ion-button full>INSTRUCTIONS</button>
-            </div>
-            <div class="menu-item" (click)="highscoreMenu()">
-                <button ion-button full>HIGHSCORE</button>
             </div>-->
-            <div class="menu-item" (click)="rankingsMenu()">
-                <button class="tappy-button highlighted" ion-button disabled full>RANKINGS</button>
+            <div class="menu-item" (click)="highscoreMenu()">
+                <button class="tappy-button" ion-button full>HIGH SCORES</button>
             </div>
             <div class="menu-item" (click)="settingsMenu()">
                 <button class="tappy-button highlighted" ion-button full>SETTINGS</button>

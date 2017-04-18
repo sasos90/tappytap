@@ -33,12 +33,17 @@ import {LSK} from "../../models/LSK";
                     <span class="value">{{ scoreModel.total }}</span>
                 </div>
             </div>
-            <div class="result-wrapper">
+            <div class="result-wrapper rank">
                 <div class="level result">
                     <div class="label">{{ 'RANK' }}</div>
                     <div class="value-wrapper">
-                        <span *ngIf="!rank" class="value-left"><ion-spinner></ion-spinner></span>
-                        <span *ngIf="rank" class="value-left">{{ rank }}</span>
+                        <span *ngIf="retrievingRank" class="value-left">
+                            <ion-spinner></ion-spinner>
+                        </span>
+                        <span *ngIf="!retrievingRank && !rank" class="value-left">
+                            <ion-icon class="no-sync-warning" name="warning"></ion-icon>
+                        </span>
+                        <span *ngIf="!retrievingRank && rank" class="value-left rank-value">{{ rank }}</span>
                     </div>
                 </div>
             </div>
@@ -63,7 +68,9 @@ export class FinalResultComponent {
     private comboStored: number = 0;
     private comboMultiplier: number = 0;
     private comboMultiplierStored: number = 0;
+    // rank
     private rank: number;
+    private retrievingRank: boolean = false;
 
     // highlighting
     private scoreSummarizing: boolean = true;
@@ -99,12 +106,14 @@ export class FinalResultComponent {
                 this.saveBestScoreToLocalStorage();
 
                 // save to backend
+                this.retrievingRank = true;
                 this.backend.sendScore(this.scoreModel.total, this.scoreModel.levelReached, (rank) => {
                     console.debug("Rank: " + rank);
                     this.rank = rank;
                     LocalStorage.set(LSK.HIGHSCORE_SYNCED, true);
+                    this.retrievingRank = false;
                 }, () => {
-
+                    this.retrievingRank = false;
                 });
 
                 // send to FIREBASE
@@ -116,6 +125,14 @@ export class FinalResultComponent {
                     });
                 }
             }
+        } else {
+            this.retrievingRank = true;
+            this.backend.getRankForScore(this.scoreModel.total, (rank) => {
+                this.rank = rank;
+                this.retrievingRank = false;
+            }, () => {
+                this.retrievingRank = false;
+            });
         }
 
         // start timeout to show the final score wrapper
