@@ -4,14 +4,13 @@ import {Environment} from "../models/Environment";
  */
 export class Config {
     public static ENV: Environment = Environment.LIVE;
-    public static VERSION: string = "1.4.0";
+    public static VERSION: string = "1.5.0";
     public static SALT: string = "*k9[unD1LrQSQ2_";
 
     // backend host config
     public static BACKEND_ENV: Environment = Environment.LIVE;
     public static HOST_TEST: string = "http://localhost:3000/";
     public static HOST_LIVE: string = "https://tappytap-backend.sasosabotin.si/";
-    public static BACKEND_HOST: string = Config.getBackendHost();
 
     public static getBackendHost() : string {
         switch (Config.BACKEND_ENV) {
@@ -21,4 +20,5 @@ export class Config {
                 return Config.HOST_LIVE;
         }
     }
+    public static BACKEND_HOST: string = Config.getBackendHost();
 }
