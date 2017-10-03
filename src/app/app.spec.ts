@@ -27,7 +27,7 @@ import {Settings} from "../pages/settings/settings";
 let comp: MyApp;
 let fixture: ComponentFixture<MyApp>;
 
-describe('Component: Root Component', () => {
+fdescribe('Component: Root Component', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
