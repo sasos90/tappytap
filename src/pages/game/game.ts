@@ -44,7 +44,7 @@ export class Game {
      * Game data
      */
     public gameModel: GameModel;
-    private exposedTimeout: number;
+    private exposedTimeout: any; // number or Timer
     public exposed: boolean = false;
     public headerStatus: HeaderStatus = new HeaderStatus("HIT");
     private gameCounter: number = 0;
