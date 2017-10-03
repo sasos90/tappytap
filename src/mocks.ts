@@ -67,7 +67,7 @@ export class NavMock {
  * @class PlatformMock
  */ new BehaviorSubject(this.HOME_VIEW);
 export class PlatformMock {
-    public ready(): Promise<{String}> {
+    public ready(): Promise<string> {
         return new Promise((resolve) => {
             resolve('READY');
         });
