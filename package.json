@@ -4,11 +4,11 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "test": "ng test",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
+    "test": "ng test",
     "e2e": "ionic-app-scripts build && protractor",
     "postinstall": "webdriver-manager update"
   },
