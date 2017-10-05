@@ -80,10 +80,18 @@ fdescribe('Testing the game engine', () => {
         gameModel.boxList.push(new BoxModel('red', true));
     });
 
-    fit('should check if all boxes are hit', () => {
+    it('should check if all boxes are hit', () => {
         expect(gameModel.allBoxesAreHit()).toBe(false);
         makeAllBoxesHit();
         expect(gameModel.allBoxesAreHit()).toBe(true);
+    });
+
+    it('should generate 9 boxes for 3rd level, with exactly 3 targets', () => {
+        gameModel = new GameModel(3, Dimension.DIM_3X3, gameComponent);
+        const targetColor = gameModel.targetBox.color;
+        expect(gameModel.boxList.length).toBe(9);
+        const targetBoxes = gameModel.boxList.filter(b => b.color === targetColor);
+        expect(targetBoxes.length).toBe(3);
     });
 
     let makeAllBoxesHit = () => {
