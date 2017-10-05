@@ -1,29 +1,29 @@
 import {ComponentFixture, TestBed} from "@angular/core/testing";
-import {GameModel} from "../../models/GameModel";
-import {Dimension} from "../../models/Dimension";
-import {Game} from "./game";
-import {BoxList} from "../../models/BoxList";
-import {BoxModel} from "../../models/BoxModel";
-import {MyApp} from "../../app/app.component";
-import {BoxComponent} from "../../components/box/box";
-import {Page2} from "../page2/page2";
-import {ReadySetGoComponent} from "../../components/ReadySetGo/ReadySetGoComponent";
-import {FinalResultComponent} from "../../components/FinalResult/FinalResultComponent";
-import {MainMenu} from "../mainmenu/mainmenu";
-import {Instructions} from "../instructions/instructions";
-import {HighScore} from "../highscore/highscore";
-import {Settings} from "../settings/settings";
-import {MoreGames} from "../moregames/moregames";
+import {GameModel} from "./GameModel";
+import {Dimension} from "./Dimension";
+import {Game} from "../pages/game/game";
+import {BoxList} from "./BoxList";
+import {BoxModel} from "./BoxModel";
+import {MyApp} from "../app/app.component";
+import {BoxComponent} from "../components/box/box";
+import {Page2} from "../pages/page2/page2";
+import {ReadySetGoComponent} from "../components/ReadySetGo/ReadySetGoComponent";
+import {FinalResultComponent} from "../components/FinalResult/FinalResultComponent";
+import {MainMenu} from "../pages/mainmenu/mainmenu";
+import {Instructions} from "../pages/instructions/instructions";
+import {HighScore} from "../pages/highscore/highscore";
+import {Settings} from "../pages/settings/settings";
+import {MoreGames} from "../pages/moregames/moregames";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 import {NativeAudio} from "@ionic-native/native-audio";
 import {Firebase} from "@ionic-native/firebase";
 import {AdMob} from "@ionic-native/admob";
 import {Device} from "@ionic-native/device";
-import {Backend} from "../../services/Backend";
+import {Backend} from "../services/Backend";
 import {ErrorHandler} from "@angular/core";
 import {IonicErrorHandler, IonicModule, NavController} from "ionic-angular";
-import {MyHammerConfig} from "../../app/app.module";
+import {MyHammerConfig} from "../app/app.module";
 import {BrowserModule, HAMMER_GESTURE_CONFIG} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 
@@ -75,8 +75,8 @@ fdescribe('Testing the game engine', () => {
         // create boxes
         gameModel.boxList = new BoxList();
         gameModel.boxList.push(new BoxModel('red', true));
-        gameModel.boxList.push(new BoxModel('red', true));
         gameModel.boxList.push(new BoxModel('red', false));
+        gameModel.boxList.push(new BoxModel('blue', false));
         gameModel.boxList.push(new BoxModel('red', true));
     });
 
@@ -100,7 +100,9 @@ fdescribe('Testing the game engine', () => {
 
     let makeAllBoxesHit = () => {
         gameModel.boxList.forEach(b => {
-            b.isHit = true;
+            if (b.color === gameModel.targetBox.color) {
+                b.isHit = true;
+            }
         });
     };
 });
