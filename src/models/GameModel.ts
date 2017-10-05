@@ -98,6 +98,10 @@ export class GameModel {
         return this.boxList.allHit(this.targetBox);
     }
 
+    public getLevel(): number {
+        return this.level;
+    }
+
     private generateTarget() {
         this.targetBox = new BoxModel(ColorHelper.getRandomColor());
     }
