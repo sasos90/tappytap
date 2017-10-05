@@ -94,6 +94,10 @@ fdescribe('Testing the game engine', () => {
         expect(targetBoxes.length).toBe(3);
     });
 
+    it('should generate correct dimension for 10th level', () => {
+        expect(GameModel.generateDimensionForGame(10)).toBe(Dimension.DIM_6X6);
+    });
+
     let makeAllBoxesHit = () => {
         gameModel.boxList.forEach(b => {
             b.isHit = true;
