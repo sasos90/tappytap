@@ -44,7 +44,7 @@
     "@ionic/app-scripts": "1.3.7",
     "@types/jasmine": "^2.5.47",
     "@types/node": "^7.0.18",
-    "codecov": "^2.2.0",
+    "codecov": "^3.6.5",
     "connect": "https://registry.npmjs.org/connect/-/connect-3.6.5.tgz",
     "ionic-mocks": "1.0.0",
     "jasmine": "https://registry.npmjs.org/jasmine/-/jasmine-2.8.0.tgz",
