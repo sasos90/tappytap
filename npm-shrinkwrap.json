@@ -155,9 +155,19 @@
       }
     },
     "@angular/core": {
-      "version": "4.1.0",
-      "resolved": "https://registry.npmjs.org/@angular/core/-/core-4.1.0.tgz",
-      "integrity": "sha1-cuwXMxaHlXGIDJxIPtbfwMqrlLA="
+      "version": "11.0.5",
+      "resolved": "https://registry.npmjs.org/@angular/core/-/core-11.0.5.tgz",
+      "integrity": "sha512-XAXWQi7R3ucZXQwx9QK5jSKJeQyRJ53u2dQDpr7R5stzeCy1a5hrNOkZLg9zOTTPcth/6+FrOrRZP9SMdxtw3w==",
+      "requires": {
+        "tslib": "^2.0.0"
+      },
+      "dependencies": {
+        "tslib": {
+          "version": "2.4.0",
+          "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz",
+          "integrity": "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
+        }
+      }
     },
     "@angular/forms": {
       "version": "4.1.0",
@@ -2634,7 +2644,7 @@
         "finalhandler": {
           "version": "1.0.6",
           "resolved": "https://registry.npmjs.org/finalhandler/-/finalhandler-1.0.6.tgz",
-          "integrity": "sha1-AHrqM9Gk0+QgF/YkhIrVjSEvgU8=",
+          "integrity": "sha512-immlyyYCPWG2tajlYBhZ6cjLAv1QAclU8tKS0d27ZtPqm/+iddy16GT3xLExg+V4lIETLpPwaYQAlZHNE//dPA==",
           "dev": true,
           "requires": {
             "debug": "2.6.9",
@@ -3860,7 +3870,7 @@
     "exit": {
       "version": "0.1.2",
       "resolved": "https://registry.npmjs.org/exit/-/exit-0.1.2.tgz",
-      "integrity": "sha1-BjJjj42HfMghB9MKD/8aF8uhzQw=",
+      "integrity": "sha512-Zk/eNKV2zbjpKzrsQ+n1G6poVbErQxJ0LBOJXaKZ1EViLzH+hrLu9cdXI4zw9dBQJslwBEpbQ2P1oS7nDxs6jQ==",
       "dev": true
     },
     "expand-braces": {
